@@ -1,0 +1,28 @@
+{
+	"name": "melonpan-block-container",
+	"name_title": "MelonpanBlockContainer",
+	"version": "0.0.1",
+	"description": "MelonpanBlockContainer",
+	"homepage": "#",
+	"main": "index.js",
+	"scripts": {
+		"dev": "parcel watch src/index-front.js -o melonpan-block-container-front.js -d build --no-hmr & parcel watch src/index-editor.js -o melonpan-block-container-editor.js -d build --no-hmr"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-proposal-class-properties": "^7.2.1",
+		"autoprefixer": "^9.4.3",
+		"cssnano": "^4.1.7",
+		"gulp": "^4.0.0",
+		"gulp-header": "^2.0.5",
+		"gulp-rename": "^1.4.0",
+		"gulp-replace": "^1.0.0",
+		"gulp-run-command": "0.0.9",
+		"gulp-zip": "^4.2.0",
+		"merge2": "^1.2.3",
+		"stylus": "^0.54.5"
+	},
+	"dependencies": {
+		"tinycolor2": "^1.4.1"
+	}
+}

@@ -1,0 +1,53 @@
+/*
+ * Controls
+ */
+
+.components-panel
+
+	.mbc-panel_body
+		padding 0
+
+		> h2.components-panel__body-title
+			margin 0
+
+		h2:hover
+		button:focus
+			background transparent
+
+.components-panel .mbc-panel_body
+
+	.mbc-control
+		position relative
+		padding 2em 1.2em
+		width 100%
+		margin 0
+
+		+ .mbc-control
+			padding-top 0
+
+.mbc-panel_body
+
+	.components-base-control__label
+		margin-bottom 15px
+
+	.components-base-control__help
+		font-style normal
+		margin-top 15px
+		opacity .8
+
+	.components-base-control__label
+	.components-checkbox-control__label
+		font-weight 500
+
+.mbc-control-radio
+
+	.components-base-control__label
+		margin-bottom 15px
+
+.mbc-control-image
+	cursor pointer
+
+.mbc-selected-full
+	+ .mbc-content_maxwidth
+		opacity .3
+		pointer-events none

@@ -1,0 +1,6 @@
+/*! <%= pkg.name_title %> - <%= pkg.version %> | <%= pkg.homepage %> */
+/*!
+ * TinyColor v1.4.1
+ * https://github.com/bgrins/TinyColor
+ * 2016-07-07, Brian Grinstead, MIT License
+ */
