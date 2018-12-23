@@ -11,21 +11,27 @@ addFilter(`${plugin_slug}_create_block`, "zzz", blocks => {
 		name: "zzz/zzz",
 		title: "zzz",
 		icon: "carrot",
-		category: "common"
-		// settings: {
-		// 	// padding_top: {},
-		// 	padding_bottom: {},
-		// 	padding_leftright: {}
-		// 	// background_color: {}
-		// },
-		// settings_old: [
-		// 	{
-		// 		padding_top: {},
-		// 		padding_bottom: {},
-		// 		padding_leftright: {}
-		// 		// background_color: {}
-		// 	}
-		// ]
+		category: "common",
+		settings: {
+			padding_top: {},
+			// padding_bottom: {},
+			padding_leftright: {}
+			// background_color: {}
+		},
+		settings_old: [
+			{
+				padding_top: {},
+				padding_bottom: {},
+				padding_leftright: {}
+				// background_color: {}
+			},
+			{
+				padding_top: {},
+				padding_bottom: {},
+				padding_leftright: {},
+				background_color: {}
+			}
+		]
 	});
 });
 

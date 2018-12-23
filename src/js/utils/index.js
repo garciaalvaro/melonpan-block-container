@@ -1,4 +1,5 @@
 import l from "./log";
+import getValue from "./getValue";
 import prepareClass from "./prepareClass";
 import prepareColor from "./prepareColor";
 import prepareSrcset from "./prepareSrcset";
@@ -14,6 +15,7 @@ import {
 export default l;
 export {
 	icons,
+	getValue,
 	prepareClass,
 	prepareColor,
 	prepareSrcset,

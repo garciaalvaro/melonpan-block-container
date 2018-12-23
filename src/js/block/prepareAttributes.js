@@ -1,6 +1,6 @@
 import l, { plugin_slug } from "../utils";
 
-const { reduce, isUndefined } = lodash;
+const { reduce, isUndefined, get } = lodash;
 
 const prepareAttributes = settings => {
 	const attributes = {
@@ -66,24 +66,44 @@ const prepareAttributes = settings => {
 		}
 	};
 
+	// We need to pass all attributes because the migrate function
+	// in deprecate doesn't recognize the removed attributes otherwise
+	// see: https://github.com/WordPress/gutenberg/issues/10406
 	const attributes_custom = reduce(
-		settings,
-		(acc, setting, key) => {
-			if (!isUndefined(setting.default)) {
+		attributes,
+		(acc, attribute, key) => {
+			if (!isUndefined(get(settings, [key, "default"]))) {
 				acc[key] = {
-					...attributes[key],
-					default: setting.default
+					...attribute,
+					default: settings[key].default
 				};
 			} else {
-				acc[key] = {
-					...attributes[key]
-				};
+				acc[key] = attribute;
 			}
 
 			return acc;
 		},
 		{}
 	);
+
+	// const attributes_custom = reduce(
+	// 	settings,
+	// 	(acc, setting, key) => {
+	// 		if (!isUndefined(setting.default)) {
+	// 			acc[key] = {
+	// 				...attributes[key],
+	// 				default: setting.default
+	// 			};
+	// 		} else {
+	// 			acc[key] = {
+	// 				...attributes[key]
+	// 			};
+	// 		}
+
+	// 		return acc;
+	// 	},
+	// 	{}
+	// );
 
 	return attributes_custom;
 };

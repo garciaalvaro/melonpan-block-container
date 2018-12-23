@@ -7,20 +7,15 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const {
-			align,
-			padding_top,
-			padding_bottom,
-			padding_leftright
-		} = this.props.attributes;
+		const { settings, attributes } = this.props;
 
 		let classes;
 		classes = [
 			`${plugin_slug}-container`,
-			prepareClass("align", align, false),
-			prepareClass("paddingtop", padding_top),
-			prepareClass("paddingbottom", padding_bottom),
-			prepareClass("paddingleftright", padding_leftright)
+			!isUndefined(settings.align) ? `align${attributes.align}` : "",
+			prepareClass("padding_top", settings, attributes),
+			prepareClass("padding_bottom", settings, attributes),
+			prepareClass("padding_leftright", settings, attributes)
 		];
 		classes = compact(classes);
 		classes = classes.join(" ");

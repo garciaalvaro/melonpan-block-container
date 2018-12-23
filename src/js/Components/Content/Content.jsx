@@ -1,4 +1,4 @@
-import l, { Div, plugin_slug, prepareClass } from "../../utils";
+import l, { Div, plugin_slug, prepareClass, getValue } from "../../utils";
 
 const { compact, isUndefined } = lodash;
 const { Component } = wp.element;
@@ -6,17 +6,23 @@ const { InnerBlocks } = wp.editor;
 
 class Content extends Component {
 	getClasses = () => {
-		let { content_maxwidth, content_align } = this.props.attributes;
-		content_maxwidth =
+		let { settings, attributes } = this.props;
+		const content_align = getValue("content_align", settings, attributes);
+		const content_maxwidth =
 			isUndefined(content_align) || content_align !== "full"
-				? content_maxwidth
+				? getValue("content_maxwidth", settings, attributes)
 				: undefined;
 
 		let classes;
 		classes = [
 			`${plugin_slug}-content`,
-			prepareClass("maxwidth", content_maxwidth),
-			prepareClass("align", content_align)
+			prepareClass(
+				"content_maxwidth",
+				settings,
+				attributes,
+				content_maxwidth
+			),
+			prepareClass("content_align", settings, attributes)
 		];
 		classes = compact(classes);
 		classes = classes.join(" ");

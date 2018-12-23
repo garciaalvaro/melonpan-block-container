@@ -2,8 +2,9 @@ import l, {
 	Div,
 	Img,
 	plugin_slug,
+	prepareColor,
 	prepareClass,
-	prepareColor
+	getValue
 } from "../../utils";
 
 const { isUndefined, compact } = lodash;
@@ -11,13 +12,13 @@ const { Component } = wp.element;
 
 class Background extends Component {
 	getClasses = () => {
-		const { shadow_width, border_width } = this.props.attributes;
+		const { settings, attributes } = this.props;
 
 		let classes;
 		classes = [
 			`${plugin_slug}-background`,
-			prepareClass("shadowwidth", shadow_width),
-			prepareClass("borderwidth", border_width)
+			prepareClass("shadow_width", settings, attributes),
+			prepareClass("border_width", settings, attributes)
 		];
 		classes = compact(classes);
 		classes = classes.join(" ");
@@ -26,14 +27,29 @@ class Background extends Component {
 	};
 
 	getStyles = () => {
-		let {
-			border_color,
-			border_color_opacity,
-			shadow_color,
-			shadow_color_opacity,
-			background_color,
-			background_color_opacity
-		} = this.props.attributes;
+		const { settings, attributes } = this.props;
+		const border_color = getValue("border_color", settings, attributes);
+		const border_color_opacity = getValue(
+			"border_color_opacity",
+			settings,
+			attributes
+		);
+		const shadow_color = getValue("shadow_color", settings, attributes);
+		const shadow_color_opacity = getValue(
+			"shadow_color_opacity",
+			settings,
+			attributes
+		);
+		const background_color = getValue(
+			"background_color",
+			settings,
+			attributes
+		);
+		const background_color_opacity = getValue(
+			"background_color_opacity",
+			settings,
+			attributes
+		);
 
 		const style = {
 			"--border_color": prepareColor(border_color, border_color_opacity),
