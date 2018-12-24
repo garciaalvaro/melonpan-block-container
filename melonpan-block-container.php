@@ -16,11 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'MELONPANBLOCKCONTAINER_PLUGIN_VERSION' ) ) {
-	define( 'MELONPANBLOCKCONTAINER_PLUGIN_VERSION', '1.0.0' );
+if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
+	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.0.0' );
 }
-if ( ! defined( 'MELONPANBLOCKCONTAINER_BUILD_DIR' ) ) {
-	define( 'MELONPANBLOCKCONTAINER_BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
+if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
+	define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
 }
 
 /**
@@ -32,9 +32,9 @@ function enqueue_front() {
 
 	\wp_enqueue_style(
 		'melonpan_block_container_front',
-		MELONPANBLOCKCONTAINER_BUILD_DIR . 'melonpan-block-container-front.css',
+		BUILD_DIR . 'melonpan-block-container-front.css',
 		array(),
-		MELONPANBLOCKCONTAINER_PLUGIN_VERSION
+		PLUGIN_VERSION
 	);
 
 }
@@ -49,15 +49,15 @@ function enqueue_front() {
 function enqueue_editor() {
 
 	\wp_enqueue_style(
-		'melonpan_block_container_editor',
-		MELONPANBLOCKCONTAINER_BUILD_DIR . 'melonpan-block-container-editor.css',
+		'melonpan_block_container',
+		BUILD_DIR . 'melonpan-block-container-editor.css',
 		array(),
-		MELONPANBLOCKCONTAINER_PLUGIN_VERSION
+		PLUGIN_VERSION
 	);
 
 	\wp_enqueue_script(
-		'melonpan_block_container_editor',
-		MELONPANBLOCKCONTAINER_BUILD_DIR . 'melonpan-block-container-editor.js',
+		'melonpan_block_container',
+		BUILD_DIR . 'melonpan-block-container-editor.js',
 		array(
 			'lodash',
 			'wp-i18n',
@@ -66,10 +66,10 @@ function enqueue_editor() {
 			'wp-editor',
 			'wp-hooks',
 		),
-		MELONPANBLOCKCONTAINER_PLUGIN_VERSION,
+		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
 
 }
 
-\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor' );
+\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );

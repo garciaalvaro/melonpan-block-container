@@ -12,7 +12,9 @@ class Container extends Component {
 		let classes;
 		classes = [
 			`${plugin_slug}-container`,
-			!isUndefined(settings.align) ? `align${attributes.align}` : "",
+			!isUndefined(settings.align) && !isUndefined(attributes.align)
+				? `align${attributes.align}`
+				: "",
 			prepareClass("padding_top", settings, attributes),
 			prepareClass("padding_bottom", settings, attributes),
 			prepareClass("padding_leftright", settings, attributes)

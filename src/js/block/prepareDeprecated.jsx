@@ -13,12 +13,7 @@ const prepareDeprecated = (attributes_new, settings_old) => {
 		return {
 			attributes: attributes_old_definition,
 			save: props => (
-				<EditSave
-					{...props}
-					settings={setting_old}
-					is_edit={false}
-					is_migrating={true}
-				/>
+				<EditSave {...props} settings={setting_old} is_edit={false} />
 			),
 			supports: !isUndefined(setting_old.align)
 				? { align: setting_old.align.options }
