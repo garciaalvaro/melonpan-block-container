@@ -7,14 +7,12 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const { settings, attributes } = this.props;
+		const { settings, attributes, className } = this.props;
 
 		let classes;
 		classes = [
+			className, // Apply the classes from the block prop.
 			`${plugin_slug}-container`,
-			!isUndefined(settings.align) && !isUndefined(attributes.align)
-				? `align${attributes.align}`
-				: "",
 			prepareClass("padding_top", settings, attributes),
 			prepareClass("padding_bottom", settings, attributes),
 			prepareClass("padding_leftright", settings, attributes)
@@ -28,8 +26,10 @@ class Container extends Component {
 	render() {
 		const { getClasses, props } = this;
 
+		// We pass all the props to the container of the block,
+		// in case there were extra props added through filters.
 		return (
-			<Div className={getClasses()}>
+			<Div {...props} className={getClasses()}>
 				<Background {...props} />
 				<Content {...props} />
 			</Div>

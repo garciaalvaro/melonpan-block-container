@@ -3,41 +3,32 @@ import prepareAttributes from "./prepareAttributes";
 import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
 
-const prepareBlock = block => {
-	const defaults = {
-		name: "",
-		title: "",
-		icon: "",
-		category: "",
-		template: undefined,
-		templateLock: undefined,
-		allowedBlocks: undefined,
-		settings_old: []
-	};
+const { isObject } = lodash;
 
-	block = { ...defaults, ...block };
+const prepareBlock = block => {
+	if (!isObject(block)) {
+		return false;
+	}
 
 	const settings = prepareSettings(block.settings);
 	const attributes = prepareAttributes(settings);
+	const innerblocks_props = !isObject(block.innerblocks_props)
+		? {}
+		: block.innerblocks_props;
+	const deprecated = prepareDeprecated(attributes, block.deprecated_settings);
+	const supports = !isObject(block.blocktype_props.supports)
+		? {}
+		: block.blocktype_props.supports;
 
 	block = {
-		// Block-register properties.
-		name: block.name,
-		title: block.title,
-		icon: block.icon,
-		category: block.category,
-
-		// InnerBlock properties.
-		template: block.template,
-		templateLock: block.templateLock,
-		allowedBlocks: block.allowedBlocks,
-
-		// Settings.
+		blocktype_props: {
+			...block.blocktype_props,
+			attributes,
+			deprecated,
+			supports
+		},
 		settings,
-		attributes,
-
-		// Settings.
-		deprecated: prepareDeprecated(attributes, block.settings_old)
+		innerblocks_props
 	};
 
 	return block;

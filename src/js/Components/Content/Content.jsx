@@ -37,11 +37,7 @@ class Content extends Component {
 		return (
 			<Div className={getClasses()}>
 				{is_edit ? (
-					<InnerBlocks
-						template={props.template}
-						templateLock={props.templateLock}
-						allowedBlocks={props.allowedBlocks}
-					/>
+					<InnerBlocks {...props.innerblocks_props} />
 				) : (
 					<InnerBlocks.Content />
 				)}

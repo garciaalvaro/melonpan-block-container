@@ -38,7 +38,7 @@ const settings_private_props = {
 
 const settings_default_prop = {
 	align: {
-		default: "center",
+		default: "",
 		options: ["left", "center", "right", "wide", "full"]
 	},
 	content_align: {

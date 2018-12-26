@@ -4,6 +4,9 @@ const { reduce, isUndefined, get } = lodash;
 
 const prepareAttributes = settings => {
 	const attributes = {
+		align: {
+			type: "string"
+		},
 		content_align: {
 			type: "string"
 		},
