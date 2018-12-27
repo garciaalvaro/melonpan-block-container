@@ -6,7 +6,7 @@ const { InnerBlocks } = wp.editor;
 
 class Content extends Component {
 	getClasses = () => {
-		let { settings, attributes } = this.props;
+		let { extra_classes, settings, attributes } = this.props;
 		const content_align = getValue("content_align", settings, attributes);
 		const content_maxwidth =
 			isUndefined(content_align) || content_align !== "full"
@@ -15,6 +15,7 @@ class Content extends Component {
 
 		let classes;
 		classes = [
+			extra_classes.content,
 			`${plugin_slug}-content`,
 			prepareClass(
 				"content_maxwidth",

@@ -2,36 +2,39 @@ import l from "../utils";
 import prepareAttributes from "./prepareAttributes";
 import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
+import prepareExtraClasses from "./prepareExtraClasses";
 
 const { isObject } = lodash;
 
-const prepareBlock = block => {
-	if (!isObject(block)) {
+const prepareBlock = props => {
+	if (!isObject(props)) {
 		return false;
 	}
 
-	const settings = prepareSettings(block.settings);
+	const settings = prepareSettings(props.settings);
 	const attributes = prepareAttributes(settings);
-	const innerblocks_props = !isObject(block.innerblocks_props)
+	const innerblocks_props = !isObject(props.innerblocks_props)
 		? {}
-		: block.innerblocks_props;
-	const deprecated = prepareDeprecated(attributes, block.deprecated_settings);
-	const supports = !isObject(block.blocktype_props.supports)
+		: props.innerblocks_props;
+	const deprecated = prepareDeprecated(attributes, props.deprecated_settings);
+	const supports = !isObject(props.blocktype_props.supports)
 		? {}
-		: block.blocktype_props.supports;
+		: props.blocktype_props.supports;
+	const extra_classes = prepareExtraClasses(props.extra_classes);
 
-	block = {
+	props = {
 		blocktype_props: {
-			...block.blocktype_props,
+			...props.blocktype_props,
 			attributes,
 			deprecated,
 			supports
 		},
+		extra_classes,
 		settings,
 		innerblocks_props
 	};
 
-	return block;
+	return props;
 };
 
 export default prepareBlock;

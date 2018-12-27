@@ -12,10 +12,11 @@ const { Component } = wp.element;
 
 class Background extends Component {
 	getClasses = () => {
-		const { settings, attributes } = this.props;
+		const { extra_classes, settings, attributes } = this.props;
 
 		let classes;
 		classes = [
+			extra_classes.background,
 			`${plugin_slug}-background`,
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
