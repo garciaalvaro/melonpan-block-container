@@ -7,7 +7,7 @@ import l, {
 	getValue
 } from "../../utils";
 
-const { isUndefined, compact } = lodash;
+const { isUndefined, isObject, compact } = lodash;
 const { Component } = wp.element;
 
 class Background extends Component {
@@ -28,7 +28,7 @@ class Background extends Component {
 	};
 
 	getStyles = () => {
-		const { settings, attributes } = this.props;
+		const { extra_props, settings, attributes } = this.props;
 		const border_color = getValue("border_color", settings, attributes);
 		const border_color_opacity = getValue(
 			"border_color_opacity",
@@ -52,7 +52,7 @@ class Background extends Component {
 			attributes
 		);
 
-		const style = {
+		let style = {
 			"--border_color": prepareColor(border_color, border_color_opacity),
 			"--shadow_color": prepareColor(shadow_color, shadow_color_opacity),
 			"--background_color": prepareColor(
@@ -60,6 +60,9 @@ class Background extends Component {
 				background_color_opacity
 			)
 		};
+		style = isObject(extra_props.background.style)
+			? { ...style, ...extra_props.background.style }
+			: style;
 
 		return style;
 	};
