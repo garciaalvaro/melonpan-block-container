@@ -16,7 +16,7 @@ const prepareBlock = props => {
 	const innerblocks_props = !isObject(props.innerblocks_props)
 		? {}
 		: props.innerblocks_props;
-	const deprecated = prepareDeprecated(attributes, props.deprecated_settings);
+	const deprecated = prepareDeprecated(attributes, props.deprecated);
 	const supports = !isObject(props.blocktype_props.supports)
 		? {}
 		: props.blocktype_props.supports;
