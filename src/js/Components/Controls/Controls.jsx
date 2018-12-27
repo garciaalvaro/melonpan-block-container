@@ -30,36 +30,28 @@ class Controls extends Component {
 		} = props.settings;
 
 		return (
-			<Fragment>
-				<InspectorControls
-					className={`${plugin_slug}-inspector_controls`}
-				>
-					{(!isUndefined(content_maxwidth) ||
-						!isUndefined(content_align)) && <Content {...props} />}
+			<InspectorControls className={`${plugin_slug}-inspector_controls`}>
+				{(!isUndefined(content_maxwidth) ||
+					!isUndefined(content_align)) && <Content {...props} />}
 
-					{(!isUndefined(background_color) ||
-						!isUndefined(background_color_opacity) ||
-						!isUndefined(background_image_id) ||
-						!isUndefined(background_image_url)) && (
-						<Background {...props} />
-					)}
+				{(!isUndefined(background_color) ||
+					!isUndefined(background_color_opacity) ||
+					!isUndefined(background_image_id) ||
+					!isUndefined(background_image_url)) && (
+					<Background {...props} />
+				)}
 
-					{(!isUndefined(padding_top) ||
-						!isUndefined(padding_bottom) ||
-						!isUndefined(padding_leftright)) && (
-						<Padding {...props} />
-					)}
+				{(!isUndefined(padding_top) ||
+					!isUndefined(padding_bottom) ||
+					!isUndefined(padding_leftright)) && <Padding {...props} />}
 
-					{(!isUndefined(border_color) ||
-						!isUndefined(border_color_opacity) ||
-						!isUndefined(border_width) ||
-						!isUndefined(shadow_color) ||
-						!isUndefined(shadow_color_opacity) ||
-						!isUndefined(shadow_width)) && (
-						<ShadowBorder {...props} />
-					)}
-				</InspectorControls>
-			</Fragment>
+				{(!isUndefined(border_color) ||
+					!isUndefined(border_color_opacity) ||
+					!isUndefined(border_width) ||
+					!isUndefined(shadow_color) ||
+					!isUndefined(shadow_color_opacity) ||
+					!isUndefined(shadow_width)) && <ShadowBorder {...props} />}
+			</InspectorControls>
 		);
 	}
 }

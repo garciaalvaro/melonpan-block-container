@@ -1,4 +1,4 @@
-import l, { plugin_slug, icons } from "../utils";
+import l, { plugin_slug } from "../utils";
 import registerBlock from "./registerBlock";
 import prepareBlock from "./prepareBlock";
 
@@ -7,58 +7,135 @@ const { isObject, forEach, castArray } = lodash;
 const { applyFilters, addFilter } = wp.hooks;
 
 // Example block registration using the hook.
-addFilter(`${plugin_slug}_create_block`, "zzz", blocks => {
+addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 	return blocks.concat({
+		// These are the default block registration properties. For more available properties:
+		// https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 		blocktype_props: {
-			name: "zzz/zzz",
-			title: "zzz",
+			name: "my-plugin/my-block",
+			title: "My Block",
 			icon: "carrot",
-			category: "common",
-			styles: [
-				// Mark style as default.
-				{
-					name: "default",
-					label: __("Rounded"),
-					isDefault: true
-				},
-				{
-					name: "outline",
-					label: __("Outline")
-				},
-				{
-					name: "squared",
-					label: __("Squared")
-				}
-			]
+			category: "common"
 		},
+		// These properties will be passed to the InnerBlocks component. For more info:
+		// https://github.com/WordPress/gutenberg/blob/master/packages/editor/src/components/inner-blocks/README.md
+		innerblocks_props: {
+			template: [["core/quote"], ["core/image"]],
+			templateLock: false,
+			allowedBlocks: ["core/quote", "core/image"]
+		},
+		// Use this property to add extra props to the container, content or background divs.
+		extra_props: {
+			container: {
+				id: "an-id",
+				className: "a_class another_class"
+			},
+			content: {},
+			background: { className: "a_class", style: { opacity: 0.5 } }
+		},
+		// This is the list of all the available properties and their default values.
+		// Settings are opt-in so only the ones that are passed will be used.
+		// If an empty object is passed (for example, background_color:{}) the default values will apply.
 		settings: {
-			align: {},
-			content_align: {},
-			background_color: {},
-			background_color_opacity: {},
-			padding_bottom: {},
-			border_color: {},
-			border_color_opacity: {},
-			border_width: {},
-			shadow_color: {},
-			shadow_color_opacity: {},
-			shadow_width: {},
+			align: {
+				default: "",
+				options: ["left", "center", "right", "wide", "full"]
+			},
+			content_align: {
+				default: "center"
+			},
+			background_color: {
+				default: "",
+				colors: [
+					{ name: "banana", color: "#FFDEAD" },
+					{ name: "melon", color: "#aae6bd" },
+					{ name: "melocoton", color: "#ffc5b4" },
+					{ name: "pistacho", color: "#bdb76b" },
+					{ name: "ciruela", color: "#bd8f8f" },
+					{ name: "naranja", color: "#ff7f50" },
+					{ name: "endrina", color: "#708090" },
+					{ name: "black", color: "#000000" },
+					{ name: "white", color: "#ffffff" }
+				]
+			},
 			background_image: {},
-			padding_top: {},
-			padding_leftright: {}
-		}
-		// settings_old: [
-		// 	{
-		// 		border_color_opacity: {},
-		// 		border_width: {},
-		// 		shadow_color: {},
-		// 		shadow_color_opacity: {},
-		// 		shadow_width: {},
-		// 		background_image: {},
-		// 		padding_top: {},
-		// 		padding_leftright: {}
-		// 	}
-		// ]
+			background_color_opacity: {
+				default: 50,
+				min: 0,
+				max: 100
+			},
+			content_maxwidth: {
+				default: 800,
+				min: 300,
+				max: 1300
+			},
+			padding_top: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_bottom: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_leftright: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			border_color: {
+				default: "",
+				colors: [
+					{ name: "black", color: "#000000" },
+					{ name: "white", color: "#ffffff" }
+				]
+			},
+			border_color_opacity: {
+				default: 15,
+				min: 0,
+				max: 100
+			},
+			border_width: {
+				default: 0
+			},
+			shadow_color: {
+				default: "",
+				colors: [
+					{ name: "black", color: "#000000" },
+					{ name: "white", color: "#ffffff" }
+				]
+			},
+			shadow_color_opacity: {
+				default: 15,
+				min: 0,
+				max: 100
+			},
+			shadow_width: {
+				default: 0
+			}
+		},
+		// This property is experimental. If you need to migrate the block to a new version
+		// because either the settings or the extra_props objects changed,
+		// you need to pass the changed one/s inside an object.
+		// Then wrap all the different versions inside an array.
+		deprecated: [
+			{
+				// Old version of the block. Both extra_props and settings changed.
+				extra_props: {
+					// ...
+				},
+				settings: {
+					// ...
+				}
+			},
+			{
+				// Another old version of the block. Only settings changed.
+				settings: {
+					// ...
+				}
+			}
+		]
 	});
 });
 
@@ -78,17 +155,3 @@ forEach(blocks, block => {
 		registerBlock(block);
 	}
 });
-
-// align: {},
-// content_align: {},
-// background_color: {},
-// background_color_opacity: {},
-// padding_top: {},
-// padding_bottom: {},
-// padding_leftright: {},
-// border_color: {},
-// border_color_opacity: {},
-// border_width: {},
-// shadow_color: {},
-// shadow_color_opacity: {},
-// shadow_width: {}
