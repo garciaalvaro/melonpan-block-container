@@ -8,7 +8,7 @@ const registerBlock = ({
 	blocktype_props,
 	settings,
 	innerblocks_props,
-	extra_classes
+	extra_props
 }) => {
 	registerBlockType(blocktype_props.name, {
 		...blocktype_props,
@@ -21,7 +21,7 @@ const registerBlock = ({
 				{...props}
 				innerblocks_props={innerblocks_props}
 				settings={settings}
-				extra_classes={extra_classes}
+				extra_props={extra_props}
 				is_edit={true}
 			/>
 		),
@@ -29,7 +29,7 @@ const registerBlock = ({
 			<EditSave
 				{...props}
 				settings={settings}
-				extra_classes={extra_classes}
+				extra_props={extra_props}
 				is_edit={false}
 			/>
 		)

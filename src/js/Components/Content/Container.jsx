@@ -7,11 +7,11 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const { extra_classes, settings, attributes, className } = this.props;
+		const { extra_props, settings, attributes, className } = this.props;
 
 		let classes;
 		classes = [
-			extra_classes.container,
+			extra_props.container.className,
 			className, // Apply the classes from the block prop.
 			`${plugin_slug}-container`,
 			prepareClass("padding_top", settings, attributes),
@@ -27,7 +27,7 @@ class Container extends Component {
 	render() {
 		const { getClasses, props } = this;
 		const {
-			extra_classes,
+			extra_props,
 			settings,
 			is_edit,
 			innerblocks_props,
@@ -37,7 +37,7 @@ class Container extends Component {
 		// We pass all the props to the container of the block,
 		// in case there were extra props added through filters.
 		return (
-			<Div {...rest} className={getClasses()}>
+			<Div {...extra_props.container} {...rest} className={getClasses()}>
 				<Background {...props} />
 				<Content {...props} />
 			</Div>

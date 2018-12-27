@@ -12,11 +12,11 @@ const { Component } = wp.element;
 
 class Background extends Component {
 	getClasses = () => {
-		const { extra_classes, settings, attributes } = this.props;
+		const { extra_props, settings, attributes } = this.props;
 
 		let classes;
 		classes = [
-			extra_classes.background,
+			extra_props.background.className,
 			`${plugin_slug}-background`,
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
@@ -91,7 +91,11 @@ class Background extends Component {
 		}
 
 		return (
-			<Div className={getClasses()} style={getStyles()}>
+			<Div
+				{...props.extra_props.background}
+				className={getClasses()}
+				style={getStyles()}
+			>
 				{!isUndefined(background_image_url) && (
 					<Img
 						className={`${plugin_slug}-background-image`}

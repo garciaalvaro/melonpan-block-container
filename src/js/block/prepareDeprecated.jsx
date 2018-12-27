@@ -1,7 +1,7 @@
 import l from "../utils";
 import prepareSettings from "./prepareSettings";
 import prepareAttributes from "./prepareAttributes";
-import prepareExtraClasses from "./prepareExtraClasses";
+import prepareExtraProps from "./prepareExtraProps";
 import EditSave from "../Components/EditSave/EditSave";
 
 const { isUndefined, isObject, isArray, mapValues, pick, keys } = lodash;
@@ -14,7 +14,7 @@ const prepareDeprecated = (attributes_new, deprecated) => {
 	const deprecated_prepared = deprecated.map(deprecated => {
 		const settings = prepareSettings(deprecated.settings);
 		const attributes_definition = prepareAttributes(settings);
-		const extra_classes = prepareExtraClasses(deprecated.extra_classes);
+		const extra_props = prepareExtraProps(deprecated.extra_props);
 
 		return {
 			attributes: attributes_definition,
@@ -22,7 +22,7 @@ const prepareDeprecated = (attributes_new, deprecated) => {
 				<EditSave
 					{...props}
 					settings={settings}
-					extra_classes={extra_classes}
+					extra_props={extra_props}
 					is_edit={false}
 				/>
 			),
