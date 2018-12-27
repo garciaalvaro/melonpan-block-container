@@ -116,12 +116,14 @@ const settings_default_prop = {
 };
 
 const prepareSettings = custom => {
+	if (!isObject(custom)) {
+		return {};
+	}
+
 	const defaults = settings_default_prop;
 	const privates = settings_private_props;
-	let settings;
 
-	// Set defaults if custom is not set.
-	custom = isObject(custom) ? custom : defaults;
+	let settings;
 	settings = custom;
 	// Exclude not allowed attributes.
 	settings = pick(settings, keys(defaults));
