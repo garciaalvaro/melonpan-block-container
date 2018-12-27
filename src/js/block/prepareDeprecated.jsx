@@ -4,17 +4,26 @@ import prepareAttributes from "./prepareAttributes";
 import prepareExtraProps from "./prepareExtraProps";
 import EditSave from "../Components/EditSave/EditSave";
 
-const { isUndefined, isObject, isArray, mapValues, pick, keys } = lodash;
+const { isUndefined, isArray, mapValues, pick, keys } = lodash;
 
-const prepareDeprecated = (attributes_new, deprecated) => {
-	if (!isObject(attributes_new) || !isArray(deprecated)) {
+const prepareDeprecated = (
+	deprecated,
+	settings_new,
+	attributes_new,
+	extra_props_new
+) => {
+	if (!isArray(deprecated)) {
 		return [];
 	}
 
 	const deprecated_prepared = deprecated.map(deprecated => {
-		const settings = prepareSettings(deprecated.settings);
+		const settings = !isUndefined(deprecated.settings)
+			? prepareSettings(deprecated.settings)
+			: settings_new;
 		const attributes_definition = prepareAttributes(settings);
-		const extra_props = prepareExtraProps(deprecated.extra_props);
+		const extra_props = !isUndefined(deprecated.extra_props)
+			? prepareExtraProps(deprecated.extra_props)
+			: extra_props_new;
 
 		return {
 			attributes: attributes_definition,
