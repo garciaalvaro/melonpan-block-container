@@ -8,7 +8,14 @@ const { RangeControl, PanelBody } = wp.components;
 class Padding extends Component {
 	render() {
 		const { setAttributes, attributes, settings } = this.props;
-		const { padding_top, padding_bottom, padding_leftright } = settings;
+		const {
+			padding_top,
+			padding_bottom,
+			padding_left,
+			padding_right,
+			padding_topbottom,
+			padding_leftright
+		} = settings;
 
 		return (
 			<PanelBody
@@ -47,6 +54,62 @@ class Padding extends Component {
 						max={padding_bottom.max}
 						onChange={value =>
 							setAttributes({ padding_bottom: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_left) && (
+					<RangeControl
+						label={__("Padding left")}
+						className={[
+							`${plugin_slug}-padding_left`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_left}
+						step={padding_left.step}
+						min={padding_left.min}
+						max={padding_left.max}
+						onChange={value =>
+							setAttributes({ padding_left: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_right) && (
+					<RangeControl
+						label={__("Padding right")}
+						className={[
+							`${plugin_slug}-padding_right`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_right}
+						step={padding_right.step}
+						min={padding_right.min}
+						max={padding_right.max}
+						onChange={value =>
+							setAttributes({ padding_right: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_topbottom) && (
+					<RangeControl
+						label={__("Padding top & bottom")}
+						className={[
+							`${plugin_slug}-padding_topbottom`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_topbottom}
+						step={padding_topbottom.step}
+						min={padding_topbottom.min}
+						max={padding_topbottom.max}
+						onChange={value =>
+							setAttributes({
+								padding_topbottom: value
+							})
 						}
 					/>
 				)}

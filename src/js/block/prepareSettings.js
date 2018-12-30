@@ -15,6 +15,15 @@ const settings_private_props = {
 	padding_bottom: {
 		step: 5
 	},
+	padding_left: {
+		step: 5
+	},
+	padding_right: {
+		step: 5
+	},
+	padding_topbottom: {
+		step: 5
+	},
 	padding_leftright: {
 		step: 5
 	},
@@ -74,6 +83,21 @@ const settings_default_prop = {
 		max: 200
 	},
 	padding_bottom: {
+		default: 20,
+		min: 0,
+		max: 200
+	},
+	padding_left: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	padding_right: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	padding_topbottom: {
 		default: 20,
 		min: 0,
 		max: 200

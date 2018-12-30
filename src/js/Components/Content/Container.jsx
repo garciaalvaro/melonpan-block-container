@@ -16,6 +16,9 @@ class Container extends Component {
 			`${plugin_slug}-container`,
 			prepareClass("padding_top", settings, attributes),
 			prepareClass("padding_bottom", settings, attributes),
+			prepareClass("padding_left", settings, attributes),
+			prepareClass("padding_right", settings, attributes),
+			prepareClass("padding_topbottom", settings, attributes),
 			prepareClass("padding_leftright", settings, attributes)
 		];
 		classes = compact(classes);

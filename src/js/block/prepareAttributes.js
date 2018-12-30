@@ -46,6 +46,15 @@ const prepareAttributes = settings => {
 		padding_bottom: {
 			type: "number"
 		},
+		padding_left: {
+			type: "number"
+		},
+		padding_right: {
+			type: "number"
+		},
+		padding_topbottom: {
+			type: "number"
+		},
 		padding_leftright: {
 			type: "number"
 		},
