@@ -1,8 +1,13 @@
-import l, { Div, plugin_slug, prepareClass } from "../../utils";
+import l, {
+	Div,
+	plugin_slug,
+	prepareClass,
+	prepareClassPaddingSmallScreen
+} from "../../utils";
 import Background from "./Background";
 import Content from "./Content";
 
-const { compact, isUndefined } = lodash;
+const { compact } = lodash;
 const { Component } = wp.element;
 
 class Container extends Component {
@@ -14,6 +19,34 @@ class Container extends Component {
 			extra_props.container.className,
 			className, // Apply the classes from the block prop.
 			`${plugin_slug}-container`,
+
+			prepareClassPaddingSmallScreen("padding_top", settings, attributes),
+			prepareClassPaddingSmallScreen(
+				"padding_bottom",
+				settings,
+				attributes
+			),
+			prepareClassPaddingSmallScreen(
+				"padding_left",
+				settings,
+				attributes
+			),
+			prepareClassPaddingSmallScreen(
+				"padding_right",
+				settings,
+				attributes
+			),
+			prepareClassPaddingSmallScreen(
+				"padding_topbottom",
+				settings,
+				attributes
+			),
+			prepareClassPaddingSmallScreen(
+				"padding_leftright",
+				settings,
+				attributes
+			),
+
 			prepareClass("padding_top", settings, attributes),
 			prepareClass("padding_bottom", settings, attributes),
 			prepareClass("padding_left", settings, attributes),

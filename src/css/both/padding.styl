@@ -7,14 +7,39 @@ for num in (0..200)
 		.mbc-padding_topbottom-{num}
 			padding-top (num)px
 			padding-bottom (num)px
-		.mbc-padding_leftright-{num}
-			padding-left (num)px
-			padding-right (num)px
 		.mbc-padding_top-{num}
 			padding-top (num)px
 		.mbc-padding_bottom-{num}
 			padding-bottom (num)px
+
+for num in (0..100)
+	if num % 5 == 0
+		.mbc-padding_leftright-{num}
+			padding-left (num)px
+			padding-right (num)px
 		.mbc-padding_left-{num}
 			padding-left (num)px
 		.mbc-padding_right-{num}
 			padding-left (num)px
+
+@media (max-width: 600px)
+	for num in (0..200)
+		if num % 5 == 0
+			.mbc-padding_top-gt-max_padding-{num}
+				padding-top (num)px
+			.mbc-padding_bottom-gt-max_padding-{num}
+				padding-bottom (num)px
+			.mbc-padding_topbottom-gt-max_padding-{num}
+				padding-top (num)px
+				padding-bottom (num)px
+
+@media (max-width: 600px)
+	for num in (0..100)
+		if num % 5 == 0
+			.mbc-padding_left-gt-max_padding-{num}
+				padding-left (num)px
+			.mbc-padding_right-gt-max_padding-{num}
+				padding-right (num)px
+			.mbc-padding_leftright-gt-max_padding-{num}
+				padding-left (num)px
+				padding-right (num)px

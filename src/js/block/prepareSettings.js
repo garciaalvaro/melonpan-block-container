@@ -27,6 +27,9 @@ const settings_private_props = {
 	padding_leftright: {
 		step: 5
 	},
+	max_padding_small_screen: {
+		step: 5
+	},
 	border_width: {
 		step: 1,
 		min: 0,
@@ -103,6 +106,11 @@ const settings_default_prop = {
 		max: 200
 	},
 	padding_leftright: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	max_padding_small_screen: {
 		default: 20,
 		min: 0,
 		max: 100

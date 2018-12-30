@@ -14,7 +14,8 @@ class Padding extends Component {
 			padding_left,
 			padding_right,
 			padding_topbottom,
-			padding_leftright
+			padding_leftright,
+			max_padding_small_screen
 		} = settings;
 
 		return (
@@ -129,6 +130,29 @@ class Padding extends Component {
 						onChange={value =>
 							setAttributes({
 								padding_leftright: value
+							})
+						}
+					/>
+				)}
+
+				{!isUndefined(max_padding_small_screen) && (
+					<RangeControl
+						label={__("Padding small screen")}
+						help={__(
+							"In small screens, if there is a padding greater than 0 this value will replace it."
+						)}
+						className={[
+							`${plugin_slug}-max_padding_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.max_padding_small_screen}
+						step={max_padding_small_screen.step}
+						min={max_padding_small_screen.min}
+						max={max_padding_small_screen.max}
+						onChange={value =>
+							setAttributes({
+								max_padding_small_screen: value
 							})
 						}
 					/>

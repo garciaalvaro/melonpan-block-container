@@ -24,6 +24,7 @@ class Controls extends Component {
 			padding_right,
 			padding_topbottom,
 			padding_leftright,
+			max_padding_small_screen,
 			border_width,
 			border_color,
 			border_color_opacity,
@@ -49,7 +50,10 @@ class Controls extends Component {
 					!isUndefined(padding_left) ||
 					!isUndefined(padding_right) ||
 					!isUndefined(padding_topbottom) ||
-					!isUndefined(padding_leftright)) && <Padding {...props} />}
+					!isUndefined(padding_leftright) ||
+					!isUndefined(max_padding_small_screen)) && (
+					<Padding {...props} />
+				)}
 
 				{(!isUndefined(border_color) ||
 					!isUndefined(border_color_opacity) ||
