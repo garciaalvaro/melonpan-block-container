@@ -1,11 +1,72 @@
 import l, { plugin_slug } from "../../utils";
 
-const { isUndefined } = lodash;
+const { isUndefined, compact } = lodash;
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-const { RangeControl, RadioControl, PanelBody } = wp.components;
+const { RangeControl, BaseControl, Toolbar, PanelBody } = wp.components;
 
 class Content extends Component {
+	getAlignControls = () => {
+		const { setAttributes, attributes, settings } = this.props;
+		const { content_align } = settings;
+
+		let controls;
+		controls = content_align.options.map(control => {
+			switch (control) {
+				case "left":
+					return {
+						name: "left",
+						title: "Left",
+						icon: "align-left",
+						isActive: attributes.content_align === "left",
+						onClick: value =>
+							setAttributes({ content_align: "left" })
+					};
+					break;
+
+				case "center":
+					return {
+						name: "center",
+						title: "center",
+						icon: "align-center",
+						isActive: attributes.content_align === "center",
+						onClick: value =>
+							setAttributes({ content_align: "center" })
+					};
+					break;
+
+				case "right":
+					return {
+						name: "right",
+						title: "right",
+						icon: "align-right",
+						isActive: attributes.content_align === "right",
+						onClick: value =>
+							setAttributes({ content_align: "right" })
+					};
+					break;
+
+				case "full":
+					return {
+						name: "full",
+						title: "full",
+						icon: "align-full-width",
+						isActive: attributes.content_align === "full",
+						onClick: value =>
+							setAttributes({ content_align: "full" })
+					};
+					break;
+
+				default:
+					return null;
+					break;
+			}
+		});
+		controls = compact(controls);
+
+		return controls;
+	};
+
 	render() {
 		const { setAttributes, attributes, settings } = this.props;
 		const { content_maxwidth, content_align } = settings;
@@ -16,11 +77,11 @@ class Content extends Component {
 				className={`${plugin_slug}-panel_body`}
 			>
 				{!isUndefined(content_align) && (
-					<RadioControl
+					<BaseControl
 						className={[
 							`${plugin_slug}-content_align`,
 							`${plugin_slug}-control`,
-							`${plugin_slug}-control-radio`,
+							`${plugin_slug}-control-toolbar`,
 							`${plugin_slug}-selected-${
 								attributes.content_align
 							}`
@@ -29,18 +90,11 @@ class Content extends Component {
 						help={__(
 							"Choose an option to align the content inside the container."
 						)}
-						selected={attributes.content_align}
-						options={[
-							{ value: "left", label: "Left" },
-							{ value: "right", label: "Right" },
-							{ value: "center", label: "Center" },
-							{ value: "full", label: "Full" }
-						]}
-						onChange={value =>
-							setAttributes({ content_align: value })
-						}
-					/>
+					>
+						<Toolbar controls={this.getAlignControls()} />
+					</BaseControl>
 				)}
+
 				{!isUndefined(content_maxwidth) && (
 					<RangeControl
 						label={__("Max width")}

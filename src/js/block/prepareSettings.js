@@ -54,7 +54,8 @@ const settings_default_prop = {
 		options: ["left", "center", "right", "wide", "full"]
 	},
 	content_align: {
-		default: "center"
+		default: "center",
+		options: ["left", "center", "right", "full"]
 	},
 	background_color: {
 		default: "",
