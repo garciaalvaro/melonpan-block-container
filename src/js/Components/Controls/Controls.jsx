@@ -24,7 +24,12 @@ class Controls extends Component {
 			padding_right,
 			padding_topbottom,
 			padding_leftright,
-			max_padding_small_screen,
+			padding_top_small_screen,
+			padding_bottom_small_screen,
+			padding_left_small_screen,
+			padding_right_small_screen,
+			padding_topbottom_small_screen,
+			padding_leftright_small_screen,
 			border_width,
 			border_color,
 			border_color_opacity,
@@ -51,7 +56,12 @@ class Controls extends Component {
 					!isUndefined(padding_right) ||
 					!isUndefined(padding_topbottom) ||
 					!isUndefined(padding_leftright) ||
-					!isUndefined(max_padding_small_screen)) && (
+					!isUndefined(padding_top_small_screen) ||
+					!isUndefined(padding_bottom_small_screen) ||
+					!isUndefined(padding_left_small_screen) ||
+					!isUndefined(padding_right_small_screen) ||
+					!isUndefined(padding_topbottom_small_screen) ||
+					!isUndefined(padding_leftright_small_screen)) && (
 					<Padding {...props} />
 				)}
 

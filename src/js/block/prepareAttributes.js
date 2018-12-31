@@ -58,7 +58,22 @@ const prepareAttributes = settings => {
 		padding_leftright: {
 			type: "number"
 		},
-		max_padding_small_screen: {
+		padding_top_small_screen: {
+			type: "number"
+		},
+		padding_bottom_small_screen: {
+			type: "number"
+		},
+		padding_left_small_screen: {
+			type: "number"
+		},
+		padding_right_small_screen: {
+			type: "number"
+		},
+		padding_topbottom_small_screen: {
+			type: "number"
+		},
+		padding_leftright_small_screen: {
 			type: "number"
 		},
 		border_color: {

@@ -1,9 +1,4 @@
-import l, {
-	Div,
-	plugin_slug,
-	prepareClass,
-	prepareClassPaddingSmallScreen
-} from "../../utils";
+import l, { Div, plugin_slug, prepareClass } from "../../utils";
 import Background from "./Background";
 import Content from "./Content";
 
@@ -20,29 +15,17 @@ class Container extends Component {
 			className, // Apply the classes from the block prop.
 			`${plugin_slug}-container`,
 
-			prepareClassPaddingSmallScreen("padding_top", settings, attributes),
-			prepareClassPaddingSmallScreen(
-				"padding_bottom",
+			prepareClass("padding_top_small_screen", settings, attributes),
+			prepareClass("padding_bottom_small_screen", settings, attributes),
+			prepareClass("padding_left_small_screen", settings, attributes),
+			prepareClass("padding_right_small_screen", settings, attributes),
+			prepareClass(
+				"padding_topbottom_small_screen",
 				settings,
 				attributes
 			),
-			prepareClassPaddingSmallScreen(
-				"padding_left",
-				settings,
-				attributes
-			),
-			prepareClassPaddingSmallScreen(
-				"padding_right",
-				settings,
-				attributes
-			),
-			prepareClassPaddingSmallScreen(
-				"padding_topbottom",
-				settings,
-				attributes
-			),
-			prepareClassPaddingSmallScreen(
-				"padding_leftright",
+			prepareClass(
+				"padding_leftright_small_screen",
 				settings,
 				attributes
 			),

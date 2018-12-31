@@ -27,7 +27,22 @@ const settings_private_props = {
 	padding_leftright: {
 		step: 5
 	},
-	max_padding_small_screen: {
+	padding_top_small_screen: {
+		step: 5
+	},
+	padding_bottom_small_screen: {
+		step: 5
+	},
+	padding_left_small_screen: {
+		step: 5
+	},
+	padding_right_small_screen: {
+		step: 5
+	},
+	padding_topbottom_small_screen: {
+		step: 5
+	},
+	padding_leftright_small_screen: {
 		step: 5
 	},
 	border_width: {
@@ -111,7 +126,32 @@ const settings_default_prop = {
 		min: 0,
 		max: 100
 	},
-	max_padding_small_screen: {
+	padding_top_small_screen: {
+		default: 20,
+		min: 0,
+		max: 200
+	},
+	padding_bottom_small_screen: {
+		default: 20,
+		min: 0,
+		max: 200
+	},
+	padding_left_small_screen: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	padding_right_small_screen: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	padding_topbottom_small_screen: {
+		default: 20,
+		min: 0,
+		max: 200
+	},
+	padding_leftright_small_screen: {
 		default: 20,
 		min: 0,
 		max: 100

@@ -1,6 +1,5 @@
 import l from "./log";
 import getValue from "./getValue";
-import prepareClassPaddingSmallScreen from "./prepareClassPaddingSmallScreen";
 import prepareClass from "./prepareClass";
 import prepareColor from "./prepareColor";
 import prepareSrcset from "./prepareSrcset";
@@ -17,7 +16,6 @@ export default l;
 export {
 	icons,
 	getValue,
-	prepareClassPaddingSmallScreen,
 	prepareClass,
 	prepareColor,
 	prepareSrcset,

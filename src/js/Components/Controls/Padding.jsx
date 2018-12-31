@@ -15,7 +15,12 @@ class Padding extends Component {
 			padding_right,
 			padding_topbottom,
 			padding_leftright,
-			max_padding_small_screen
+			padding_top_small_screen,
+			padding_bottom_small_screen,
+			padding_left_small_screen,
+			padding_right_small_screen,
+			padding_topbottom_small_screen,
+			padding_leftright_small_screen
 		} = settings;
 
 		return (
@@ -135,24 +140,115 @@ class Padding extends Component {
 					/>
 				)}
 
-				{!isUndefined(max_padding_small_screen) && (
+				{!isUndefined(padding_top_small_screen) && (
 					<RangeControl
-						label={__("Padding small screen")}
-						help={__(
-							"In small screens, if there is a padding greater than 0 this value will replace it."
-						)}
+						label={__("Padding top - Small screens")}
 						className={[
-							`${plugin_slug}-max_padding_small_screen`,
+							`${plugin_slug}-padding_top_small_screen`,
 							`${plugin_slug}-control`,
 							`${plugin_slug}-control-range`
 						].join(" ")}
-						value={attributes.max_padding_small_screen}
-						step={max_padding_small_screen.step}
-						min={max_padding_small_screen.min}
-						max={max_padding_small_screen.max}
+						value={attributes.padding_top_small_screen}
+						step={padding_top_small_screen.step}
+						min={padding_top_small_screen.min}
+						max={padding_top_small_screen.max}
+						onChange={value =>
+							setAttributes({ padding_top_small_screen: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_bottom_small_screen) && (
+					<RangeControl
+						label={__("Padding bottom - Small screens")}
+						className={[
+							`${plugin_slug}-padding_bottom_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_bottom_small_screen}
+						step={padding_bottom_small_screen.step}
+						min={padding_bottom_small_screen.min}
+						max={padding_bottom_small_screen.max}
 						onChange={value =>
 							setAttributes({
-								max_padding_small_screen: value
+								padding_bottom_small_screen: value
+							})
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_left_small_screen) && (
+					<RangeControl
+						label={__("Padding left - Small screens")}
+						className={[
+							`${plugin_slug}-padding_left_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_left_small_screen}
+						step={padding_left_small_screen.step}
+						min={padding_left_small_screen.min}
+						max={padding_left_small_screen.max}
+						onChange={value =>
+							setAttributes({ padding_left_small_screen: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_right_small_screen) && (
+					<RangeControl
+						label={__("Padding right - Small screens")}
+						className={[
+							`${plugin_slug}-padding_right_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_right_small_screen}
+						step={padding_right_small_screen.step}
+						min={padding_right_small_screen.min}
+						max={padding_right_small_screen.max}
+						onChange={value =>
+							setAttributes({ padding_right_small_screen: value })
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_topbottom_small_screen) && (
+					<RangeControl
+						label={__("Padding top & bottom - Small screens")}
+						className={[
+							`${plugin_slug}-padding_topbottom_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_topbottom_small_screen}
+						step={padding_topbottom_small_screen.step}
+						min={padding_topbottom_small_screen.min}
+						max={padding_topbottom_small_screen.max}
+						onChange={value =>
+							setAttributes({
+								padding_topbottom_small_screen: value
+							})
+						}
+					/>
+				)}
+
+				{!isUndefined(padding_leftright_small_screen) && (
+					<RangeControl
+						label={__("Padding left & right - Small screens")}
+						className={[
+							`${plugin_slug}-padding_leftright_small_screen`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-range`
+						].join(" ")}
+						value={attributes.padding_leftright_small_screen}
+						step={padding_leftright_small_screen.step}
+						min={padding_leftright_small_screen.min}
+						max={padding_leftright_small_screen.max}
+						onChange={value =>
+							setAttributes({
+								padding_leftright_small_screen: value
 							})
 						}
 					/>
