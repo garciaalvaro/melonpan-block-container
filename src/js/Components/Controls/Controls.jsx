@@ -18,12 +18,14 @@ class Controls extends Component {
 			background_image_url,
 			content_align,
 			content_maxwidth,
+			padding,
 			padding_top,
 			padding_bottom,
 			padding_left,
 			padding_right,
 			padding_topbottom,
 			padding_leftright,
+			padding_small_screen,
 			padding_top_small_screen,
 			padding_bottom_small_screen,
 			padding_left_small_screen,
@@ -50,12 +52,14 @@ class Controls extends Component {
 					<Background {...props} />
 				)}
 
-				{(!isUndefined(padding_top) ||
+				{(!isUndefined(padding) ||
+					!isUndefined(padding_top) ||
 					!isUndefined(padding_bottom) ||
 					!isUndefined(padding_left) ||
 					!isUndefined(padding_right) ||
 					!isUndefined(padding_topbottom) ||
 					!isUndefined(padding_leftright) ||
+					!isUndefined(padding_small_screen) ||
 					!isUndefined(padding_top_small_screen) ||
 					!isUndefined(padding_bottom_small_screen) ||
 					!isUndefined(padding_left_small_screen) ||

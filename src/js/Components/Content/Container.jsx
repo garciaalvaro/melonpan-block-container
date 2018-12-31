@@ -15,6 +15,7 @@ class Container extends Component {
 			className, // Apply the classes from the block prop.
 			`${plugin_slug}-container`,
 
+			prepareClass("padding_small_screen", settings, attributes),
 			prepareClass("padding_top_small_screen", settings, attributes),
 			prepareClass("padding_bottom_small_screen", settings, attributes),
 			prepareClass("padding_left_small_screen", settings, attributes),
@@ -30,6 +31,7 @@ class Container extends Component {
 				attributes
 			),
 
+			prepareClass("padding", settings, attributes),
 			prepareClass("padding_top", settings, attributes),
 			prepareClass("padding_bottom", settings, attributes),
 			prepareClass("padding_left", settings, attributes),

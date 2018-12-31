@@ -40,6 +40,9 @@ const prepareAttributes = settings => {
 			selector: `.${plugin_slug}-background-image`,
 			attribute: "alt"
 		},
+		padding: {
+			type: "number"
+		},
 		padding_top: {
 			type: "number"
 		},
@@ -56,6 +59,9 @@ const prepareAttributes = settings => {
 			type: "number"
 		},
 		padding_leftright: {
+			type: "number"
+		},
+		padding_small_screen: {
 			type: "number"
 		},
 		padding_top_small_screen: {

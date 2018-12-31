@@ -101,6 +101,11 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 			},
 			// There are several sets of padding settings which can be combined.
 			// For example padding_top, padding_bottom and padding_leftright.
+			padding: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
 			padding_top: {
 				default: 20,
 				min: 0,
@@ -133,6 +138,11 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 			},
 			// These paddings will apply to screens smaller than 600px in width.
 			// They are meant to override the previous paddings (over this comment).
+			padding_small_screen: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
 			padding_top_small_screen: {
 				default: 20,
 				min: 0,

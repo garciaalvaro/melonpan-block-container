@@ -9,6 +9,9 @@ const settings_private_props = {
 	background_color_opacity: {
 		step: 1
 	},
+	padding: {
+		step: 5
+	},
 	padding_top: {
 		step: 5
 	},
@@ -25,6 +28,9 @@ const settings_private_props = {
 		step: 5
 	},
 	padding_leftright: {
+		step: 5
+	},
+	padding_small_screen: {
 		step: 5
 	},
 	padding_top_small_screen: {
@@ -96,6 +102,11 @@ const settings_default_prop = {
 		min: 300,
 		max: 1300
 	},
+	padding: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
 	padding_top: {
 		default: 20,
 		min: 0,
@@ -122,6 +133,11 @@ const settings_default_prop = {
 		max: 200
 	},
 	padding_leftright: {
+		default: 20,
+		min: 0,
+		max: 100
+	},
+	padding_small_screen: {
 		default: 20,
 		min: 0,
 		max: 100

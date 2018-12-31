@@ -5,3 +5,13 @@
 for num in (0..10)
 	.mbc-shadow_width-{num}:after
 		box-shadow 0 0 (num)px var(--shadow_color)
+
+div.components-panel .mbc-panel_body
+	.mbc-border_width
+	.mbc-border_color
+	.mbc-border_color_opacity
+		+ .mbc-shadow_width
+		+ .mbc-shadow_color
+		+ .mbc-shadow_color_opacity
+			padding-top 2em
+			border-top 1px dotted rgba(0,0,0,0.1)
