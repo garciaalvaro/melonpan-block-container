@@ -27,11 +27,11 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 		// Use this property to add extra props to the container, content or background divs.
 		extra_props: {
 			container: {
-				id: "an-id",
-				className: "a_class another_class"
+				id: "my_id",
+				className: "my_container_class another_class"
 			},
 			content: {},
-			background: { className: "a_class", style: { opacity: 0.5 } }
+			background: { className: "my_bg_class", style: { opacity: 0.5 } }
 		},
 		// This is the list of all the available properties and their default values.
 		// Settings are opt-in so only the ones that are passed will be used.
@@ -69,21 +69,6 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 				min: 300,
 				max: 1300
 			},
-			padding_top: {
-				default: 20,
-				min: 0,
-				max: 200
-			},
-			padding_bottom: {
-				default: 20,
-				min: 0,
-				max: 200
-			},
-			padding_leftright: {
-				default: 20,
-				min: 0,
-				max: 100
-			},
 			border_color: {
 				default: "",
 				colors: [
@@ -113,6 +98,70 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 			},
 			shadow_width: {
 				default: 0
+			},
+			// There are several sets of padding settings which can be combined.
+			// For example padding_top, padding_bottom and padding_leftright.
+			padding_top: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_bottom: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_left: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			padding_right: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			padding_topbottom: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_leftright: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			// These paddings will apply to screens smaller than 600px in width.
+			// They are meant to override the previous paddings (over this comment).
+			padding_top_small_screen: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_bottom_small_screen: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_left_small_screen: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			padding_right_small_screen: {
+				default: 20,
+				min: 0,
+				max: 100
+			},
+			padding_topbottom_small_screen: {
+				default: 20,
+				min: 0,
+				max: 200
+			},
+			padding_leftright_small_screen: {
+				default: 20,
+				min: 0,
+				max: 100
 			}
 		},
 		// This property is experimental. If you need to migrate the block to a new version
