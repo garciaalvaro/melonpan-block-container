@@ -69,7 +69,8 @@ const settings_private_props = {
 	}
 };
 
-const settings_default_prop = {
+let settings_default_prop;
+settings_default_prop = {
 	align: {
 		default: "",
 		options: ["left", "center", "right", "wide", "full"]
@@ -203,6 +204,11 @@ const settings_default_prop = {
 		default: 0
 	}
 };
+
+settings_default_prop = mapValues(settings_default_prop, setting_value => ({
+	...setting_value,
+	show_control: true
+}));
 
 const prepareSettings = custom => {
 	if (!isObject(custom)) {

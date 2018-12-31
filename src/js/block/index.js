@@ -42,9 +42,11 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 				options: ["left", "center", "right", "wide", "full"]
 			},
 			content_align: {
+				show_control: true,
 				default: "center"
 			},
 			background_color: {
+				show_control: true,
 				default: "",
 				colors: [
 					{ name: "banana", color: "#FFDEAD" },
@@ -60,16 +62,19 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 			},
 			background_image: {},
 			background_color_opacity: {
+				show_control: true,
 				default: 50,
 				min: 0,
 				max: 100
 			},
 			content_maxwidth: {
+				show_control: true,
 				default: 800,
 				min: 300,
 				max: 1300
 			},
 			border_color: {
+				show_control: true,
 				default: "",
 				colors: [
 					{ name: "black", color: "#000000" },
@@ -77,14 +82,17 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 				]
 			},
 			border_color_opacity: {
+				show_control: true,
 				default: 15,
 				min: 0,
 				max: 100
 			},
 			border_width: {
+				show_control: true,
 				default: 0
 			},
 			shadow_color: {
+				show_control: true,
 				default: "",
 				colors: [
 					{ name: "black", color: "#000000" },
@@ -92,46 +100,55 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 				]
 			},
 			shadow_color_opacity: {
+				show_control: true,
 				default: 15,
 				min: 0,
 				max: 100
 			},
 			shadow_width: {
+				show_control: true,
 				default: 0
 			},
 			// There are several sets of padding settings which can be combined.
 			// For example padding_top, padding_bottom and padding_leftright.
 			padding: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_top: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_bottom: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_left: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_right: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_topbottom: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_leftright: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
@@ -139,36 +156,43 @@ addFilter("mbc_create_block", "my-plugin/my-block", blocks => {
 			// These paddings will apply to screens smaller than 600px in width.
 			// They are meant to override the previous paddings (over this comment).
 			padding_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_top_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_bottom_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_left_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_right_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100
 			},
 			padding_topbottom_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 200
 			},
 			padding_leftright_small_screen: {
+				show_control: true,
 				default: 20,
 				min: 0,
 				max: 100

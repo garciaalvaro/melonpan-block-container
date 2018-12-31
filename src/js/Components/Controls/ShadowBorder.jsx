@@ -1,6 +1,5 @@
-import l, { plugin_slug } from "../../utils";
+import l, { plugin_slug, showControl } from "../../utils";
 
-const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { ColorPalette } = wp.editor;
@@ -8,7 +7,7 @@ const { RangeControl, BaseControl, PanelBody } = wp.components;
 
 class ShadowBorder extends Component {
 	render() {
-		const { setAttributes, attributes, settings } = this.props;
+		const { setAttributes, attributes, settings: sett } = this.props;
 		const {
 			border_width,
 			border_color,
@@ -16,14 +15,14 @@ class ShadowBorder extends Component {
 			shadow_width,
 			shadow_color,
 			shadow_color_opacity
-		} = settings;
+		} = sett;
 
 		return (
 			<PanelBody
 				title={__("Shadow and Border")}
 				className={`${plugin_slug}-panel_body`}
 			>
-				{!isUndefined(border_width) && (
+				{showControl("border_width", sett) && (
 					<RangeControl
 						label={__("Border width")}
 						className={[
@@ -43,7 +42,7 @@ class ShadowBorder extends Component {
 					/>
 				)}
 
-				{!isUndefined(border_color) && (
+				{showControl("border_color", sett) && (
 					<BaseControl
 						label={__("Border color")}
 						className={[
@@ -64,7 +63,7 @@ class ShadowBorder extends Component {
 					</BaseControl>
 				)}
 
-				{!isUndefined(border_color_opacity) && (
+				{showControl("border_color_opacity", sett) && (
 					<RangeControl
 						label={__("Border color opacity")}
 						className={[
@@ -83,7 +82,7 @@ class ShadowBorder extends Component {
 						}}
 					/>
 				)}
-				{!isUndefined(shadow_width) && (
+				{showControl("shadow_width", sett) && (
 					<RangeControl
 						label={__("Shadow width")}
 						className={[
@@ -103,7 +102,7 @@ class ShadowBorder extends Component {
 					/>
 				)}
 
-				{!isUndefined(shadow_color) && (
+				{showControl("shadow_color", sett) && (
 					<BaseControl
 						label={__("Shadow color")}
 						className={[
@@ -124,7 +123,7 @@ class ShadowBorder extends Component {
 					</BaseControl>
 				)}
 
-				{!isUndefined(shadow_color_opacity) && (
+				{showControl("shadow_color_opacity", sett) && (
 					<RangeControl
 						label={__("Shadow color opacity")}
 						className={[

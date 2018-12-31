@@ -1,6 +1,5 @@
-import l, { plugin_slug } from "../../utils";
+import l, { plugin_slug, showControl } from "../../utils";
 
-const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { RangeControl, PanelBody } = wp.components;
@@ -75,7 +74,7 @@ class Padding extends Component {
 				{paddings.map(({ name, label }) => {
 					const setting = settings[name];
 
-					if (!isUndefined(setting)) {
+					if (showControl(name, settings)) {
 						return (
 							<RangeControl
 								key={name}

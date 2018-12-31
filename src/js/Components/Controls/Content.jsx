@@ -1,6 +1,6 @@
-import l, { plugin_slug } from "../../utils";
+import l, { plugin_slug, showControl } from "../../utils";
 
-const { isUndefined, compact } = lodash;
+const { compact } = lodash;
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { RangeControl, BaseControl, Toolbar, PanelBody } = wp.components;
@@ -68,15 +68,15 @@ class Content extends Component {
 	};
 
 	render() {
-		const { setAttributes, attributes, settings } = this.props;
-		const { content_maxwidth, content_align } = settings;
+		const { setAttributes, attributes, settings: sett } = this.props;
+		const { content_maxwidth } = sett;
 
 		return (
 			<PanelBody
 				title={__("Content")}
 				className={`${plugin_slug}-panel_body`}
 			>
-				{!isUndefined(content_align) && (
+				{showControl("content_align", sett) && (
 					<BaseControl
 						className={[
 							`${plugin_slug}-content_align`,
@@ -95,7 +95,7 @@ class Content extends Component {
 					</BaseControl>
 				)}
 
-				{!isUndefined(content_maxwidth) && (
+				{showControl("content_maxwidth", sett) && (
 					<RangeControl
 						label={__("Max width")}
 						className={[

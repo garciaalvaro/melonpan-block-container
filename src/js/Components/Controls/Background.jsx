@@ -1,4 +1,4 @@
-import l, { plugin_slug, prepareSrcset } from "../../utils";
+import l, { plugin_slug, prepareSrcset, showControl } from "../../utils";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
@@ -25,19 +25,19 @@ class Background extends Component {
 	};
 
 	render() {
-		const { setAttributes, attributes, settings } = this.props;
+		const { setAttributes, attributes, settings: sett } = this.props;
 		const {
 			background_color,
 			background_color_opacity,
 			background_image_id
-		} = settings;
+		} = sett;
 
 		return (
 			<PanelBody
 				title={__("Background")}
 				className={`${plugin_slug}-panel_body`}
 			>
-				{!isUndefined(background_color) && (
+				{showControl("background_color", sett) && (
 					<BaseControl
 						label={__("Background color")}
 						className={[
@@ -58,7 +58,7 @@ class Background extends Component {
 					</BaseControl>
 				)}
 
-				{!isUndefined(background_color_opacity) && (
+				{showControl("background_color_opacity", sett) && (
 					<RangeControl
 						label={__("Background color opacity")}
 						className={[
