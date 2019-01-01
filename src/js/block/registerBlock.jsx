@@ -4,6 +4,7 @@ import EditSave from "../Components/EditSave/EditSave";
 const { isUndefined } = lodash;
 const { registerBlockType } = wp.blocks;
 
+// Register block function helper.
 const registerBlock = ({
 	blocktype_props,
 	settings,

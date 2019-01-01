@@ -1,8 +1,8 @@
-=== Melonpan Container Block ===
+=== Melonpan Block Container ===
 Contributors: melonpan
-Tags: gutenberg, blocks, navigation, editor
-Requires at least: 4.9.8
-Tested up to: 4.9.8
+Tags: gutenberg, blocks, editor, container, innerblocks
+Requires at least: 5.0
+Tested up to: 5.0
 Stable tag: 0.0.1
 Requires PHP: 5.6
 License: GPLv3

@@ -1,7 +1,8 @@
 import l from "../utils";
 
-const { isObject, isUndefined, assign, pick, mapValues, keys } = lodash;
+const { isObject, isUndefined, pick, mapValues, keys } = lodash;
 
+// Object containing settings properties meant to be private.
 const settings_private_props = {
 	content_maxwidth: {
 		step: 10
@@ -70,6 +71,8 @@ const settings_private_props = {
 };
 
 let settings_default_prop;
+
+// This is an array of all available settings.
 settings_default_prop = {
 	align: {
 		default: "",
@@ -98,6 +101,7 @@ settings_default_prop = {
 		min: 0,
 		max: 100
 	},
+	background_image: {},
 	content_maxwidth: {
 		default: 800,
 		min: 300,
@@ -205,11 +209,13 @@ settings_default_prop = {
 	}
 };
 
+// Assign the show_control property to each setting.
 settings_default_prop = mapValues(settings_default_prop, setting_value => ({
 	...setting_value,
 	show_control: true
 }));
 
+// Nomralize the settings passed.
 const prepareSettings = custom => {
 	if (!isObject(custom)) {
 		return {};
@@ -227,27 +233,15 @@ const prepareSettings = custom => {
 		// Exclude not allowed properties.
 		setting_value = pick(setting_value, keys(defaults[setting_key]));
 		// Fill not-set properties with the ones from defaults.
-		setting_value = assign({}, defaults[setting_key], setting_value);
+		setting_value = { ...defaults[setting_key], ...setting_value };
 
 		if (!isUndefined(privates[setting_key])) {
 			// Assign private properties.
-			setting_value = assign({}, privates[setting_key], setting_value);
+			setting_value = { ...privates[setting_key], ...setting_value };
 		}
 
 		return setting_value;
 	});
-
-	if (!isUndefined(custom.background_image)) {
-		const background_image = {
-			background_image_id: {},
-			background_image_url: {},
-			background_image_srcset: {},
-			background_image_alt: {}
-		};
-
-		// Assign private required properties.
-		settings = assign({}, background_image, settings);
-	}
 
 	return settings;
 };

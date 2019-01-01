@@ -1,4 +1,3 @@
-import l from "./log";
 import tinycolor from "tinycolor2";
 
 const { isUndefined } = lodash;

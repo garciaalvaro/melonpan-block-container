@@ -6,11 +6,13 @@ import prepareExtraProps from "./prepareExtraProps";
 
 const { isObject } = lodash;
 
+// Normalize the block props.
 const prepareBlock = props => {
 	if (!isObject(props)) {
 		return false;
 	}
 
+	// Prepare each property.
 	const settings = prepareSettings(props.settings);
 	const attributes = prepareAttributes(settings);
 	const innerblocks_props = !isObject(props.innerblocks_props)

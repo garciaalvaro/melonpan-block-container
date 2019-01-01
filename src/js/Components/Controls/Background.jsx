@@ -1,4 +1,4 @@
-import l, { plugin_slug, prepareSrcset, showControl } from "../../utils";
+import l, { Img, plugin_slug, prepareSrcset, showControl } from "../../utils";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
@@ -29,7 +29,7 @@ class Background extends Component {
 		const {
 			background_color,
 			background_color_opacity,
-			background_image_id
+			background_image
 		} = sett;
 
 		return (
@@ -78,7 +78,7 @@ class Background extends Component {
 					/>
 				)}
 
-				{!isUndefined(background_image_id) && (
+				{!isUndefined(background_image) && (
 					<BaseControl
 						label={__("Background image")}
 						className={[
@@ -105,11 +105,11 @@ class Background extends Component {
 								value={attributes.background_image_id}
 								multiple={false}
 								render={({ open }) => (
-									<img
+									<Img
 										onClick={open}
 										className={`${plugin_slug}-control-image`}
 										src={attributes.background_image_url}
-										srcset={
+										srcSet={
 											attributes.background_image_srcset
 										}
 										alt={attributes.background_image_alt}

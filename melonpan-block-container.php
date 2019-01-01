@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Melonpan Container Block
+ * Plugin Name: Melonpan Block Container
  * Plugin URI: #
  * Description: Container block for Gutenberg editor.
  * Author: melonpan
@@ -12,12 +12,13 @@
 namespace MELONPANBLOCKCONTAINER;
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
 	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.0.0' );
+}
+if ( ! defined( __NAMESPACE__ . '\PLUGIN_NAME' ) ) {
+	define( __NAMESPACE__ . '\PLUGIN_NAME', 'melonpan-block-container' );
 }
 if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
 	define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
@@ -30,16 +31,15 @@ if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
  */
 function enqueue_front() {
 
-	\wp_enqueue_style(
-		'melonpan_block_container_front',
-		BUILD_DIR . 'melonpan-block-container-front.css',
+	wp_enqueue_style(
+		PLUGIN_NAME . '-front',
+		BUILD_DIR . PLUGIN_NAME . '-front.css',
 		array(),
 		PLUGIN_VERSION
 	);
 
 }
-
-\add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_front' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_front' );
 
 /**
  * Enqueue the plugin styles and scripts in the editor.
@@ -48,16 +48,16 @@ function enqueue_front() {
  */
 function enqueue_editor() {
 
-	\wp_enqueue_style(
-		'melonpan_block_container',
-		BUILD_DIR . 'melonpan-block-container-editor.css',
+	wp_enqueue_style(
+		PLUGIN_NAME . '-editor',
+		BUILD_DIR . PLUGIN_NAME . '-editor.css',
 		array(),
 		PLUGIN_VERSION
 	);
 
-	\wp_enqueue_script(
-		'melonpan_block_container',
-		BUILD_DIR . 'melonpan-block-container-editor.js',
+	wp_enqueue_script(
+		PLUGIN_NAME . '-editor',
+		BUILD_DIR . PLUGIN_NAME . '-editor.js',
 		array(
 			'lodash',
 			'wp-i18n',
@@ -71,5 +71,4 @@ function enqueue_editor() {
 	);
 
 }
-
-\add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );

@@ -19,8 +19,7 @@ class Content extends Component {
 						title: "Left",
 						icon: "align-left",
 						isActive: attributes.content_align === "left",
-						onClick: value =>
-							setAttributes({ content_align: "left" })
+						onClick: () => setAttributes({ content_align: "left" })
 					};
 					break;
 
@@ -30,7 +29,7 @@ class Content extends Component {
 						title: "center",
 						icon: "align-center",
 						isActive: attributes.content_align === "center",
-						onClick: value =>
+						onClick: () =>
 							setAttributes({ content_align: "center" })
 					};
 					break;
@@ -41,8 +40,7 @@ class Content extends Component {
 						title: "right",
 						icon: "align-right",
 						isActive: attributes.content_align === "right",
-						onClick: value =>
-							setAttributes({ content_align: "right" })
+						onClick: () => setAttributes({ content_align: "right" })
 					};
 					break;
 
@@ -52,8 +50,7 @@ class Content extends Component {
 						title: "full",
 						icon: "align-full-width",
 						isActive: attributes.content_align === "full",
-						onClick: value =>
-							setAttributes({ content_align: "full" })
+						onClick: () => setAttributes({ content_align: "full" })
 					};
 					break;
 
@@ -62,21 +59,22 @@ class Content extends Component {
 					break;
 			}
 		});
+		// Remove falsey values.
 		controls = compact(controls);
 
 		return controls;
 	};
 
 	render() {
-		const { setAttributes, attributes, settings: sett } = this.props;
-		const { content_maxwidth } = sett;
+		const { setAttributes, attributes, settings } = this.props;
+		const { content_maxwidth } = settings;
 
 		return (
 			<PanelBody
 				title={__("Content")}
 				className={`${plugin_slug}-panel_body`}
 			>
-				{showControl("content_align", sett) && (
+				{showControl("content_align", settings) && (
 					<BaseControl
 						className={[
 							`${plugin_slug}-content_align`,
@@ -95,7 +93,7 @@ class Content extends Component {
 					</BaseControl>
 				)}
 
-				{showControl("content_maxwidth", sett) && (
+				{showControl("content_maxwidth", settings) && (
 					<RangeControl
 						label={__("Max width")}
 						className={[

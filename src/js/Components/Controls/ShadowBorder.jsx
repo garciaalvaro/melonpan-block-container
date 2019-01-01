@@ -82,6 +82,7 @@ class ShadowBorder extends Component {
 						}}
 					/>
 				)}
+
 				{showControl("shadow_width", sett) && (
 					<RangeControl
 						label={__("Shadow width")}

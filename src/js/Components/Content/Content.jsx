@@ -25,6 +25,7 @@ class Content extends Component {
 			),
 			prepareClass("content_align", settings, attributes)
 		];
+		// Remove falsey values.
 		classes = compact(classes);
 		classes = classes.join(" ");
 

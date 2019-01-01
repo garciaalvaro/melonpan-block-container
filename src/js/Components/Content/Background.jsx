@@ -16,11 +16,13 @@ class Background extends Component {
 
 		let classes;
 		classes = [
+			// extra_props property classes.
 			extra_props.background.className,
 			`${plugin_slug}-background`,
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
 		];
+		// Remove falsey values.
 		classes = compact(classes);
 		classes = classes.join(" ");
 
@@ -52,7 +54,8 @@ class Background extends Component {
 			attributes
 		);
 
-		let style = {
+		let style;
+		style = {
 			"--border_color": prepareColor(border_color, border_color_opacity),
 			"--shadow_color": prepareColor(shadow_color, shadow_color_opacity),
 			"--background_color": prepareColor(
@@ -69,20 +72,24 @@ class Background extends Component {
 
 	render() {
 		const { getClasses, getStyles, props } = this;
+		const { attributes, settings } = props;
 		const {
 			background_image_url,
 			background_image_srcset,
-			background_image_alt,
+			background_image_alt
+		} = attributes;
+		const {
+			background_image,
 			border_color,
 			border_color_opacity,
 			shadow_color,
 			shadow_color_opacity,
 			background_color,
 			background_color_opacity
-		} = props.attributes;
+		} = settings;
 
 		if (
-			isUndefined(background_image_url) &&
+			isUndefined(background_image) &&
 			isUndefined(border_color) &&
 			isUndefined(border_color_opacity) &&
 			isUndefined(shadow_color) &&
@@ -99,12 +106,12 @@ class Background extends Component {
 				className={getClasses()}
 				style={getStyles()}
 			>
-				{!isUndefined(background_image_url) && (
+				{!isUndefined(background_image) && (
 					<Img
 						className={`${plugin_slug}-background-image`}
 						sizes="100vw"
 						src={background_image_url}
-						srcset={background_image_srcset}
+						srcSet={background_image_srcset}
 						alt={background_image_alt}
 					/>
 				)}

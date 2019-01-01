@@ -4,6 +4,7 @@ import Content from "./Content";
 import Padding from "./Padding";
 import ShadowBorder from "./ShadowBorder";
 
+const { isUndefined } = lodash;
 const { Component } = wp.element;
 const { InspectorControls } = wp.editor;
 
@@ -21,8 +22,7 @@ class Controls extends Component {
 
 				{(showControl("background_color", sett) ||
 					showControl("background_color_opacity", sett) ||
-					showControl("background_image_id", sett) ||
-					showControl("background_image_url", sett)) && (
+					!isUndefined(sett.background_image)) && (
 					<Background {...props} />
 				)}
 

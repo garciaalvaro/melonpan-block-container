@@ -2,6 +2,7 @@ import l, { plugin_slug } from "../utils";
 
 const { reduce, isUndefined, get } = lodash;
 
+// Prepare attributes object. Pass the default values from settings object.
 const prepareAttributes = settings => {
 	const attributes = {
 		align: {
@@ -103,12 +104,13 @@ const prepareAttributes = settings => {
 	};
 
 	// We need to pass all attributes because the migrate function
-	// in deprecate doesn't recognize the removed attributes otherwise
-	// see: https://github.com/WordPress/gutenberg/issues/10406
+	// in deprecate doesn't recognize removed attributes otherwise.
+	// See: https://github.com/WordPress/gutenberg/issues/10406
 	const attributes_custom = reduce(
 		attributes,
 		(acc, attribute, key) => {
 			if (!isUndefined(get(settings, [key, "default"]))) {
+				// Add the default value from settings.
 				acc[key] = {
 					...attribute,
 					default: settings[key].default
@@ -121,25 +123,6 @@ const prepareAttributes = settings => {
 		},
 		{}
 	);
-
-	// const attributes_custom = reduce(
-	// 	settings,
-	// 	(acc, setting, key) => {
-	// 		if (!isUndefined(setting.default)) {
-	// 			acc[key] = {
-	// 				...attributes[key],
-	// 				default: setting.default
-	// 			};
-	// 		} else {
-	// 			acc[key] = {
-	// 				...attributes[key]
-	// 			};
-	// 		}
-
-	// 		return acc;
-	// 	},
-	// 	{}
-	// );
 
 	return attributes_custom;
 };

@@ -12,7 +12,8 @@ class Container extends Component {
 		let classes;
 		classes = [
 			extra_props.container.className,
-			className, // Apply the classes from the block prop.
+			// Apply the classes from the block prop.
+			className,
 			`${plugin_slug}-container`,
 
 			prepareClass("padding_small_screen", settings, attributes),
@@ -39,6 +40,7 @@ class Container extends Component {
 			prepareClass("padding_topbottom", settings, attributes),
 			prepareClass("padding_leftright", settings, attributes)
 		];
+		// Remove falsey values.
 		classes = compact(classes);
 		classes = classes.join(" ");
 
@@ -54,11 +56,16 @@ class Container extends Component {
 			innerblocks_props,
 			...rest
 		} = props;
+		const extra_props_from_filters = is_edit ? {} : rest;
 
 		// We pass all the props to the container of the block,
 		// in case there were extra props added through filters.
 		return (
-			<Div {...extra_props.container} {...rest} className={getClasses()}>
+			<Div
+				{...extra_props.container}
+				{...extra_props_from_filters}
+				className={getClasses()}
+			>
 				<Background {...props} />
 				<Content {...props} />
 			</Div>

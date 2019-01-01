@@ -6,6 +6,7 @@ import EditSave from "../Components/EditSave/EditSave";
 
 const { isUndefined, isArray, mapValues, pick, keys } = lodash;
 
+// Prepare the deprecated array of objects.
 const prepareDeprecated = (
 	deprecated,
 	settings_new,
@@ -20,6 +21,7 @@ const prepareDeprecated = (
 		const settings = !isUndefined(deprecated.settings)
 			? prepareSettings(deprecated.settings)
 			: settings_new;
+		// This is the attributes object definition, not the values.
 		const attributes_definition = prepareAttributes(settings);
 		const extra_props = !isUndefined(deprecated.extra_props)
 			? prepareExtraProps(deprecated.extra_props)
