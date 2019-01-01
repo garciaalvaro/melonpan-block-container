@@ -106,15 +106,16 @@ class Background extends Component {
 				className={getClasses()}
 				style={getStyles()}
 			>
-				{!isUndefined(background_image) && (
-					<Img
-						className={`${plugin_slug}-background-image`}
-						sizes="100vw"
-						src={background_image_url}
-						srcSet={background_image_srcset}
-						alt={background_image_alt}
-					/>
-				)}
+				{!isUndefined(background_image) &&
+					!isUndefined(background_image_url) && (
+						<Img
+							className={`${plugin_slug}-background-image`}
+							sizes="100vw"
+							src={background_image_url}
+							srcSet={background_image_srcset}
+							alt={background_image_alt}
+						/>
+					)}
 			</Div>
 		);
 	}
