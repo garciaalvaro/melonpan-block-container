@@ -26,24 +26,14 @@ const registerBlock = ({
 				is_edit={true}
 			/>
 		),
-		save: props => {
-			const { attributes } = props;
-
-			if (!isUndefined(attributes.className)) {
-				props.attributes.className = cleanClassName(
-					attributes.className
-				);
-			}
-
-			return (
-				<EditSave
-					{...props}
-					settings={settings}
-					extra_props={extra_props}
-					is_edit={false}
-				/>
-			);
-		}
+		save: props => (
+			<EditSave
+				{...props}
+				settings={settings}
+				extra_props={extra_props}
+				is_edit={false}
+			/>
+		)
 	});
 };
 
