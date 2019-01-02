@@ -13,7 +13,7 @@ addFilter(
 				name: `${plugin_namespace}/container`,
 				title: __("Melonpan Block - Container"),
 				icon: icons.block,
-				category: "common"
+				category: "melonpan"
 			},
 			settings: {
 				align: {
