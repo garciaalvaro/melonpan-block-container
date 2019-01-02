@@ -70,6 +70,7 @@ class Padding extends Component {
 			<PanelBody
 				title={__("Padding")}
 				className={`${plugin_slug}-panel_body`}
+				initialOpen={false}
 			>
 				{paddings.map(({ name, label }) => {
 					const setting = settings[name];

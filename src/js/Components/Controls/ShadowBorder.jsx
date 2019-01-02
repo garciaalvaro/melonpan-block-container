@@ -21,6 +21,7 @@ class ShadowBorder extends Component {
 			<PanelBody
 				title={__("Shadow and Border")}
 				className={`${plugin_slug}-panel_body`}
+				initialOpen={false}
 			>
 				{showControl("border_width", sett) && (
 					<RangeControl

@@ -73,6 +73,7 @@ class Content extends Component {
 			<PanelBody
 				title={__("Content")}
 				className={`${plugin_slug}-panel_body`}
+				initialOpen={false}
 			>
 				{showControl("content_align", settings) && (
 					<BaseControl

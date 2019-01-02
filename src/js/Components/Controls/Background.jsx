@@ -36,6 +36,7 @@ class Background extends Component {
 			<PanelBody
 				title={__("Background")}
 				className={`${plugin_slug}-panel_body`}
+				initialOpen={false}
 			>
 				{showControl("background_color", sett) && (
 					<BaseControl
