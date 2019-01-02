@@ -7,21 +7,13 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const {
-			extra_props,
-			settings,
-			attributes,
-			className,
-			is_edit
-		} = this.props;
+		const { extra_props, settings, attributes, className } = this.props;
 
 		let classes;
 		classes = [
+			className,
 			`${plugin_slug}-container`,
-
 			extra_props.container.className,
-
-			is_edit ? className : "", // Apply the classes from the block prop.
 
 			prepareClass("padding_small_screen", settings, attributes),
 			prepareClass("padding_top_small_screen", settings, attributes),
