@@ -15,6 +15,16 @@ class Container extends Component {
 			`${plugin_slug}-container`,
 			extra_props.container.className,
 
+			// Padding
+			prepareClass("padding", settings, attributes),
+			prepareClass("padding_top", settings, attributes),
+			prepareClass("padding_bottom", settings, attributes),
+			prepareClass("padding_left", settings, attributes),
+			prepareClass("padding_right", settings, attributes),
+			prepareClass("padding_topbottom", settings, attributes),
+			prepareClass("padding_leftright", settings, attributes),
+
+			// Padding small screen
 			prepareClass("padding_small_screen", settings, attributes),
 			prepareClass("padding_top_small_screen", settings, attributes),
 			prepareClass("padding_bottom_small_screen", settings, attributes),
@@ -25,19 +35,7 @@ class Container extends Component {
 				settings,
 				attributes
 			),
-			prepareClass(
-				"padding_leftright_small_screen",
-				settings,
-				attributes
-			),
-
-			prepareClass("padding", settings, attributes),
-			prepareClass("padding_top", settings, attributes),
-			prepareClass("padding_bottom", settings, attributes),
-			prepareClass("padding_left", settings, attributes),
-			prepareClass("padding_right", settings, attributes),
-			prepareClass("padding_topbottom", settings, attributes),
-			prepareClass("padding_leftright", settings, attributes)
+			prepareClass("padding_leftright_small_screen", settings, attributes)
 		];
 		// Remove falsey values.
 		classes = compact(classes);

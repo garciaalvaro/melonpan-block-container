@@ -107,13 +107,17 @@ const prepareAttributes = settings => {
 	const attributes_custom = reduce(
 		attributes,
 		(acc, attribute, key) => {
-			if (!isUndefined(settings[key])) {
-				// Add the default value from settings.
-				acc[key] = attribute;
+			// We need to pass all attributes because the migrate function
+			// in deprecate doesn't recognize removed attributes otherwise.
+			// (This only applies to certain attributes like background_color).
+			// See: https://github.com/WordPress/gutenberg/issues/10406
+			acc[key] = attribute;
 
-				if (!isUndefined(settings[key].default)) {
-					acc[key].default = settings[key].default;
-				}
+			if (
+				!isUndefined(settings[key]) &&
+				!isUndefined(settings[key].default)
+			) {
+				acc[key].default = settings[key].default;
 			}
 
 			return acc;
