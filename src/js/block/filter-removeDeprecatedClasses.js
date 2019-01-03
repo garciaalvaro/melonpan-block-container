@@ -1,11 +1,11 @@
-import l, { plugin_slug, plugin_namespace, cleanClassName } from "../utils";
+import l, { plugin_slug, cleanClassName } from "../utils";
 
 const { isUndefined } = lodash;
 const { addFilter } = wp.hooks;
 
 const removeDeprecatedClasses = (attributes, block_type) => {
 	if (
-		block_type.name !== `${plugin_namespace}/container` ||
+		isUndefined(block_type.is_melonpan_block_container) ||
 		isUndefined(attributes.className)
 	) {
 		return attributes;

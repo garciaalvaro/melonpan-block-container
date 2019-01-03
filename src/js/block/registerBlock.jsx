@@ -1,4 +1,4 @@
-import l, { cleanClassName } from "../utils";
+import l from "../utils";
 import EditSave from "../Components/EditSave/EditSave";
 
 const { isUndefined } = lodash;
@@ -33,7 +33,8 @@ const registerBlock = ({
 				extra_props={extra_props}
 				is_edit={false}
 			/>
-		)
+		),
+		is_melonpan_block_container: true
 	});
 };
 
