@@ -16,9 +16,9 @@ class Background extends Component {
 
 		let classes;
 		classes = [
-			// extra_props property classes.
-			extra_props.background.className,
 			`${plugin_slug}-background`,
+			extra_props.background.className,
+
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
 		];

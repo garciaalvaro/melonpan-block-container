@@ -18,23 +18,26 @@ const registerBlock = ({
 			align: !isUndefined(settings.align) ? settings.align.options : false
 		},
 		edit: props => (
-			<EditSave
-				{...props}
-				innerblocks_props={innerblocks_props}
-				settings={settings}
-				extra_props={extra_props}
-				is_edit={true}
-			/>
+			<div className={props.className}>
+				<EditSave
+					{...props}
+					innerblocks_props={innerblocks_props}
+					settings={settings}
+					extra_props={extra_props}
+					is_edit={true}
+				/>
+			</div>
 		),
 		save: props => (
-			<EditSave
-				{...props}
-				settings={settings}
-				extra_props={extra_props}
-				is_edit={false}
-			/>
-		),
-		is_melonpan_block_container: true
+			<div>
+				<EditSave
+					{...props}
+					settings={settings}
+					extra_props={extra_props}
+					is_edit={false}
+				/>
+			</div>
+		)
 	});
 };
 

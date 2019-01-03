@@ -30,12 +30,14 @@ const prepareDeprecated = (
 		return {
 			attributes: attributes_definition,
 			save: props => (
-				<EditSave
-					{...props}
-					settings={settings}
-					extra_props={extra_props}
-					is_edit={false}
-				/>
+				<div>
+					<EditSave
+						{...props}
+						settings={settings}
+						extra_props={extra_props}
+						is_edit={false}
+					/>
+				</div>
 			),
 			supports: {
 				align: !isUndefined(settings.align)

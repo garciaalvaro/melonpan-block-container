@@ -15,8 +15,9 @@ class Content extends Component {
 
 		let classes;
 		classes = [
-			extra_props.content.className,
 			`${plugin_slug}-content`,
+			extra_props.content.className,
+
 			prepareClass(
 				"content_maxwidth",
 				settings,

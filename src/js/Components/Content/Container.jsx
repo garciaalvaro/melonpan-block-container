@@ -7,11 +7,10 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const { extra_props, settings, attributes, className } = this.props;
+		const { extra_props, settings, attributes } = this.props;
 
 		let classes;
 		classes = [
-			className,
 			`${plugin_slug}-container`,
 			extra_props.container.className,
 
