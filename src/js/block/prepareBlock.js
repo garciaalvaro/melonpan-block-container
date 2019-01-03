@@ -25,7 +25,6 @@ const prepareBlock = props => {
 	const deprecated = prepareDeprecated(
 		props.deprecated,
 		settings,
-		attributes,
 		extra_props
 	);
 

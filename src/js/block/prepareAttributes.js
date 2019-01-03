@@ -1,10 +1,14 @@
 import l, { plugin_slug } from "../utils";
 
-const { reduce, isUndefined } = lodash;
+const { isUndefined, mapValues, reduce } = lodash;
 
 // Prepare attributes object. Pass the default values from settings object.
 const prepareAttributes = settings => {
 	const attributes = {
+		extra: {
+			type: "object",
+			default: {}
+		},
 		align: {
 			type: "string"
 		},
@@ -113,7 +117,12 @@ const prepareAttributes = settings => {
 			// See: https://github.com/WordPress/gutenberg/issues/10406
 			acc[key] = attribute;
 
-			if (
+			if (key === "extra" && !isUndefined(settings.extra)) {
+				acc.extra.default = mapValues(
+					settings.extra,
+					extra_value => extra_value.default
+				);
+			} else if (
 				!isUndefined(settings[key]) &&
 				!isUndefined(settings[key].default)
 			) {

@@ -1,4 +1,9 @@
-import l, { Div, plugin_slug, prepareClass } from "../../utils";
+import l, {
+	Div,
+	plugin_slug,
+	prepareClass,
+	prepareExtraClasses
+} from "../../utils";
 import Background from "./Background";
 import Content from "./Content";
 
@@ -13,6 +18,8 @@ class Container extends Component {
 		classes = [
 			`${plugin_slug}-container`,
 			extra_props.container.className,
+
+			prepareExtraClasses(settings, attributes),
 
 			// Padding
 			prepareClass("padding", settings, attributes),
@@ -50,6 +57,7 @@ class Container extends Component {
 			settings,
 			is_edit,
 			innerblocks_props,
+			innerBlocks,
 			...rest
 		} = props;
 		const extra_props_from_filters = is_edit ? {} : rest;

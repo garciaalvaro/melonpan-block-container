@@ -1,6 +1,6 @@
 import l from "../utils";
 
-const { isObject, isUndefined, pick, mapValues, keys } = lodash;
+const { isObject, isUndefined, reduce, pick, mapValues, keys } = lodash;
 
 // Object containing settings properties meant to be private.
 const settings_private_props = {
@@ -74,6 +74,7 @@ let settings_default_prop;
 
 // This is an array of all available settings.
 settings_default_prop = {
+	extra: {},
 	align: {
 		default: "",
 		options: ["left", "center", "right", "wide", "full"]
@@ -228,6 +229,7 @@ const prepareSettings = custom => {
 	settings = custom;
 	// Exclude not allowed attributes.
 	settings = pick(settings, keys(defaults));
+
 	// Use only the allowed keys.
 	settings = mapValues(settings, (setting_value, setting_key) => {
 		// Exclude not allowed properties.
@@ -242,6 +244,27 @@ const prepareSettings = custom => {
 
 		return setting_value;
 	});
+	// Assign extra attributes
+	if (isObject(custom.extra)) {
+		const extra = reduce(
+			custom.extra,
+			(acc, extra_value, extra_key) => {
+				if (!isObject(extra_value)) {
+					return acc;
+				}
+
+				extra_value = pick(extra_value, ["default"]);
+				extra_value = { default: "", ...extra_value };
+
+				acc[extra_key] = extra_value;
+
+				return acc;
+			},
+			{}
+		);
+
+		settings = { ...settings, extra };
+	}
 
 	return settings;
 };
