@@ -72,7 +72,7 @@ class Background extends Component {
 
 	render() {
 		const { getClasses, getStyles, props } = this;
-		const { attributes, settings } = props;
+		const { attributes, settings, extra_props } = props;
 		const {
 			background_image_url,
 			background_image_srcset,
@@ -102,7 +102,7 @@ class Background extends Component {
 
 		return (
 			<Div
-				{...props.extra_props.background}
+				{...extra_props.background}
 				className={getClasses()}
 				style={getStyles()}
 			>

@@ -15,9 +15,11 @@ const main_plugin_file = `${pkg.name}.php`;
 gulp.task(
 	"parcel",
 	run(
-		`parcel build src/index.js -o ${
+		`parcel build src/index-front.js -o ${
 			pkg.name
-		}.min.js -d build --no-source-maps`
+		}-front.min.js -d build --no-source-maps & parcel build src/index-editor.js -o ${
+			pkg.name
+		}-editor.min.js -d build --no-source-maps`
 	)
 );
 

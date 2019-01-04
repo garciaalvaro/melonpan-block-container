@@ -1,7 +1,6 @@
 import l from "./log";
 import showControl from "./showControl";
 import getValue from "./getValue";
-import cleanClassName from "./cleanClassName";
 import prepareCustomAttributeClasses from "./prepareCustomAttributeClasses";
 import prepareClass from "./prepareClass";
 import prepareColor from "./prepareColor";
@@ -15,7 +14,6 @@ export {
 	icons,
 	showControl,
 	getValue,
-	cleanClassName,
 	prepareCustomAttributeClasses,
 	prepareClass,
 	prepareColor,
