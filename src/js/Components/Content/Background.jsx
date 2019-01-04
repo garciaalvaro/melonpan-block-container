@@ -7,7 +7,7 @@ import l, {
 	getValue
 } from "../../utils";
 
-const { isUndefined, isObject, compact } = lodash;
+const { isUndefined, isNil, isObject, compact } = lodash;
 const { Component } = wp.element;
 
 class Background extends Component {
@@ -56,12 +56,15 @@ class Background extends Component {
 
 		let style;
 		style = {
-			"--border_color": prepareColor(border_color, border_color_opacity),
-			"--shadow_color": prepareColor(shadow_color, shadow_color_opacity),
-			"--background_color": prepareColor(
+			color: prepareColor(shadow_color, shadow_color_opacity),
+			borderColor: prepareColor(border_color, border_color_opacity),
+			backgroundColor: prepareColor(
 				background_color,
 				background_color_opacity
-			)
+			),
+			backgroundImage: !isNil(attributes.background_image_url)
+				? `url(${attributes.background_image_url})`
+				: null
 		};
 		style = isObject(extra_props.background.style)
 			? { ...style, ...extra_props.background.style }

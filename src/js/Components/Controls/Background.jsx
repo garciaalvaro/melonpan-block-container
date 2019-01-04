@@ -12,8 +12,8 @@ class Background extends Component {
 		const { id, sizes, alt } = image;
 		const size =
 			sizes.medium_large ||
-			sizes.medium ||
 			sizes.large ||
+			sizes.medium ||
 			sizes.thumbnail;
 
 		setAttributes({

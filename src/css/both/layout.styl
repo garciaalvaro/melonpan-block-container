@@ -22,6 +22,12 @@
 	height 100%
 	top 0
 	left 0
+	color transparent
+	background-color transparent
+	border-color transparent
+	background-repeat no-repeat
+	background-size cover
+	background-position center
 
 	&:after
 		content ""
@@ -30,7 +36,12 @@
 		height 100%
 		top 0
 		left 0
-		background-color var(--background_color)
+		color inherit
+		background-color inherit
+		border-color inherit
+
+	&:empty:after
+		background-color transparent
 
 	.mbc-background-image
 		position absolute
