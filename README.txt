@@ -118,6 +118,10 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     ]
                 },
                 background_image: {},
+				background_image_fixed: {
+					show_control: true,
+                    default: false
+                },
                 background_color_opacity: {
                     show_control: true,
                     default: 50,

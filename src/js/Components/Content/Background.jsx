@@ -19,6 +19,7 @@ class Background extends Component {
 			`${plugin_slug}-background`,
 			extra_props.background.className,
 
+			prepareClass("background_image_fixed", settings, attributes),
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
 		];

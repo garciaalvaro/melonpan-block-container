@@ -4,7 +4,7 @@ const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { ColorPalette, MediaPlaceholder, MediaUpload } = wp.editor;
-const { RangeControl, BaseControl, PanelBody } = wp.components;
+const { RangeControl, BaseControl, PanelBody, ToggleControl } = wp.components;
 
 class Background extends Component {
 	onSelectHandler = image => {
@@ -77,6 +77,31 @@ class Background extends Component {
 							});
 						}}
 					/>
+				)}
+
+				{showControl("background_image_fixed", sett) && (
+					<BaseControl
+						label={__("Background image fixed")}
+						className={[
+							`${plugin_slug}-background_image_fixed`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-toogle`
+						].join(" ")}
+					>
+						<ToggleControl
+							label={
+								attributes.background_image_fixed
+									? __("Fixed")
+									: __("Not fixed")
+							}
+							checked={attributes.background_image_fixed}
+							onChange={value =>
+								setAttributes({
+									background_image_fixed: value
+								})
+							}
+						/>
+					</BaseControl>
 				)}
 
 				{!isUndefined(background_image) && (
