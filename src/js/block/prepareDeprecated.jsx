@@ -25,22 +25,22 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 		return {
 			attributes: attributes_definition,
 			save: props => {
-				// If the extra property changed we need to manually include
+				// If the custom property changed we need to manually include
 				// the old keys in the old version of the attribute.
 				const missing_keys = difference(
-					keys(settings.extra),
-					keys(props.attributes.extra)
+					keys(settings.custom),
+					keys(props.attributes.custom)
 				);
 				if (!isEmpty(missing_keys)) {
-					const extra_old = {};
+					const custom_old = {};
 
 					forEach(missing_keys, missing_key => {
-						extra_old[missing_key] = settings.extra[missing_key];
+						custom_old[missing_key] = settings.custom[missing_key];
 					});
 
-					props.attributes.extra = {
-						...props.attributes.extra,
-						...extra_old
+					props.attributes.custom = {
+						...props.attributes.custom,
+						...custom_old
 					};
 				}
 

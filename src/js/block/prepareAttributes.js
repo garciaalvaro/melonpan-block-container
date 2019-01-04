@@ -5,7 +5,7 @@ const { isUndefined, mapValues, reduce } = lodash;
 // Prepare attributes object. Pass the default values from settings object.
 const prepareAttributes = settings => {
 	const attributes = {
-		extra: {
+		custom: {
 			type: "object",
 			default: {}
 		},
@@ -117,10 +117,10 @@ const prepareAttributes = settings => {
 			// See: https://github.com/WordPress/gutenberg/issues/10406
 			acc[key] = attribute;
 
-			if (key === "extra" && !isUndefined(settings.extra)) {
-				acc.extra.default = mapValues(
-					settings.extra,
-					extra_value => extra_value.default
+			if (key === "custom" && !isUndefined(settings.custom)) {
+				acc.custom.default = mapValues(
+					settings.custom,
+					custom_value => custom_value.default
 				);
 			} else if (
 				!isUndefined(settings[key]) &&

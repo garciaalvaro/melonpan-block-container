@@ -74,7 +74,7 @@ let settings_default_prop;
 
 // This is an array of all available settings.
 settings_default_prop = {
-	extra: {},
+	custom: {},
 	align: {
 		default: "",
 		options: ["left", "center", "right", "wide", "full"]
@@ -244,26 +244,26 @@ const prepareSettings = custom => {
 
 		return setting_value;
 	});
-	// Assign extra attributes
-	if (isObject(custom.extra)) {
-		const extra = reduce(
-			custom.extra,
-			(acc, extra_value, extra_key) => {
-				if (!isObject(extra_value)) {
+	// Assign custom attribute.
+	if (isObject(custom.custom)) {
+		const custom_attribute = reduce(
+			custom.custom,
+			(acc, custom_value, custom_key) => {
+				if (!isObject(custom_value)) {
 					return acc;
 				}
 
-				extra_value = pick(extra_value, ["default"]);
-				extra_value = { default: "", ...extra_value };
+				custom_value = pick(custom_value, ["default"]);
+				custom_value = { default: "", ...custom_value };
 
-				acc[extra_key] = extra_value;
+				acc[custom_key] = custom_value;
 
 				return acc;
 			},
 			{}
 		);
 
-		settings = { ...settings, extra };
+		settings = { ...settings, custom: custom_attribute };
 	}
 
 	return settings;

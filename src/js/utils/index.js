@@ -2,7 +2,7 @@ import l from "./log";
 import showControl from "./showControl";
 import getValue from "./getValue";
 import cleanClassName from "./cleanClassName";
-import prepareExtraClasses from "./prepareExtraClasses";
+import prepareCustomAttributeClasses from "./prepareCustomAttributeClasses";
 import prepareClass from "./prepareClass";
 import prepareColor from "./prepareColor";
 import prepareSrcset from "./prepareSrcset";
@@ -16,7 +16,7 @@ export {
 	showControl,
 	getValue,
 	cleanClassName,
-	prepareExtraClasses,
+	prepareCustomAttributeClasses,
 	prepareClass,
 	prepareColor,
 	prepareSrcset,

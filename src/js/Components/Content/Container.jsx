@@ -2,7 +2,7 @@ import l, {
 	Div,
 	plugin_slug,
 	prepareClass,
-	prepareExtraClasses
+	prepareCustomAttributeClasses
 } from "../../utils";
 import Background from "./Background";
 import Content from "./Content";
@@ -19,7 +19,7 @@ class Container extends Component {
 			`${plugin_slug}-container`,
 			extra_props.container.className,
 
-			prepareExtraClasses(settings, attributes),
+			prepareCustomAttributeClasses(settings, attributes),
 
 			// Padding
 			prepareClass("padding", settings, attributes),
@@ -52,24 +52,10 @@ class Container extends Component {
 
 	render() {
 		const { getClasses, props } = this;
-		const {
-			extra_props,
-			settings,
-			is_edit,
-			innerblocks_props,
-			innerBlocks,
-			...rest
-		} = props;
-		const extra_props_from_filters = is_edit ? {} : rest;
+		const { extra_props } = props;
 
-		// We pass all the props to the container of the block,
-		// in case there were extra props added through filters.
 		return (
-			<Div
-				{...extra_props.container}
-				{...extra_props_from_filters}
-				className={getClasses()}
-			>
+			<Div {...extra_props.container} className={getClasses()}>
 				<Background {...props} />
 				<Content {...props} />
 			</Div>
