@@ -4,23 +4,24 @@ import header from "gulp-header";
 import rename from "gulp-rename";
 import replace from "gulp-replace";
 import run from "gulp-run-command";
-import pot from "gulp-wp-pot";
+// import pot from "gulp-wp-pot";
 import fs from "fs";
 import merge2 from "merge2";
 import pkg from "./package.json";
 
-const pot_package_name = pkg.name_title;
+// const pot_package_name = pkg.name_title;
 const main_plugin_file = `${pkg.name}.php`;
 
 gulp.task(
 	"parcel",
-	run(
+	run([
 		`parcel build src/index-front.js -o ${
 			pkg.name
-		}-front.min.js -d build --no-source-maps & parcel build src/index-editor.js -o ${
+		}-front.min.js -d build --no-source-maps`,
+		`parcel build src/index-editor.js -o ${
 			pkg.name
 		}-editor.min.js -d build --no-source-maps`
-	)
+	])
 );
 
 gulp.task("version", () => {
@@ -43,38 +44,49 @@ gulp.task("version", () => {
 	return merge2(main_php, readme_txt);
 });
 
-gulp.task("pot", () => {
-	return gulp
-		.src(["**/*.php", "!.*/**", "!node_modules/**", "!_extras/**"])
-		.pipe(
-			pot({
-				domain: pkg.name,
-				package: pot_package_name
-			})
-		)
-		.pipe(gulp.dest(`languages/${pkg.name}.pot`));
-});
+// gulp.task("pot", () => {
+// 	return gulp
+// 		.src(["**/*.php", "!.*/**", "!node_modules/**", "!_extras/**"])
+// 		.pipe(
+// 			pot({
+// 				domain: pkg.name,
+// 				package: pot_package_name
+// 			})
+// 		)
+// 		.pipe(gulp.dest(`languages/${pkg.name}.pot`));
+// });
 
 gulp.task("zip", () => {
-	const js_with_header = gulp
-		.src([`build/${pkg.name}.min.js`], { base: "../" })
+	const js_with_header_editor = gulp
+		.src([`build/${pkg.name}-editor.min.js`], { base: "../" })
 		.pipe(
 			header(fs.readFileSync("./src/js/#header", "utf8"), {
 				pkg: pkg
 			})
 		);
 
-	const css_with_header = gulp
-		.src([`build/${pkg.name}.min.css`], { base: "../" })
+	const css_with_header_editor = gulp
+		.src([`build/${pkg.name}-editor.min.css`], { base: "../" })
+		.pipe(
+			header(fs.readFileSync("./src/css/#header", "utf8"), {
+				pkg: pkg
+			})
+		);
+	const css_with_header_front = gulp
+		.src([`build/${pkg.name}-front.min.css`], { base: "../" })
 		.pipe(
 			header(fs.readFileSync("./src/css/#header", "utf8"), {
 				pkg: pkg
 			})
 		);
 
-	const renamed = merge2(js_with_header, css_with_header).pipe(
-		rename(function(path) {
-			path.basename = pkg.name;
+	const renamed = merge2(
+		js_with_header_editor,
+		css_with_header_editor,
+		css_with_header_front
+	).pipe(
+		rename(path => {
+			path.basename = path.basename.replace(".min", "");
 		})
 	);
 
