@@ -28,8 +28,8 @@ addFilter(
 					show_control: true,
 					default: "",
 					colors: [
-						{ name: "banana", color: "#FFDEAD" },
-						{ name: "melon", color: "#aae6bd" },
+						{ name: "banana", color: "#fce198" },
+						{ name: "sandia", color: "#f68c78" },
 						{ name: "melocoton", color: "#ffc5b4" },
 						{ name: "pistacho", color: "#bdb76b" },
 						{ name: "ciruela", color: "#bd8f8f" },
