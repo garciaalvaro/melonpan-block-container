@@ -19,6 +19,10 @@ class Background extends Component {
 			`${plugin_slug}-background`,
 			extra_props.background.className,
 
+			!isUndefined(settings.background_image) &&
+			!isUndefined(attributes.background_image_url)
+				? `${plugin_slug}-has-bg_image`
+				: null,
 			prepareClass("background_image_fixed", settings, attributes),
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
@@ -89,7 +93,8 @@ class Background extends Component {
 			shadow_color,
 			shadow_color_opacity,
 			background_color,
-			background_color_opacity
+			background_color_opacity,
+			background_image_fixed
 		} = settings;
 
 		if (
@@ -111,7 +116,9 @@ class Background extends Component {
 				style={getStyles()}
 			>
 				{!isUndefined(background_image) &&
-					!isUndefined(background_image_url) && (
+					!isUndefined(background_image_url) &&
+					(isUndefined(background_image_fixed) ||
+						!attributes.background_image_fixed) && (
 						<Img
 							className={`${plugin_slug}-background-image`}
 							sizes="100vw"
