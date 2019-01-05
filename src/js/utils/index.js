@@ -6,7 +6,7 @@ import prepareClass from "./prepareClass";
 import prepareColor from "./prepareColor";
 import prepareSrcset from "./prepareSrcset";
 import icons from "./icons";
-import { Div, Img } from "./Components";
+import { Div, Span, Img } from "./Components";
 import { plugin_namespace, plugin_slug } from "./info-plugin";
 
 export default l;
@@ -21,5 +21,6 @@ export {
 	plugin_namespace,
 	plugin_slug,
 	Div,
+	Span,
 	Img
 };

@@ -1,9 +1,9 @@
-import l, { plugin_slug, showControl } from "../../utils";
+import l, { Span, plugin_slug, showControl } from "../../utils";
 
 const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const { ColorPalette } = wp.editor;
-const { RangeControl, BaseControl, PanelBody } = wp.components;
+const { RangeControl, BaseControl, PanelBody, ColorIndicator } = wp.components;
 
 class ShadowBorder extends Component {
 	render() {
@@ -45,7 +45,14 @@ class ShadowBorder extends Component {
 
 				{showControl("border_color", sett) && (
 					<BaseControl
-						label={__("Border color")}
+						label={
+							<Fragment>
+								<Span>{__("Border color")}</Span>
+								<ColorIndicator
+									colorValue={attributes.border_color}
+								/>
+							</Fragment>
+						}
 						className={[
 							`${plugin_slug}-border_color`,
 							`${plugin_slug}-control`,
@@ -106,7 +113,14 @@ class ShadowBorder extends Component {
 
 				{showControl("shadow_color", sett) && (
 					<BaseControl
-						label={__("Shadow color")}
+						label={
+							<Fragment>
+								<Span>{__("Shadow color")}</Span>
+								<ColorIndicator
+									colorValue={attributes.shadow_color}
+								/>
+							</Fragment>
+						}
 						className={[
 							`${plugin_slug}-shadow_color`,
 							`${plugin_slug}-control`,

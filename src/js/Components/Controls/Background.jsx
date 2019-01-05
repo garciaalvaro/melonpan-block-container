@@ -1,10 +1,22 @@
-import l, { Img, plugin_slug, prepareSrcset, showControl } from "../../utils";
+import l, {
+	Img,
+	Span,
+	plugin_slug,
+	prepareSrcset,
+	showControl
+} from "../../utils";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const { ColorPalette, MediaPlaceholder, MediaUpload } = wp.editor;
-const { RangeControl, BaseControl, PanelBody, ToggleControl } = wp.components;
+const {
+	RangeControl,
+	BaseControl,
+	PanelBody,
+	ToggleControl,
+	ColorIndicator
+} = wp.components;
 
 class Background extends Component {
 	onSelectHandler = image => {
@@ -40,7 +52,14 @@ class Background extends Component {
 			>
 				{showControl("background_color", sett) && (
 					<BaseControl
-						label={__("Background color")}
+						label={
+							<Fragment>
+								<Span>{__("Background color")}</Span>
+								<ColorIndicator
+									colorValue={attributes.background_color}
+								/>
+							</Fragment>
+						}
 						className={[
 							`${plugin_slug}-background_color`,
 							`${plugin_slug}-control`,
