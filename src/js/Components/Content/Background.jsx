@@ -116,9 +116,7 @@ class Background extends Component {
 				style={getStyles()}
 			>
 				{!isUndefined(background_image) &&
-					!isUndefined(background_image_url) &&
-					(isUndefined(background_image_fixed) ||
-						!attributes.background_image_fixed) && (
+					!isUndefined(background_image_url) && (
 						<Img
 							className={`${plugin_slug}-background-image`}
 							sizes="100vw"
