@@ -83,6 +83,18 @@ settings_default_prop = {
 		default: "center",
 		options: ["left", "center", "right", "full"]
 	},
+	content_maxwidth: {
+		default: 800,
+		min: 300,
+		max: 1300
+	},
+	content_color: {
+		default: "",
+		colors: [
+			{ name: "black", color: "#000000" },
+			{ name: "white", color: "#ffffff" }
+		]
+	},
 	background_color: {
 		default: "",
 		colors: [
@@ -104,11 +116,7 @@ settings_default_prop = {
 	},
 	background_image: {},
 	background_fixed: { default: false },
-	content_maxwidth: {
-		default: 800,
-		min: 300,
-		max: 1300
-	},
+
 	padding: {
 		default: 20,
 		min: 0,

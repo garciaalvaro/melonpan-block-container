@@ -16,7 +16,8 @@ class Controls extends Component {
 		return (
 			<InspectorControls className={`${plugin_slug}-inspector_controls`}>
 				{(showControl("content_maxwidth", sett) ||
-					showControl("content_align", sett)) && (
+					showControl("content_align", sett) ||
+					showControl("content_color", sett)) && (
 					<Content {...props} />
 				)}
 

@@ -24,6 +24,20 @@ addFilter(
 					show_control: true,
 					default: "center"
 				},
+				content_maxwidth: {
+					show_control: true,
+					default: 800,
+					min: 300,
+					max: 1300
+				},
+				content_color: {
+					show_control: true,
+					default: "",
+					colors: [
+						{ name: "black", color: "#000000" },
+						{ name: "white", color: "#ffffff" }
+					]
+				},
 				background_color: {
 					show_control: true,
 					default: "",
@@ -49,12 +63,6 @@ addFilter(
 					default: 50,
 					min: 0,
 					max: 100
-				},
-				content_maxwidth: {
-					show_control: true,
-					default: 800,
-					min: 300,
-					max: 1300
 				},
 				border_color: {
 					show_control: true,

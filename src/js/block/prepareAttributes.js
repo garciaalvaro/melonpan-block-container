@@ -18,6 +18,9 @@ const prepareAttributes = settings => {
 		content_maxwidth: {
 			type: "number"
 		},
+		content_color: {
+			type: "string"
+		},
 		background_color: {
 			type: "string"
 		},

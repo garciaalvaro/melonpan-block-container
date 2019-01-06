@@ -1,9 +1,16 @@
-import l, { plugin_slug, showControl } from "../../utils";
+import l, { Span, plugin_slug, showControl } from "../../utils";
 
 const { compact } = lodash;
 const { __ } = wp.i18n;
-const { Component } = wp.element;
-const { RangeControl, BaseControl, Toolbar, PanelBody } = wp.components;
+const { Component, Fragment } = wp.element;
+const {
+	RangeControl,
+	BaseControl,
+	Toolbar,
+	PanelBody,
+	ColorIndicator
+} = wp.components;
+const { ColorPalette } = wp.editor;
 
 class Content extends Component {
 	getAlignControls = () => {
@@ -67,7 +74,7 @@ class Content extends Component {
 
 	render() {
 		const { setAttributes, attributes, settings } = this.props;
-		const { content_maxwidth } = settings;
+		const { content_maxwidth, content_color } = settings;
 
 		return (
 			<PanelBody
@@ -110,6 +117,34 @@ class Content extends Component {
 							setAttributes({ content_maxwidth: value })
 						}
 					/>
+				)}
+
+				{showControl("content_color", settings) && (
+					<BaseControl
+						label={
+							<Fragment>
+								<Span>{__("Text color")}</Span>
+								<ColorIndicator
+									colorValue={attributes.content_color}
+								/>
+							</Fragment>
+						}
+						className={[
+							`${plugin_slug}-content_color`,
+							`${plugin_slug}-control`,
+							`${plugin_slug}-control-colorpalette`
+						].join(" ")}
+					>
+						<ColorPalette
+							colors={content_color.colors}
+							value={attributes.content_color}
+							onChange={value => {
+								setAttributes({
+									content_color: value
+								});
+							}}
+						/>
+					</BaseControl>
 				)}
 			</PanelBody>
 		);

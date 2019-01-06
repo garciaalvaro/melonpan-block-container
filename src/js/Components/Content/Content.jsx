@@ -1,6 +1,12 @@
-import l, { Div, plugin_slug, prepareClass, getValue } from "../../utils";
+import l, {
+	Div,
+	plugin_slug,
+	prepareClass,
+	prepareColor,
+	getValue
+} from "../../utils";
 
-const { compact, isUndefined } = lodash;
+const { isUndefined, isObject, compact } = lodash;
 const { Component } = wp.element;
 const { InnerBlocks } = wp.editor;
 
@@ -18,6 +24,9 @@ class Content extends Component {
 			`${plugin_slug}-content`,
 			extra_props.content.className,
 
+			!isUndefined(attributes.content_color)
+				? `${plugin_slug}-has-color`
+				: null,
 			prepareClass(
 				"content_maxwidth",
 				settings,
@@ -33,12 +42,31 @@ class Content extends Component {
 		return classes;
 	};
 
+	getStyle = () => {
+		const { extra_props, settings, attributes } = this.props;
+		const content_color = getValue("content_color", settings, attributes);
+
+		let style;
+		style = {
+			color: prepareColor(content_color)
+		};
+		style = isObject(extra_props.content.style)
+			? { ...style, ...extra_props.content.style }
+			: style;
+
+		return style;
+	};
+
 	render() {
-		const { getClasses, props } = this;
+		const { getClasses, getStyle, props } = this;
 		const { is_edit, extra_props } = props;
 
 		return (
-			<Div {...extra_props.content} className={getClasses()}>
+			<Div
+				{...extra_props.content}
+				className={getClasses()}
+				style={getStyle()}
+			>
 				{is_edit ? (
 					<InnerBlocks {...props.innerblocks_props} />
 				) : (

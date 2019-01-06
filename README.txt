@@ -53,7 +53,7 @@ First you need to [enqueue your script in the editor](https://wordpress.org/gute
 Then, inside your script call the filter in the following way (make sure "Melonpan Block - Container" plugin is active):
 
     // Custom block registration example using the filter.
-    wp.hooks.addFilter("mbc.createBlock", "my-plugin/my-block", blocks => {
+    wp.hooks.addFilter("melonpanBlockContainer.createBlock", "my-plugin/my-block", blocks => {
         return blocks.concat({
             // These are the default block registration properties. For more available properties:
             // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
@@ -98,6 +98,20 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     show_control: true,
                     default: "center"
                 },
+                content_maxwidth: {
+                    show_control: true,
+                    default: 800,
+                    min: 300,
+                    max: 1300
+                },
+				content_color: {
+					show_control: true,
+					default: "",
+					colors: [
+						{ name: "black", color: "#000000" },
+						{ name: "white", color: "#ffffff" }
+					]
+				},
                 background_color: {
                     show_control: true,
                     default: "",
@@ -123,12 +137,6 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     default: 50,
                     min: 0,
                     max: 100
-                },
-                content_maxwidth: {
-                    show_control: true,
-                    default: 800,
-                    min: 300,
-                    max: 1300
                 },
                 border_color: {
                     show_control: true,
@@ -283,7 +291,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
 
 = How can I add a custom attribute? =
 
-When creating your own block using the "mbc.createBlock" filter, you can add custom attributes.
+When creating your own block using the "melonpanBlockContainer.createBlock" filter, you can add custom attributes.
 This setting is meant to be a helper that adds a class with the name and value of the attribute.
 One of the advantages of using it rather than the "blocks.registerBlockType" filter is that it should work if you need to deprecate the attribute.
 Keep in mind that it will simply add a class in the .mbc-container div, and that a "string", "number" or "boolean" value can be used.
