@@ -21,9 +21,9 @@ class Background extends Component {
 
 			!isUndefined(settings.background_image) &&
 			!isUndefined(attributes.background_image_url)
-				? `${plugin_slug}-has-bg_image`
+				? `${plugin_slug}-has-image`
 				: null,
-			prepareClass("background_image_fixed", settings, attributes),
+			prepareClass("background_fixed", settings, attributes),
 			prepareClass("shadow_width", settings, attributes),
 			prepareClass("border_width", settings, attributes)
 		];
@@ -34,7 +34,7 @@ class Background extends Component {
 		return classes;
 	};
 
-	getStyles = () => {
+	getStyle = () => {
 		const { extra_props, settings, attributes } = this.props;
 		const border_color = getValue("border_color", settings, attributes);
 		const border_color_opacity = getValue(
@@ -79,7 +79,7 @@ class Background extends Component {
 	};
 
 	render() {
-		const { getClasses, getStyles, props } = this;
+		const { getClasses, getStyle, props } = this;
 		const { attributes, settings, extra_props } = props;
 		const {
 			background_image_url,
@@ -93,8 +93,7 @@ class Background extends Component {
 			shadow_color,
 			shadow_color_opacity,
 			background_color,
-			background_color_opacity,
-			background_image_fixed
+			background_color_opacity
 		} = settings;
 
 		if (
@@ -113,7 +112,7 @@ class Background extends Component {
 			<Div
 				{...extra_props.background}
 				className={getClasses()}
-				style={getStyles()}
+				style={getStyle()}
 			>
 				{!isUndefined(background_image) &&
 					!isUndefined(background_image_url) && (

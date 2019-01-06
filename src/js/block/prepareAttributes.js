@@ -45,7 +45,7 @@ const prepareAttributes = settings => {
 			selector: `.${plugin_slug}-background-image`,
 			attribute: "alt"
 		},
-		background_image_fixed: {
+		background_fixed: {
 			type: "boolean"
 		},
 		padding: {

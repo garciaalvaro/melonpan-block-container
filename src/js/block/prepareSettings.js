@@ -103,7 +103,7 @@ settings_default_prop = {
 		max: 100
 	},
 	background_image: {},
-	background_image_fixed: { default: false },
+	background_fixed: { default: false },
 	content_maxwidth: {
 		default: 800,
 		min: 300,

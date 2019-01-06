@@ -98,25 +98,25 @@ class Background extends Component {
 					/>
 				)}
 
-				{showControl("background_image_fixed", sett) && (
+				{showControl("background_fixed", sett) && (
 					<BaseControl
 						label={__("Background image fixed")}
 						className={[
-							`${plugin_slug}-background_image_fixed`,
+							`${plugin_slug}-background_fixed`,
 							`${plugin_slug}-control`,
 							`${plugin_slug}-control-toogle`
 						].join(" ")}
 					>
 						<ToggleControl
 							label={
-								attributes.background_image_fixed
+								attributes.background_fixed
 									? __("Fixed")
 									: __("Not fixed")
 							}
-							checked={attributes.background_image_fixed}
+							checked={attributes.background_fixed}
 							onChange={value =>
 								setAttributes({
-									background_image_fixed: value
+									background_fixed: value
 								})
 							}
 						/>

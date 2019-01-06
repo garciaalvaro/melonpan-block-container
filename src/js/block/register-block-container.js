@@ -40,7 +40,7 @@ addFilter(
 					]
 				},
 				background_image: {},
-				background_image_fixed: {
+				background_fixed: {
 					show_control: true,
 					default: false
 				},

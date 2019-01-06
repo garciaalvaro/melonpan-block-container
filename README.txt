@@ -114,7 +114,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     ]
                 },
                 background_image: {},
-				background_image_fixed: {
+				background_fixed: {
 					show_control: true,
                     default: false
                 },
