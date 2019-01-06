@@ -1,4 +1,4 @@
-=== Melonpan Block Container ===
+=== Melonpan Block - Container ===
 Contributors: melonpan
 Tags: gutenberg, blocks, editor, container, innerblocks
 Requires at least: 5.0
@@ -18,11 +18,7 @@ Developers: The plugin comes with a filter to register your own block based on t
 
 == Screenshots ==
 
-1. Main view, dark scheme.
-2. Dragging a block to a different position.
-3. Opened block menu.
-4. Development Tool, console log block data.
-5. List of available color schemes, light and dark.
+1. Block edit panel.
 
 == Usage ==
 
@@ -106,8 +102,8 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     show_control: true,
                     default: "",
                     colors: [
-                        { name: "banana", color: "#ffdead" },
-                        { name: "melon", color: "#aae6bd" },
+                        { name: "banana", color: "#fce198" },
+                        { name: "sandia", color: "#f68c78" },
                         { name: "melocoton", color: "#ffc5b4" },
                         { name: "pistacho", color: "#bdb76b" },
                         { name: "ciruela", color: "#bd8f8f" },
@@ -355,3 +351,7 @@ Here is an example of adding a control using the Gutenberg filters:
 
 = 1.0.0 =
 * Initial release.
+
+== Credits ==
+
+Screenshot background image belongs to [Sander Wehkamp](https://unsplash.com/@sanderwehkamp).

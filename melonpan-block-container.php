@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Melonpan Block Container
+ * Plugin Name: Melonpan Block - Container
  * Plugin URI: #
  * Description: Container block for Gutenberg editor.
  * Author: melonpan
