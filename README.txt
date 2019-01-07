@@ -8,13 +8,19 @@ Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Container block with settings to nest other blocks. Developers may also use it to create their own blocks in a quick way.
+Container block with settings that can have other blocks nested. Developers may also use it to create their own blocks making use of the build-in settings and controls.
 
 == Description ==
 
-This block is a wrapper that can nest other blocks. It comes with several settings:
-Background color, Background color opacity, Background image, Content align, Content max-width, Border color, Border color opacity, Border width, Shadow color, Shadow color opacity, Shadow width, Padding top, Padding bottom, Padding left, Padding right...
-Developers: The plugin comes with a filter to register your own block based on this one, with nested templates. Check the tab "How can I use the filter to create my own block?" below for more info.
+This block is a container that can have other blocks nested. It comes with several settings:
+
+* Background image, fixed, color & opacity
+* Content align, max-width, text color
+* Border width, color & opacity
+* Shadow width, color & opacity
+* Padding top, bottom, left, right, responsive paddings
+
+Developers: The plugin comes with a filter to register your own block based on this one. Check the *How can I use the filter to create my own block?* section for more info.
 
 == Screenshots ==
 
@@ -22,18 +28,18 @@ Developers: The plugin comes with a filter to register your own block based on t
 
 == Usage ==
 
-This block will be added inside the blocks inserter menu under the "Melonpan Blocks" category.
-Once added in the page you can edit its settings and add other blocks inside it.
+This block will be added inside the blocks inserter menu under the *Melonpan Blocks* category.
+Once added in the page you can edit its settings and add other blocks inside.
 You may even add this same block type inside.
 
 == Installation ==
 
 Installation from the WordPress admin.
 
-1. Log in to the WordPress admin and navigate to Plugins > Add New.
-2. Type "Melonpan Block - Container" in the Search field.
-3. In the results list "Melonpan Block - Container" plugin should appear, click **Install Now** button.
-4. Once it finished installing, click the Activate button.
+1. Log in to the WordPress admin and navigate to *Plugins > Add New*.
+2. Type *Melonpan Block - Container* in the Search field.
+3. In the results list *Melonpan Block - Container* plugin should appear, click **Install Now** button.
+4. Once it finished installing, click the *Activate* button.
 5. That's it, now you can go to any post where Gutenberg is enabled and start using the block.
 
 == Frequently Asked Questions ==
@@ -42,15 +48,15 @@ Installation from the WordPress admin.
 
 The plugin comes with a filter to register your own block extending this one, to make use of the settings that come with it.
 
-**Notes**:
+**Notes**
 You can choose from the available settings, listed below, and assign the block's InnerBlocks properties to customize it.
-You may also pass your own attributes, inside the "custom" attribute, this feature adds a class to the .mbc-container div. Check the How can I add a custom attribute? section for more info.
-Also note that the align attribute is handled by Gutenberg so even though you can deprecate the control, the class that the old block had assigned will remain.
+You may also pass your own attributes, inside the **custom** attribute, this adds a class to the **.mbc-container** div. Check the *How can I add a custom attribute?* section for more info.
+Also note that the align attribute is handled by Gutenberg so although you can deprecate the control, the class that the old block had assigned will remain.
 
-**Steps**:
-First you need to [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
+**Steps**
+First, you need to [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
 
-Then, inside your script call the filter in the following way (make sure "Melonpan Block - Container" plugin is active):
+Inside your script call the filter in the following way (make sure *Melonpan Block - Container* plugin is active):
 
     // Custom block registration example using the filter.
     wp.hooks.addFilter("melonpanBlockContainer.createBlock", "my-plugin/my-block", blocks => {
@@ -85,7 +91,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
             // Set the "show_control" property to false if you want to apply the setting
             // with the default value but hide the control from the editor.
             settings: {
-                // Check the How can I add a custom attribute? for more info.
+                // Check the "How can I add a custom attribute?" section for more info.
                 custom: {
                     example_attribute_name: { default: "value_A" },
                     another_example_attribute_name: { default: true }
@@ -263,7 +269,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     max: 100
                 }
             },
-            // This property is experimental. If you need to migrate the block to a new version,
+            // This property is experimental. If you need to update the block to a new version,
             // because either the "settings" or the "extra_props" objects changed,
             // you need to pass those objects as they were before the change, inside an object.
             // Then wrap all the different versions inside an array.
@@ -292,14 +298,14 @@ Then, inside your script call the filter in the following way (make sure "Melonp
 
 = How can I add a custom attribute? =
 
-When creating your own block using the "melonpanBlockContainer.createBlock" filter, you can add custom attributes.
+When creating your own block using the **melonpanBlockContainer.createBlock** filter, you can add custom attributes.
 This setting is meant to be a helper that adds a class with the name and value of the attribute.
-One of the advantages of using it rather than the "blocks.registerBlockType" filter is that it should work if you need to deprecate the attribute.
-Keep in mind that it will simply add a class in the .mbc-container div, and that a "string", "number" or "boolean" value can be used.
-If the attribute is a string or number the class will include the name and the value (example_attribute_name -> .mbc-example_attribute_name-the_value).
-If the attribute is a boolean the class will include the name and "enabled" or "disabled" (example_attribute_name -> .mbc-example_attribute_name-enabled).
-You will probably want to add a control for the attribute. To do so you may use the Gutenberg filters. Remember to remove the control if you deprecate the attribute.
-Here is an example of adding a control using the Gutenberg filters:
+One of the advantages of using it rather than the *blocks.registerBlockType* filter is that it should work if you need to deprecate the attribute.
+Keep in mind that it will simply add a class in the **.mbc-container** div, and that a *string*, *number* or *boolean* value can be used.
+If the attribute is a *string* or *number* the class will include the name and the value (example_attribute_name => **.mbc-example_attribute_name-the_value**).
+If the attribute is a *boolean* the class will include the name and *enabled* or *disabled* (example_attribute_name => **.mbc-example_attribute_name-enabled**).
+To add a control for the attribute you may use Gutenberg filters. Remember to remove the control if you deprecate the attribute.
+Here is an example of adding a control using Gutenberg filters:
 
     const { __ } = wp.i18n;
     const { addFilter } = wp.hooks;
