@@ -10,7 +10,7 @@ import l, {
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { ColorPalette, MediaPlaceholder, MediaUpload } = wp.editor;
+const { ColorPalette, MediaUpload } = wp.editor;
 const {
 	RangeControl,
 	BaseControl,
@@ -25,6 +25,7 @@ class Background extends Component {
 	addImage = image => {
 		const { setAttributes } = this.props;
 		const { id, sizes, alt } = image;
+
 		const size =
 			sizes.medium_large ||
 			sizes.large ||
@@ -146,21 +147,10 @@ class Background extends Component {
 							`${plugin_slug}-control-media`
 						].join(" ")}
 					>
-						{isUndefined(attributes.background_image_id) ? (
-							<MediaPlaceholder
-								icon="format-image"
-								labels={{
-									title: __("Media area")
-								}}
-								onSelect={this.addImage}
-								allowedTypes={["image"]}
-								value={attributes.background_image_id}
-								multiple={false}
-							/>
-						) : (
-							<Div
-								className={`${plugin_slug}-background_image-buttons`}
-							>
+						<Div
+							className={`${plugin_slug}-background_image-buttons`}
+						>
+							{isUndefined(attributes.background_image_id) ? (
 								<MediaUpload
 									onSelect={this.addImage}
 									allowedTypes={["image"]}
@@ -168,17 +158,34 @@ class Background extends Component {
 									multiple={false}
 									render={({ open }) => (
 										<Button onClick={open} isDefault>
-											<Icon icon={icons.edit} />
-											{__("Change")}
+											{__("Open Media Library")}
 										</Button>
 									)}
 								/>
-								<Button onClick={this.removeImage} isDefault>
-									<Icon icon={icons.remove} />
-									{__("Remove")}
-								</Button>
-							</Div>
-						)}
+							) : (
+								<Fragment>
+									<MediaUpload
+										onSelect={this.addImage}
+										allowedTypes={["image"]}
+										value={attributes.background_image_id}
+										multiple={false}
+										render={({ open }) => (
+											<Button onClick={open} isDefault>
+												<Icon icon={icons.edit} />
+												{__("Change")}
+											</Button>
+										)}
+									/>
+									<Button
+										onClick={this.removeImage}
+										isDefault
+									>
+										<Icon icon={icons.remove} />
+										{__("Remove")}
+									</Button>
+								</Fragment>
+							)}
+						</Div>
 					</BaseControl>
 				)}
 			</PanelBody>
