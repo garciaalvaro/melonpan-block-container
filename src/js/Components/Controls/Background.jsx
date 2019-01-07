@@ -1,9 +1,10 @@
 import l, {
-	Img,
+	Div,
 	Span,
 	plugin_slug,
 	prepareSrcset,
-	showControl
+	showControl,
+	icons
 } from "../../utils";
 
 const { isUndefined } = lodash;
@@ -15,11 +16,13 @@ const {
 	BaseControl,
 	PanelBody,
 	ToggleControl,
-	ColorIndicator
+	ColorIndicator,
+	Button,
+	Icon
 } = wp.components;
 
 class Background extends Component {
-	onSelectHandler = image => {
+	addImage = image => {
 		const { setAttributes } = this.props;
 		const { id, sizes, alt } = image;
 		const size =
@@ -33,6 +36,17 @@ class Background extends Component {
 			background_image_url: size.url,
 			background_image_srcset: prepareSrcset(sizes),
 			background_image_alt: alt
+		});
+	};
+
+	removeImage = () => {
+		const { setAttributes } = this.props;
+
+		setAttributes({
+			background_image_id: undefined,
+			background_image_url: undefined,
+			background_image_srcset: undefined,
+			background_image_alt: undefined
 		});
 	};
 
@@ -138,29 +152,32 @@ class Background extends Component {
 								labels={{
 									title: __("Media area")
 								}}
-								onSelect={this.onSelectHandler}
+								onSelect={this.addImage}
 								allowedTypes={["image"]}
 								value={attributes.background_image_id}
 								multiple={false}
 							/>
 						) : (
-							<MediaUpload
-								onSelect={this.onSelectHandler}
-								allowedTypes={["image"]}
-								value={attributes.background_image_id}
-								multiple={false}
-								render={({ open }) => (
-									<Img
-										onClick={open}
-										className={`${plugin_slug}-control-image`}
-										src={attributes.background_image_url}
-										srcSet={
-											attributes.background_image_srcset
-										}
-										alt={attributes.background_image_alt}
-									/>
-								)}
-							/>
+							<Div
+								className={`${plugin_slug}-background_image-buttons`}
+							>
+								<MediaUpload
+									onSelect={this.addImage}
+									allowedTypes={["image"]}
+									value={attributes.background_image_id}
+									multiple={false}
+									render={({ open }) => (
+										<Button onClick={open} isDefault>
+											<Icon icon={icons.edit} />
+											{__("Change")}
+										</Button>
+									)}
+								/>
+								<Button onClick={this.removeImage} isDefault>
+									<Icon icon={icons.remove} />
+									{__("Remove")}
+								</Button>
+							</Div>
 						)}
 					</BaseControl>
 				)}
