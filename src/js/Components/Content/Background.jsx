@@ -67,9 +67,11 @@ class Background extends Component {
 				background_color,
 				background_color_opacity
 			),
-			backgroundImage: !isNil(attributes.background_image_url)
-				? `url(${attributes.background_image_url})`
-				: null
+			backgroundImage:
+				!isUndefined(settings.background_image) &&
+				!isNil(attributes.background_image_url)
+					? `url(${attributes.background_image_url})`
+					: null
 		};
 		style = isObject(extra_props.background.style)
 			? { ...style, ...extra_props.background.style }
