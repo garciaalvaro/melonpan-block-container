@@ -12,14 +12,14 @@ const { Component } = wp.element;
 
 class Container extends Component {
 	getClasses = () => {
-		const { extra_props, settings, attributes } = this.props;
+		const { extra_props, settings, attributes, is_edit } = this.props;
 
 		let classes;
 		classes = [
 			`${plugin_slug}-container`,
 			extra_props.container.className,
 
-			prepareCustomAttributeClasses(settings, attributes),
+			prepareCustomAttributeClasses(settings, attributes, is_edit),
 
 			// Padding
 			prepareClass("padding", settings, attributes),

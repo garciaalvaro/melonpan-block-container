@@ -9,21 +9,26 @@ const sanitizeId = value => {
 	return value;
 };
 
-const prepareCustomAttributeClasses = (settings, attributes) => {
+const prepareCustomAttributeClasses = (settings, attributes, is_edit) => {
 	let custom_classes = [];
+	const attributes_custom = attributes.custom;
 
 	forOwn(settings.custom, (value, key) => {
+		if (isUndefined(attributes_custom[key]) && is_edit) {
+			attributes_custom[key] = settings.custom[key].default;
+		}
+
 		if (
-			isUndefined(attributes.custom[key]) ||
-			attributes.custom[key] === ""
+			isUndefined(attributes_custom[key]) ||
+			attributes_custom[key] === ""
 		) {
 			return;
 		}
 
-		value = attributes.custom[key];
+		value = attributes_custom[key];
 
 		if (isBoolean(value)) {
-			value = attributes.custom[key] ? "enabled" : "disabled";
+			value = attributes_custom[key] ? "enabled" : "disabled";
 		} else if (isObject(value) && !isUndefined(value.default)) {
 			value = sanitizeId(value.default);
 		} else {
