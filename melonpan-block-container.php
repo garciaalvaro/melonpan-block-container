@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Melonpan Block - Container
- * Plugin URI: #
+ * Plugin URI: https://wordpress.org/plugins/melonpan-block-container/
  * Description: Container block for Gutenberg editor.
  * Author: melonpan
  * Version: 1.0.0

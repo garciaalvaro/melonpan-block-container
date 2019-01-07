@@ -101,7 +101,8 @@ gulp.task("zip", () => {
 				"!_extras/**",
 				"!gulp*",
 				"!yarn*",
-				"!src/**/#header",
+				"!src/**",
+				// "!src/**/#header",
 				"!package*",
 				"!build/**",
 				"!src/index.*"

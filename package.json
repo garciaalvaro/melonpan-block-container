@@ -3,7 +3,7 @@
 	"name_title": "Melonpan Block - Container",
 	"version": "1.0.0",
 	"description": "MelonpanBlockContainer",
-	"homepage": "#",
+	"homepage": "https://wordpress.org/plugins/melonpan-block-container/",
 	"main": "index.js",
 	"scripts": {
 		"dev": "parcel watch src/index-front.js -o melonpan-block-container-front.js -d build --no-hmr & parcel watch src/index-editor.js -o melonpan-block-container-editor.js -d build --no-hmr",

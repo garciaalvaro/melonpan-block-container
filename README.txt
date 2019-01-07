@@ -87,7 +87,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
             settings: {
                 // Check the How can I add a custom attribute? for more info.
                 custom: {
-                    example_attribute_name: { default: "default_value" },
+                    example_attribute_name: { default: "value_A" },
                     another_example_attribute_name: { default: true }
                 },
                 align: {
@@ -269,7 +269,7 @@ Then, inside your script call the filter in the following way (make sure "Melonp
             // Then wrap all the different versions inside an array.
             deprecated: [
                 {
-                    // Old version of the block. Both extra_props and settings changed.
+                    // Old version of the block.
                     extra_props: {
                         // ...
                     },
@@ -278,9 +278,10 @@ Then, inside your script call the filter in the following way (make sure "Melonp
                     }
                 },
                 {
-                    // Another old version of the block. Only settings changed.
-                    // Be careful, if a new change is made the extra_props that applied
-                    // to this version need to be passed as well.
+                    // Another old version of the block.
+                    extra_props: {
+                        // ...
+                    },
                     settings: {
                         // ...
                     }
@@ -295,8 +296,8 @@ When creating your own block using the "melonpanBlockContainer.createBlock" filt
 This setting is meant to be a helper that adds a class with the name and value of the attribute.
 One of the advantages of using it rather than the "blocks.registerBlockType" filter is that it should work if you need to deprecate the attribute.
 Keep in mind that it will simply add a class in the .mbc-container div, and that a "string", "number" or "boolean" value can be used.
-If the attribute is a string or number the class will include the name and the value (my_attribute -> .mbc-my_attribute-the_value).
-If the attribute is a boolean the class will include the name and "enabled" or "disabled" (my_attribute -> .mbc-my_attribute-enabled).
+If the attribute is a string or number the class will include the name and the value (example_attribute_name -> .mbc-example_attribute_name-the_value).
+If the attribute is a boolean the class will include the name and "enabled" or "disabled" (example_attribute_name -> .mbc-example_attribute_name-enabled).
 You will probably want to add a control for the attribute. To do so you may use the Gutenberg filters. Remember to remove the control if you deprecate the attribute.
 Here is an example of adding a control using the Gutenberg filters:
 
@@ -321,7 +322,7 @@ Here is an example of adding a control using the Gutenberg filters:
                         <PanelBody title={__("My Panel")}>
                             <RadioControl
                                 label={__("My attribute")}
-                                selected={attributes.custom.my_attribute}
+                                selected={attributes.custom.example_attribute_name}
                                 options={[
                                     {
                                         value: "value_A",
@@ -336,7 +337,7 @@ Here is an example of adding a control using the Gutenberg filters:
                                     setAttributes({
                                         custom: {
                                             ...attributes.custom,
-                                            my_attribute: value
+                                            example_attribute_name: value
                                         }
                                     })
                                 }
