@@ -1,7 +1,7 @@
 {
 	"name": "melonpan-block-container",
 	"name_title": "Melonpan Block - Container",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "MelonpanBlockContainer",
 	"homepage": "https://wordpress.org/plugins/melonpan-block-container/",
 	"main": "index.js",
