@@ -24,7 +24,10 @@ class Content extends Component {
 			`${plugin_slug}-content`,
 			extra_props.content.className,
 
-			!isUndefined(attributes.content_color)
+			// When clicking the Clear button, the value changes to undefined.
+			// However on reload the value is an empty string.
+			!isUndefined(attributes.content_color) &&
+			attributes.content_color !== ""
 				? `${plugin_slug}-has-color`
 				: null,
 			prepareClass(
