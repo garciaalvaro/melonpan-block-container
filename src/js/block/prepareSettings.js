@@ -225,7 +225,7 @@ settings_default_prop = mapValues(settings_default_prop, setting_value => ({
 	show_control: true
 }));
 
-// Nomralize the settings passed.
+// Normalize the settings passed.
 const prepareSettings = custom => {
 	if (!isObject(custom)) {
 		return {};

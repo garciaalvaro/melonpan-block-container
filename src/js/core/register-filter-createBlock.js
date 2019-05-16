@@ -1,5 +1,5 @@
 import l from "utils";
-import prepareBlock from "./prepareBlock";
+import prepareBlock from "../block/prepareBlock";
 import registerBlock from "./registerBlock";
 
 const { isObject, forEach, castArray } = lodash;
