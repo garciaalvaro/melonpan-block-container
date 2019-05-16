@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import prepareAttributes from "./prepareAttributes";
 import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
@@ -22,11 +22,7 @@ const prepareBlock = props => {
 		? {}
 		: props.blocktype_props.supports;
 	const extra_props = prepareExtraProps(props.extra_props);
-	const deprecated = prepareDeprecated(
-		props.deprecated,
-		settings,
-		extra_props
-	);
+	const deprecated = prepareDeprecated(props.deprecated, settings, extra_props);
 
 	props = {
 		blocktype_props: {

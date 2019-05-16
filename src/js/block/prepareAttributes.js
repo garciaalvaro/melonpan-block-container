@@ -1,4 +1,4 @@
-import l, { plugin_slug } from "../utils";
+import l, { plugin_slug } from "utils";
 
 const { isUndefined, mapValues, reduce } = lodash;
 

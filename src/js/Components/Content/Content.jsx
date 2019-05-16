@@ -4,7 +4,7 @@ import l, {
 	prepareClass,
 	prepareColor,
 	getValue
-} from "../../utils";
+} from "utils";
 
 const { isUndefined, isObject, compact } = lodash;
 const { Component } = wp.element;
@@ -26,16 +26,10 @@ class Content extends Component {
 
 			// When clicking the Clear button, the value changes to undefined.
 			// However on reload the value is an empty string.
-			!isUndefined(attributes.content_color) &&
-			attributes.content_color !== ""
+			!isUndefined(attributes.content_color) && attributes.content_color !== ""
 				? `${plugin_slug}-has-color`
 				: null,
-			prepareClass(
-				"content_maxwidth",
-				settings,
-				attributes,
-				content_maxwidth
-			),
+			prepareClass("content_maxwidth", settings, attributes, content_maxwidth),
 			prepareClass("content_align", settings, attributes)
 		];
 		// Remove falsey values.
@@ -65,11 +59,7 @@ class Content extends Component {
 		const { is_edit, extra_props } = props;
 
 		return (
-			<Div
-				{...extra_props.content}
-				className={getClasses()}
-				style={getStyle()}
-			>
+			<Div {...extra_props.content} className={getClasses()} style={getStyle()}>
 				{is_edit ? (
 					<InnerBlocks {...props.innerblocks_props} />
 				) : (

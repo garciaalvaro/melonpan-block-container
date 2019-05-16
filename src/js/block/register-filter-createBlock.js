@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import prepareBlock from "./prepareBlock";
 import registerBlock from "./registerBlock";
 

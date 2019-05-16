@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 
 const { isObject, isUndefined, reduce, pick, mapValues, keys } = lodash;
 

@@ -5,7 +5,7 @@ import l, {
 	prepareColor,
 	prepareClass,
 	getValue
-} from "../../utils";
+} from "utils";
 
 const { isUndefined, isNil, isObject, compact } = lodash;
 const { Component } = wp.element;
@@ -48,11 +48,7 @@ class Background extends Component {
 			settings,
 			attributes
 		);
-		const background_color = getValue(
-			"background_color",
-			settings,
-			attributes
-		);
+		const background_color = getValue("background_color", settings, attributes);
 		const background_color_opacity = getValue(
 			"background_color_opacity",
 			settings,
@@ -63,10 +59,7 @@ class Background extends Component {
 		style = {
 			color: prepareColor(shadow_color, shadow_color_opacity),
 			borderColor: prepareColor(border_color, border_color_opacity),
-			backgroundColor: prepareColor(
-				background_color,
-				background_color_opacity
-			),
+			backgroundColor: prepareColor(background_color, background_color_opacity),
 			backgroundImage:
 				!isUndefined(settings.background_image) &&
 				!isNil(attributes.background_image_url)

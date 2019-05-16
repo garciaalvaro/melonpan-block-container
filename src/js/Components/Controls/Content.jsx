@@ -1,4 +1,4 @@
-import l, { Span, plugin_slug, showControl } from "../../utils";
+import l, { Span, plugin_slug, showControl } from "utils";
 
 const { compact } = lodash;
 const { __ } = wp.i18n;
@@ -36,8 +36,7 @@ class Content extends Component {
 						title: "center",
 						icon: "align-center",
 						isActive: attributes.content_align === "center",
-						onClick: () =>
-							setAttributes({ content_align: "center" })
+						onClick: () => setAttributes({ content_align: "center" })
 					};
 					break;
 
@@ -88,9 +87,7 @@ class Content extends Component {
 							`${plugin_slug}-content_align`,
 							`${plugin_slug}-control`,
 							`${plugin_slug}-control-toolbar`,
-							`${plugin_slug}-selected-${
-								attributes.content_align
-							}`
+							`${plugin_slug}-selected-${attributes.content_align}`
 						].join(" ")}
 						label={__("Align")}
 						help={__(
@@ -113,9 +110,7 @@ class Content extends Component {
 						step={content_maxwidth.step}
 						min={content_maxwidth.min}
 						max={content_maxwidth.max}
-						onChange={value =>
-							setAttributes({ content_maxwidth: value })
-						}
+						onChange={value => setAttributes({ content_maxwidth: value })}
 					/>
 				)}
 
@@ -124,9 +119,7 @@ class Content extends Component {
 						label={
 							<Fragment>
 								<Span>{__("Text color")}</Span>
-								<ColorIndicator
-									colorValue={attributes.content_color}
-								/>
+								<ColorIndicator colorValue={attributes.content_color} />
 							</Fragment>
 						}
 						className={[

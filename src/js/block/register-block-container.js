@@ -1,4 +1,4 @@
-import l, { plugin_namespace, icons } from "../utils";
+import l, { plugin_namespace, icons } from "utils";
 
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;

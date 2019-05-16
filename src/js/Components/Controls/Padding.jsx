@@ -1,4 +1,4 @@
-import l, { plugin_slug, showControl } from "../../utils";
+import l, { plugin_slug, showControl } from "utils";
 
 const { __ } = wp.i18n;
 const { Component } = wp.element;
@@ -89,9 +89,7 @@ class Padding extends Component {
 								step={setting.step}
 								min={setting.min}
 								max={setting.max}
-								onChange={value =>
-									setAttributes({ [name]: value })
-								}
+								onChange={value => setAttributes({ [name]: value })}
 							/>
 						);
 					}

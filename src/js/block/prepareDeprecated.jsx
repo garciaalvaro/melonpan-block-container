@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import prepareSettings from "./prepareSettings";
 import prepareAttributes from "./prepareAttributes";
 import prepareExtraProps from "./prepareExtraProps";
@@ -57,8 +57,7 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 					const custom_old = {};
 
 					forEach(missing_keys, missing_key => {
-						custom_old[missing_key] =
-							settings.custom[missing_key].default;
+						custom_old[missing_key] = settings.custom[missing_key].default;
 					});
 
 					props.attributes.custom = {
@@ -79,9 +78,7 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 				);
 			},
 			supports: {
-				align: !isUndefined(settings.align)
-					? settings.align.options
-					: false
+				align: !isUndefined(settings.align) ? settings.align.options : false
 			}
 		};
 	});

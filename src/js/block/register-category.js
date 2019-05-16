@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 
 const { find, isUndefined } = lodash;
 const { select, dispatch } = wp.data;

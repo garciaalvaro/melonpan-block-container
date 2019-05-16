@@ -1,4 +1,4 @@
-import l from "../../utils";
+import l from "utils";
 import Controls from "../Controls/Controls";
 import Container from "../Content/Container";
 

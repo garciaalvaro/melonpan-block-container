@@ -1,4 +1,4 @@
-import l, { plugin_slug, showControl } from "../../utils";
+import l, { plugin_slug, showControl } from "utils";
 import Background from "./Background";
 import Content from "./Content";
 import Padding from "./Padding";
@@ -17,15 +17,11 @@ class Controls extends Component {
 			<InspectorControls className={`${plugin_slug}-inspector_controls`}>
 				{(showControl("content_maxwidth", sett) ||
 					showControl("content_align", sett) ||
-					showControl("content_color", sett)) && (
-					<Content {...props} />
-				)}
+					showControl("content_color", sett)) && <Content {...props} />}
 
 				{(showControl("background_color", sett) ||
 					showControl("background_color_opacity", sett) ||
-					!isUndefined(sett.background_image)) && (
-					<Background {...props} />
-				)}
+					!isUndefined(sett.background_image)) && <Background {...props} />}
 
 				{(showControl("padding", sett, sett) ||
 					showControl("padding_top", sett) ||
@@ -49,9 +45,7 @@ class Controls extends Component {
 					showControl("border_width", sett) ||
 					showControl("shadow_color", sett) ||
 					showControl("shadow_color_opacity", sett) ||
-					showControl("shadow_width", sett)) && (
-					<ShadowBorder {...props} />
-				)}
+					showControl("shadow_width", sett)) && <ShadowBorder {...props} />}
 			</InspectorControls>
 		);
 	}

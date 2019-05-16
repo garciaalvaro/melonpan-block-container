@@ -1,4 +1,4 @@
-import l, { Span, plugin_slug, showControl } from "../../utils";
+import l, { Span, plugin_slug, showControl } from "utils";
 
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
@@ -48,9 +48,7 @@ class ShadowBorder extends Component {
 						label={
 							<Fragment>
 								<Span>{__("Border color")}</Span>
-								<ColorIndicator
-									colorValue={attributes.border_color}
-								/>
+								<ColorIndicator colorValue={attributes.border_color} />
 							</Fragment>
 						}
 						className={[
@@ -116,9 +114,7 @@ class ShadowBorder extends Component {
 						label={
 							<Fragment>
 								<Span>{__("Shadow color")}</Span>
-								<ColorIndicator
-									colorValue={attributes.shadow_color}
-								/>
+								<ColorIndicator colorValue={attributes.shadow_color} />
 							</Fragment>
 						}
 						className={[

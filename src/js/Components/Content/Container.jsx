@@ -3,7 +3,7 @@ import l, {
 	plugin_slug,
 	prepareClass,
 	prepareCustomAttributeClasses
-} from "../../utils";
+} from "utils";
 import Background from "./Background";
 import Content from "./Content";
 
@@ -36,11 +36,7 @@ class Container extends Component {
 			prepareClass("padding_bottom_small_screen", settings, attributes),
 			prepareClass("padding_left_small_screen", settings, attributes),
 			prepareClass("padding_right_small_screen", settings, attributes),
-			prepareClass(
-				"padding_topbottom_small_screen",
-				settings,
-				attributes
-			),
+			prepareClass("padding_topbottom_small_screen", settings, attributes),
 			prepareClass("padding_leftright_small_screen", settings, attributes)
 		];
 		// Remove falsey values.

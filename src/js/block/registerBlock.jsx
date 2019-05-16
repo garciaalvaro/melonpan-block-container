@@ -1,4 +1,4 @@
-import l from "../utils";
+import l from "utils";
 import EditSave from "../Components/EditSave/EditSave";
 
 const { isUndefined } = lodash;

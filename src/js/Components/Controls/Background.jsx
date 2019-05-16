@@ -5,7 +5,7 @@ import l, {
 	prepareSrcset,
 	showControl,
 	icons
-} from "../../utils";
+} from "utils";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
@@ -27,10 +27,7 @@ class Background extends Component {
 		const { id, sizes, alt } = image;
 
 		const size =
-			sizes.medium_large ||
-			sizes.large ||
-			sizes.medium ||
-			sizes.thumbnail;
+			sizes.medium_large || sizes.large || sizes.medium || sizes.thumbnail;
 
 		setAttributes({
 			background_image_id: id,
@@ -70,9 +67,7 @@ class Background extends Component {
 						label={
 							<Fragment>
 								<Span>{__("Background color")}</Span>
-								<ColorIndicator
-									colorValue={attributes.background_color}
-								/>
+								<ColorIndicator colorValue={attributes.background_color} />
 							</Fragment>
 						}
 						className={[
@@ -124,9 +119,7 @@ class Background extends Component {
 					>
 						<ToggleControl
 							label={
-								attributes.background_fixed
-									? __("Fixed")
-									: __("Not fixed")
+								attributes.background_fixed ? __("Fixed") : __("Not fixed")
 							}
 							checked={attributes.background_fixed}
 							onChange={value =>
@@ -147,9 +140,7 @@ class Background extends Component {
 							`${plugin_slug}-control-media`
 						].join(" ")}
 					>
-						<Div
-							className={`${plugin_slug}-background_image-buttons`}
-						>
+						<Div className={`${plugin_slug}-background_image-buttons`}>
 							{isUndefined(attributes.background_image_id) ? (
 								<MediaUpload
 									onSelect={this.addImage}
@@ -176,10 +167,7 @@ class Background extends Component {
 											</Button>
 										)}
 									/>
-									<Button
-										onClick={this.removeImage}
-										isDefault
-									>
+									<Button onClick={this.removeImage} isDefault>
 										<Icon icon={icons.remove} />
 										{__("Remove")}
 									</Button>
