@@ -1,18 +1,18 @@
 import l from "utils";
 
-const { find, isUndefined } = lodash;
 const { select, dispatch } = wp.data;
-let categories;
+const categories = select("core/blocks").getCategories();
 
-categories = select("core/blocks").getCategories();
-
-if (isUndefined(find(categories, { slug: "melonpan" }))) {
-	categories.push({
-		slug: "melonpan",
-		title: "Melonpan Blocks",
-		icon: null
-	});
+if (categories && !categories.find(({ slug }) => slug === "melonpan")) {
+	const categories_new = [
+		...categories,
+		{
+			slug: "melonpan",
+			title: "Melonpan Blocks",
+			icon: null
+		}
+	];
 
 	// Set the new category.
-	dispatch("core/blocks").setCategories(categories);
+	dispatch("core/blocks").setCategories(categories_new);
 }

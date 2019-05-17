@@ -1,21 +1,25 @@
 import l from "utils";
+import prepareBlock from "./prepareBlock";
 import EditSave from "../Components/EditSave/EditSave";
 
-const { isUndefined } = lodash;
 const { registerBlockType } = wp.blocks;
 
 // Register block function helper.
-const registerBlock = ({
-	blocktype_props,
-	settings,
-	innerblocks_props,
-	extra_props
-}) => {
+const registerBlock = block => {
+	// Normalize the block.
+	block = prepareBlock(block);
+
+	if (!block) {
+		return;
+	}
+
+	const { blocktype_props, settings, innerblocks_props, extra_props } = block;
+
 	registerBlockType(blocktype_props.name, {
 		...blocktype_props,
 		supports: {
 			...blocktype_props.supports,
-			align: !isUndefined(settings.align) ? settings.align.options : false
+			align: settings.align ? settings.align.options : false
 		},
 		edit: props => (
 			<div className={props.className}>

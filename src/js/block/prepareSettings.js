@@ -3,7 +3,7 @@ import l from "utils";
 const { isObject, isUndefined, reduce, pick, mapValues, keys } = lodash;
 
 // Object containing settings properties meant to be private.
-const settings_private_props = {
+const settings_privates = {
 	content_maxwidth: {
 		step: 10
 	},
@@ -70,10 +70,9 @@ const settings_private_props = {
 	}
 };
 
-let settings_default_prop;
-
-// This is an array of all available settings.
-settings_default_prop = {
+// Array of all available settings.
+let settings_defaults;
+settings_defaults = {
 	custom: {},
 	align: {
 		default: "",
@@ -218,61 +217,60 @@ settings_default_prop = {
 		default: 0
 	}
 };
-
 // Assign the show_control property to each setting.
-settings_default_prop = mapValues(settings_default_prop, setting_value => ({
-	...setting_value,
+settings_defaults = mapValues(settings_defaults, setting => ({
+	...setting,
 	show_control: true
 }));
 
 // Normalize the settings passed.
-const prepareSettings = custom => {
-	if (!isObject(custom)) {
+const prepareSettings = block => {
+	if (!block.settings || !isObject(block.settings)) {
 		return {};
 	}
 
-	const defaults = settings_default_prop;
-	const privates = settings_private_props;
+	let { settings } = block;
+	const defaults = settings_defaults;
+	const privates = settings_privates;
 
-	let settings;
-	settings = custom;
-	// Exclude not allowed attributes.
+	// Exclude not allowed settings.
 	settings = pick(settings, keys(defaults));
 
-	// Use only the allowed keys.
-	settings = mapValues(settings, (setting_value, setting_key) => {
+	// Filter allowed keys in each setting.
+	settings = mapValues(settings, (setting, key) => {
 		// Exclude not allowed properties.
-		setting_value = pick(setting_value, keys(defaults[setting_key]));
+		setting = pick(setting, keys(defaults[key]));
 		// Fill not-set properties with the ones from defaults.
-		setting_value = { ...defaults[setting_key], ...setting_value };
+		setting = { ...defaults[key], ...setting };
 
-		if (!isUndefined(privates[setting_key])) {
+		if (!isUndefined(privates[key])) {
 			// Assign private properties.
-			setting_value = { ...privates[setting_key], ...setting_value };
+			setting = { ...privates[key], ...setting };
 		}
 
-		return setting_value;
+		return setting;
 	});
+
 	// Assign custom attribute.
-	if (isObject(custom.custom)) {
-		const custom_attribute = reduce(
-			custom.custom,
-			(acc, custom_value, custom_key) => {
-				if (!isObject(custom_value)) {
+	if (isObject(settings.custom)) {
+		const custom = reduce(
+			settings.custom,
+			(acc, value, key) => {
+				if (!isObject(value)) {
 					return acc;
 				}
 
-				custom_value = pick(custom_value, ["default"]);
-				custom_value = { default: "", ...custom_value };
+				value = pick(value, ["default"]);
+				value = { default: "", ...value };
 
-				acc[custom_key] = custom_value;
+				acc[key] = value;
 
 				return acc;
 			},
 			{}
 		);
 
-		settings = { ...settings, custom: custom_attribute };
+		settings = { ...settings, custom };
 	}
 
 	return settings;

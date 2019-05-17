@@ -1,4 +1,4 @@
-import { plugin_slug } from "./info-plugin";
+import { plugin_slug } from "./data-plugin";
 
 const icons = {
 	edit: (

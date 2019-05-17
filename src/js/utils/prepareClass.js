@@ -1,4 +1,4 @@
-import { plugin_slug } from "./info-plugin";
+import { plugin_slug } from "./data-plugin";
 import getValue from "./getValue";
 
 const { isUndefined, isBoolean } = lodash;

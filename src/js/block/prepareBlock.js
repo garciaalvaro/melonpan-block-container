@@ -7,26 +7,26 @@ import prepareExtraProps from "./prepareExtraProps";
 const { isObject } = lodash;
 
 // Normalize the block props.
-const prepareBlock = props => {
-	if (!isObject(props)) {
-		return false;
+const prepareBlock = block => {
+	if (!isObject(block)) {
+		return null;
 	}
 
 	// Prepare each property.
-	const settings = prepareSettings(props.settings);
+	const settings = prepareSettings(block);
 	const attributes = prepareAttributes(settings);
-	const innerblocks_props = !isObject(props.innerblocks_props)
+	const innerblocks_props = !isObject(block.innerblocks_props)
 		? {}
-		: props.innerblocks_props;
-	const supports = !isObject(props.blocktype_props.supports)
+		: block.innerblocks_props;
+	const supports = !isObject(block.blocktype_props.supports)
 		? {}
-		: props.blocktype_props.supports;
-	const extra_props = prepareExtraProps(props.extra_props);
-	const deprecated = prepareDeprecated(props.deprecated, settings, extra_props);
+		: block.blocktype_props.supports;
+	const extra_props = prepareExtraProps(block.extra_props);
+	const deprecated = prepareDeprecated(block.deprecated, settings, extra_props);
 
-	props = {
+	block = {
 		blocktype_props: {
-			...props.blocktype_props,
+			...block.blocktype_props,
 			attributes,
 			deprecated,
 			supports
@@ -36,7 +36,7 @@ const prepareBlock = props => {
 		innerblocks_props
 	};
 
-	return props;
+	return block;
 };
 
 export default prepareBlock;

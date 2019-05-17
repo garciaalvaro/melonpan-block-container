@@ -1,17 +1,15 @@
-import l, { plugin_namespace, icons } from "utils";
+import l, { plugin_namespace, plugin_title, icons } from "utils";
 
-const { __ } = wp.i18n;
-const { addFilter } = wp.hooks;
-
-// Example block registration using the hook.
-addFilter(
+// Main/Default block registration.
+wp.hooks.addFilter(
 	"melonpanBlockContainer.createBlock",
 	`${plugin_namespace}/container`,
-	blocks => {
-		return blocks.concat({
+	blocks => [
+		...blocks,
+		{
 			blocktype_props: {
 				name: `${plugin_namespace}/container`,
-				title: __("Melonpan Block - Container"),
+				title: plugin_title,
 				icon: icons.block,
 				category: "melonpan"
 			},
@@ -149,6 +147,6 @@ addFilter(
 					max: 100
 				}
 			}
-		});
-	}
+		}
+	]
 );

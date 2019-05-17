@@ -1,4 +1,4 @@
-import { plugin_slug } from "./info-plugin";
+import { plugin_slug } from "./data-plugin";
 
 const { isUndefined, isObject, isBoolean, toString, forOwn, deburr } = lodash;
 
@@ -18,10 +18,7 @@ const prepareCustomAttributeClasses = (settings, attributes, is_edit) => {
 			attributes_custom[key] = settings.custom[key].default;
 		}
 
-		if (
-			isUndefined(attributes_custom[key]) ||
-			attributes_custom[key] === ""
-		) {
+		if (isUndefined(attributes_custom[key]) || attributes_custom[key] === "") {
 			return;
 		}
 

@@ -1,3 +1,3 @@
-import "./register-category";
-import "./register-block-container";
-import "./register-filter-createBlock";
+import "./core/register-category";
+import "./core/register-block-container";
+import "./core/register-filter-createBlock";
