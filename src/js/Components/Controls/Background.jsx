@@ -1,15 +1,8 @@
-import l, {
-	Div,
-	Span,
-	plugin_slug,
-	prepareSrcset,
-	showControl,
-	icons
-} from "utils";
+import l, { Div, Span, addPrefix, getSrcset, icons } from "utils";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
+const { Fragment } = wp.element;
 const { ColorPalette, MediaUpload } = wp.editor;
 const {
 	RangeControl,
@@ -21,25 +14,21 @@ const {
 	Icon
 } = wp.components;
 
-class Background extends Component {
-	addImage = image => {
-		const { setAttributes } = this.props;
+const Background = props => {
+	const { setAttributes, values, settings } = props;
+	const addImage = image => {
 		const { id, sizes, alt } = image;
-
 		const size =
 			sizes.medium_large || sizes.large || sizes.medium || sizes.thumbnail;
 
 		setAttributes({
 			background_image_id: id,
 			background_image_url: size.url,
-			background_image_srcset: prepareSrcset(sizes),
+			background_image_srcset: getSrcset(sizes),
 			background_image_alt: alt
 		});
 	};
-
-	removeImage = () => {
-		const { setAttributes } = this.props;
-
+	const removeImage = () => {
 		setAttributes({
 			background_image_id: undefined,
 			background_image_url: undefined,
@@ -47,138 +36,133 @@ class Background extends Component {
 			background_image_alt: undefined
 		});
 	};
-
-	render() {
-		const { setAttributes, attributes, settings: sett } = this.props;
-		const {
-			background_color,
-			background_color_opacity,
-			background_image
-		} = sett;
-
-		return (
-			<PanelBody
-				title={__("Background")}
-				className={`${plugin_slug}-panel_body`}
-				initialOpen={false}
-			>
-				{showControl("background_color", sett) && (
-					<BaseControl
-						label={
-							<Fragment>
-								<Span>{__("Background color")}</Span>
-								<ColorIndicator colorValue={attributes.background_color} />
-							</Fragment>
-						}
-						className={[
-							`${plugin_slug}-background_color`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-colorpalette`
-						].join(" ")}
-					>
-						<ColorPalette
-							colors={background_color.colors}
-							value={attributes.background_color}
-							onChange={value => {
-								setAttributes({
-									background_color: value
-								});
-							}}
-						/>
-					</BaseControl>
-				)}
-
-				{showControl("background_color_opacity", sett) && (
-					<RangeControl
-						label={__("Background color opacity")}
-						className={[
-							`${plugin_slug}-background_color_opacity`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-range`
-						].join(" ")}
-						value={attributes.background_color_opacity}
-						step={background_color_opacity.step}
-						min={background_color_opacity.min}
-						max={background_color_opacity.max}
-						onChange={value => {
+	const {
+		background_fixed,
+		background_color,
+		background_color_opacity,
+		background_image
+	} = settings;
+	l(values);
+	return (
+		<PanelBody
+			title={__("Background")}
+			className={addPrefix("panel_body")}
+			initialOpen={false}
+		>
+			{background_color && background_color.show_control && (
+				<BaseControl
+					label={
+						<Fragment>
+							<Span>{__("Background color")}</Span>
+							<ColorIndicator colorValue={values.background_color} />
+						</Fragment>
+					}
+					className={addPrefix([
+						"background_color",
+						"control",
+						"control-colorpalette"
+					])}
+				>
+					<ColorPalette
+						colors={background_color.colors}
+						value={values.background_color}
+						onChange={value =>
 							setAttributes({
-								background_color_opacity: value
-							});
-						}}
+								background_color: value
+							})
+						}
 					/>
-				)}
+				</BaseControl>
+			)}
 
-				{showControl("background_fixed", sett) && (
-					<BaseControl
-						label={__("Background image fixed")}
-						className={[
-							`${plugin_slug}-background_fixed`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-toogle`
-						].join(" ")}
-					>
-						<ToggleControl
-							label={
-								attributes.background_fixed ? __("Fixed") : __("Not fixed")
-							}
-							checked={attributes.background_fixed}
-							onChange={value =>
-								setAttributes({
-									background_fixed: value
-								})
-							}
-						/>
-					</BaseControl>
-				)}
+			{background_color_opacity && background_color_opacity.show_control && (
+				<RangeControl
+					label={__("Background color opacity")}
+					className={addPrefix([
+						"background_color_opacity",
+						"control",
+						"control-range"
+					])}
+					value={values.background_color_opacity}
+					step={background_color_opacity.step}
+					min={background_color_opacity.min}
+					max={background_color_opacity.max}
+					onChange={value =>
+						setAttributes({
+							background_color_opacity: value
+						})
+					}
+				/>
+			)}
 
-				{!isUndefined(background_image) && (
-					<BaseControl
-						label={__("Background image")}
-						className={[
-							`${plugin_slug}-background_image`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-media`
-						].join(" ")}
-					>
-						<Div className={`${plugin_slug}-background_image-buttons`}>
-							{isUndefined(attributes.background_image_id) ? (
+			{background_fixed && background_fixed.show_control && (
+				<BaseControl
+					label={__("Background image fixed")}
+					className={addPrefix([
+						"background_fixed",
+						"control",
+						"control-toogle"
+					])}
+				>
+					<ToggleControl
+						label={values.background_fixed ? __("Fixed") : __("Not fixed")}
+						checked={values.background_fixed}
+						onChange={value =>
+							setAttributes({
+								background_fixed: value
+							})
+						}
+					/>
+				</BaseControl>
+			)}
+
+			{!isUndefined(background_image) && (
+				<BaseControl
+					label={__("Background image")}
+					className={addPrefix([
+						"background_image",
+						"control",
+						"control-media"
+					])}
+				>
+					<Div className={addPrefix("background_image-buttons")}>
+						{values.background_image_id ? (
+							<Fragment>
 								<MediaUpload
-									onSelect={this.addImage}
+									onSelect={addImage}
 									allowedTypes={["image"]}
-									value={attributes.background_image_id}
+									value={values.background_image_id}
 									multiple={false}
 									render={({ open }) => (
 										<Button onClick={open} isDefault>
-											{__("Open Media Library")}
+											<Icon icon={icons.edit} />
+											{__("Change")}
 										</Button>
 									)}
 								/>
-							) : (
-								<Fragment>
-									<MediaUpload
-										onSelect={this.addImage}
-										allowedTypes={["image"]}
-										value={attributes.background_image_id}
-										multiple={false}
-										render={({ open }) => (
-											<Button onClick={open} isDefault>
-												<Icon icon={icons.edit} />
-												{__("Change")}
-											</Button>
-										)}
-									/>
-									<Button onClick={this.removeImage} isDefault>
-										<Icon icon={icons.remove} />
-										{__("Remove")}
+								<Button onClick={removeImage} isDefault>
+									<Icon icon={icons.remove} />
+									{__("Remove")}
+								</Button>
+							</Fragment>
+						) : (
+							<MediaUpload
+								onSelect={addImage}
+								allowedTypes={["image"]}
+								value={values.background_image_id}
+								multiple={false}
+								render={({ open }) => (
+									<Button onClick={open} isDefault>
+										{__("Open Media Library")}
 									</Button>
-								</Fragment>
-							)}
-						</Div>
-					</BaseControl>
-				)}
-			</PanelBody>
-		);
-	}
-}
+								)}
+							/>
+						)}
+					</Div>
+				</BaseControl>
+			)}
+		</PanelBody>
+	);
+};
 
 export default Background;

@@ -1,8 +1,9 @@
-import l, { Span, plugin_slug, showControl } from "utils";
+import l, { Span, addPrefix } from "utils";
 
 const { compact } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
+const { withState } = wp.compose;
 const {
 	RangeControl,
 	BaseControl,
@@ -13,19 +14,17 @@ const {
 const { ColorPalette } = wp.editor;
 
 class Content extends Component {
-	getAlignControls = () => {
-		const { setAttributes, attributes, settings } = this.props;
+	componentDidMount() {
+		const { setAttributes, values, setState, settings } = this.props;
 		const { content_align } = settings;
-
-		let controls;
-		controls = content_align.options.map(control => {
+		const align_controls = content_align.options.map(control => {
 			switch (control) {
 				case "left":
 					return {
 						name: "left",
 						title: "Left",
 						icon: "align-left",
-						isActive: attributes.content_align === "left",
+						isActive: values.content_align === "left",
 						onClick: () => setAttributes({ content_align: "left" })
 					};
 					break;
@@ -35,7 +34,7 @@ class Content extends Component {
 						name: "center",
 						title: "center",
 						icon: "align-center",
-						isActive: attributes.content_align === "center",
+						isActive: values.content_align === "center",
 						onClick: () => setAttributes({ content_align: "center" })
 					};
 					break;
@@ -45,7 +44,7 @@ class Content extends Component {
 						name: "right",
 						title: "right",
 						icon: "align-right",
-						isActive: attributes.content_align === "right",
+						isActive: values.content_align === "right",
 						onClick: () => setAttributes({ content_align: "right" })
 					};
 					break;
@@ -55,7 +54,7 @@ class Content extends Component {
 						name: "full",
 						title: "full",
 						icon: "align-full-width",
-						isActive: attributes.content_align === "full",
+						isActive: values.content_align === "full",
 						onClick: () => setAttributes({ content_align: "full" })
 					};
 					break;
@@ -65,48 +64,50 @@ class Content extends Component {
 					break;
 			}
 		});
-		// Remove falsey values.
-		controls = compact(controls);
 
-		return controls;
-	};
+		setState({ align_controls: compact(align_controls) });
+	}
 
 	render() {
-		const { setAttributes, attributes, settings } = this.props;
-		const { content_maxwidth, content_color } = settings;
+		const { setAttributes, values, settings } = this.props;
+		const { content_maxwidth, content_color, content_align } = settings;
+		const align_controls = this.props.align_controls.map(control => ({
+			...control,
+			isActive: values.content_align === control.name
+		}));
 
 		return (
 			<PanelBody
 				title={__("Content")}
-				className={`${plugin_slug}-panel_body`}
+				className={addPrefix("panel_body")}
 				initialOpen={false}
 			>
-				{showControl("content_align", settings) && (
+				{content_align && content_align.show_control && (
 					<BaseControl
-						className={[
-							`${plugin_slug}-content_align`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-toolbar`,
-							`${plugin_slug}-selected-${attributes.content_align}`
-						].join(" ")}
+						className={addPrefix([
+							"content_align",
+							"control",
+							"control-toolbar",
+							`selected-${values.content_align}`
+						])}
 						label={__("Align")}
 						help={__(
 							"Choose an option to align the content inside the container."
 						)}
 					>
-						<Toolbar controls={this.getAlignControls()} />
+						<Toolbar controls={align_controls} />
 					</BaseControl>
 				)}
 
-				{showControl("content_maxwidth", settings) && (
+				{content_maxwidth && content_maxwidth.show_control && (
 					<RangeControl
 						label={__("Max width")}
-						className={[
-							`${plugin_slug}-content_maxwidth`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-range`
-						].join(" ")}
-						value={attributes.content_maxwidth}
+						className={addPrefix([
+							"content_maxwidth",
+							"control",
+							"control-range"
+						])}
+						value={values.content_maxwidth}
 						step={content_maxwidth.step}
 						min={content_maxwidth.min}
 						max={content_maxwidth.max}
@@ -114,28 +115,28 @@ class Content extends Component {
 					/>
 				)}
 
-				{showControl("content_color", settings) && (
+				{content_color && content_color.show_control && (
 					<BaseControl
 						label={
 							<Fragment>
 								<Span>{__("Text color")}</Span>
-								<ColorIndicator colorValue={attributes.content_color} />
+								<ColorIndicator colorValue={values.content_color} />
 							</Fragment>
 						}
-						className={[
-							`${plugin_slug}-content_color`,
-							`${plugin_slug}-control`,
-							`${plugin_slug}-control-colorpalette`
-						].join(" ")}
+						className={addPrefix([
+							"content_color",
+							"control",
+							"control-colorpalette"
+						])}
 					>
 						<ColorPalette
 							colors={content_color.colors}
-							value={attributes.content_color}
-							onChange={value => {
+							value={values.content_color}
+							onChange={value =>
 								setAttributes({
 									content_color: value
-								});
-							}}
+								})
+							}
 						/>
 					</BaseControl>
 				)}
@@ -144,4 +145,4 @@ class Content extends Component {
 	}
 }
 
-export default Content;
+export default withState({ align_controls: [] })(Content);

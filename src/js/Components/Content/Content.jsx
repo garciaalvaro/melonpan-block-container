@@ -1,73 +1,45 @@
-import l, {
-	Div,
-	plugin_slug,
-	prepareClass,
-	prepareColor,
-	getValue
-} from "utils";
+import l, { Div, getRgbaColor } from "utils";
 
-const { isUndefined, isObject, compact } = lodash;
-const { Component } = wp.element;
+const { isUndefined, isObject } = lodash;
 const { InnerBlocks } = wp.editor;
 
-class Content extends Component {
-	getClasses = () => {
-		let { extra_props, settings, attributes } = this.props;
-		const content_align = getValue("content_align", settings, attributes);
-		const content_maxwidth =
-			isUndefined(content_align) || content_align !== "full"
-				? getValue("content_maxwidth", settings, attributes)
-				: undefined;
+const Content = props => {
+	const { extra_props, values, is_edit } = props;
+	const { content_color, content_align } = values;
+	const classes = [
+		"content",
+		extra_props.content.className,
 
-		let classes;
-		classes = [
-			`${plugin_slug}-content`,
-			extra_props.content.className,
-
-			// When clicking the Clear button, the value changes to undefined.
-			// However on reload the value is an empty string.
-			!isUndefined(attributes.content_color) && attributes.content_color !== ""
-				? `${plugin_slug}-has-color`
-				: null,
-			prepareClass("content_maxwidth", settings, attributes, content_maxwidth),
-			prepareClass("content_align", settings, attributes)
-		];
-		// Remove falsey values.
-		classes = compact(classes);
-		classes = classes.join(" ");
-
-		return classes;
+		// When clicking the Clear button, the value changes to undefined.
+		// However on reload the value is an empty string.
+		!isUndefined(content_color) && content_color !== "" ? "has-color" : null
+	];
+	const classes_from_value = [
+		!content_align || content_align !== "full" ? "content_maxwidth" : null,
+		"content_align"
+	];
+	let style;
+	style = {
+		color: content_color ? getRgbaColor(content_color) : null
 	};
+	style = isObject(extra_props.content.style)
+		? { ...style, ...extra_props.content.style }
+		: style;
 
-	getStyle = () => {
-		const { extra_props, settings, attributes } = this.props;
-		const content_color = getValue("content_color", settings, attributes);
-
-		let style;
-		style = {
-			color: prepareColor(content_color)
-		};
-		style = isObject(extra_props.content.style)
-			? { ...style, ...extra_props.content.style }
-			: style;
-
-		return style;
-	};
-
-	render() {
-		const { getClasses, getStyle, props } = this;
-		const { is_edit, extra_props } = props;
-
-		return (
-			<Div {...extra_props.content} className={getClasses()} style={getStyle()}>
-				{is_edit ? (
-					<InnerBlocks {...props.innerblocks_props} />
-				) : (
-					<InnerBlocks.Content />
-				)}
-			</Div>
-		);
-	}
-}
+	return (
+		<Div
+			{...extra_props.content}
+			classes={classes}
+			style={style}
+			classes_from_value={{ classes: classes_from_value, values }}
+		>
+			{is_edit ? (
+				<InnerBlocks {...props.innerblocks_props} />
+			) : (
+				<InnerBlocks.Content />
+			)}
+		</Div>
+	);
+};
 
 export default Content;
