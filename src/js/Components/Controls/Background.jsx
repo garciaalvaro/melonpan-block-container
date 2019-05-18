@@ -42,7 +42,7 @@ const Background = props => {
 		background_color_opacity,
 		background_image
 	} = settings;
-	l(values);
+
 	return (
 		<PanelBody
 			title={__("Background")}

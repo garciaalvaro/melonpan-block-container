@@ -1,4 +1,5 @@
-import l, { pr } from "utils";
+import l from "utils";
+import { pr } from "./data-plugin";
 
 const { isUndefined, isString, compact } = lodash;
 
