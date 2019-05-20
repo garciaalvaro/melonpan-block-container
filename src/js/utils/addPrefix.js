@@ -1,28 +1,32 @@
 import l from "utils";
 import { pr } from "./data-plugin";
 
-const { isUndefined, isString, compact } = lodash;
+const { isArray, isString, compact } = lodash;
 
-const addPrefix = (items, separator = "-") => {
-	if (isUndefined(items)) {
-		return null;
+const resolvePrefix = (el, separator) => {
+	if (el.startsWith("#")) {
+		return el.replace("#", "");
 	}
 
-	if (isString(items)) {
-		return pr + separator + items;
-	}
+	return pr + separator + el;
+};
 
-	items = compact(items);
-	items = items.map(item => {
-		if (item.startsWith("#")) {
-			return item.replace("#", "");
+const addPrefix = (els, separator = "-") => {
+	separator = isString(separator) ? separator : "-";
+
+	if (isString(els)) {
+		return resolvePrefix(els, separator);
+	} else if (isArray(els)) {
+		els = els.filter(el => isString(el));
+		els = els.map(el => resolvePrefix(el, separator));
+		els = els.join(" ");
+
+		if (els.length) {
+			return els;
 		}
+	}
 
-		return pr + separator + item;
-	});
-	items = items.join(" ");
-
-	return items;
+	return null;
 };
 
 export default addPrefix;
