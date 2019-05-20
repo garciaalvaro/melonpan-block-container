@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "parcel watch src/index-front.js -o melonpan-block-container-front.js -d build --no-hmr & parcel watch src/index-editor.js -o melonpan-block-container-editor.js -d build --no-hmr",
 		"backup": "gulp backup",
-		"release": "gulp release"
+		"release": "gulp release",
+		"test": "jest --watch"
 	},
 	"alias": {
 		"utils": "./src/js/utils"
@@ -17,8 +18,15 @@
 		"@babel/core": "^7.4.4",
 		"@babel/plugin-proposal-class-properties": "^7.4.4",
 		"@babel/preset-env": "^7.4.4",
+		"@babel/preset-react": "^7.0.0",
 		"@babel/register": "^7.4.4",
+		"@wordpress/components": "^7.3.2",
+		"@wordpress/editor": "^9.2.5",
+		"@wordpress/element": "^2.3.0",
+		"@wordpress/hooks": "^2.2.0",
+		"@wordpress/i18n": "^3.3.0",
 		"autoprefixer": "^9.5.1",
+		"babel-jest": "^24.8.0",
 		"cssnano": "^4.1.10",
 		"gulp": "^4.0.2",
 		"gulp-header": "^2.0.7",
@@ -26,10 +34,20 @@
 		"gulp-replace": "^1.0.0",
 		"gulp-run-command": "0.0.9",
 		"gulp-zip": "^4.2.0",
+		"jest": "^24.8.0",
+		"lodash": "^4.17.11",
 		"merge2": "^1.2.3",
 		"stylus": "^0.54.5"
 	},
 	"dependencies": {
 		"tinycolor2": "^1.4.1"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^utils$": "<rootDir>/src/js/utils"
+		},
+		"setupFiles": [
+			"<rootDir>/jest.globals.js"
+		]
 	}
 }
