@@ -1,8 +1,21 @@
 import addPrefix from "./addPrefix";
 
-const { isBoolean, isUndefined } = lodash;
+const { isBoolean, isUndefined, reduce } = lodash;
 
-const Div = ({ children, classes, id, classes_from_value, ...rest }) => {
+const Div = props => <HTML {...props} html_tag="div" />;
+const Span = props => <HTML {...props} html_tag="span" />;
+const Img = props => <HTML {...props} html_tag="img" />;
+
+const HTML = props => {
+	let {
+		children,
+		id,
+		classes = [],
+		classes_from_value,
+		html_tag,
+		...rest
+	} = props;
+
 	if (classes_from_value) {
 		classes = [
 			...classes,
@@ -26,19 +39,41 @@ const Div = ({ children, classes, id, classes_from_value, ...rest }) => {
 		];
 	}
 
-	return (
-		<div id={addPrefix(id)} className={addPrefix(classes)} {...rest}>
-			{children}
-		</div>
+	let attributes;
+	attributes = {
+		...rest,
+		id: addPrefix(id),
+		className: addPrefix(classes)
+	};
+	attributes = reduce(
+		attributes,
+		(acc, value, key) => {
+			if (value) {
+				acc[key] = value;
+			}
+
+			return acc;
+		},
+		{}
 	);
+
+	switch (html_tag) {
+		case "div":
+			return <div {...attributes}>{children}</div>;
+			break;
+
+		case "span":
+			return <span {...attributes}>{children}</span>;
+			break;
+
+		case "img":
+			return <img {...attributes} />;
+			break;
+
+		default:
+			return 123;
+			break;
+	}
 };
-const Span = ({ children, classes, id, ...rest }) => (
-	<span id={addPrefix(id)} className={addPrefix(classes)} {...rest}>
-		{children}
-	</span>
-);
-const Img = ({ classes, id, ...rest }) => (
-	<img id={addPrefix(id)} className={addPrefix(classes)} {...rest} />
-);
 
 export { Div, Span, Img };

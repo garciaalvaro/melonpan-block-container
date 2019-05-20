@@ -1,13 +1,22 @@
 import tinycolor from "tinycolor2";
 
+const { isString, isFinite } = lodash;
+
 const getRgbaColor = (color, opacity = null) => {
-	if (!color) {
+	if (!isString(color)) {
 		return null;
 	}
 
 	color = tinycolor(color);
 
-	if (opacity === 0 || opacity) {
+	if (!color.isValid()) {
+		return null;
+	}
+
+	if (isFinite(opacity)) {
+		opacity = Math.max(opacity, 0);
+		opacity = Math.min(opacity, 100);
+
 		color = color.setAlpha(opacity / 100);
 	}
 
