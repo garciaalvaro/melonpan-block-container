@@ -3,40 +3,36 @@ import l, { getSrcset } from "utils";
 describe("getSrcset", () => {
 	const sizes = {
 		thumbnail: {
-			file: "core-multiple-2-150x150.jpg",
 			width: 150,
-			height: 150,
-			mime_type: "image/jpeg",
-			source_url:
-				"http://localhost:4444/wp-content/uploads/2019/05/core-multiple-2-150x150.jpg"
+			source_url: "http://example/image-150x150.jpg",
+			extra: 123
 		},
 		medium: {
-			file: "core-multiple-2-51x300.jpg",
 			width: 51,
-			height: 300,
-			mime_type: "image/jpeg",
-			source_url:
-				"http://localhost:4444/wp-content/uploads/2019/05/core-multiple-2-51x300.jpg"
+			source_url: "http://example/image-51x300.jpg",
+			extra: false
 		},
 		large: {
-			file: "core-multiple-2-174x1024.jpg",
 			width: 174,
-			height: 1024,
-			mime_type: "image/jpeg",
-			source_url:
-				"http://localhost:4444/wp-content/uploads/2019/05/core-multiple-2-174x1024.jpg"
+			source_url: "http://example/image-174x1024.jpg",
+			extra: true
 		},
 		full: {
-			file: "core-multiple-2.jpg",
 			width: 500,
-			height: 2938,
-			mime_type: "image/jpeg",
-			source_url:
-				"http://localhost:4444/wp-content/uploads/2019/05/core-multiple-2.jpg"
+			source_url: "http://example/image.jpg",
+			extra: null
 		}
 	};
 
-	// it("should return a string", () => {
-	// 	expect(getSrcset(sizes)).toBe("");
-	// });
+	// TODO: add tests
+	it("should return an ordered string", () => {
+		expect(getSrcset(sizes)).toBe(
+			[
+				"http://example/image-51x300.jpg 51w",
+				"http://example/image-150x150.jpg 150w",
+				"http://example/image-174x1024.jpg 174w",
+				"http://example/image.jpg 500w"
+			].join(", ")
+		);
+	});
 });
