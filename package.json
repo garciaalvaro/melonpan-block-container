@@ -47,7 +47,7 @@
 			"^utils$": "<rootDir>/src/js/utils"
 		},
 		"setupFiles": [
-			"<rootDir>/jest.globals.js"
+			"<rootDir>/test/jest.globals.js"
 		]
 	}
 }
