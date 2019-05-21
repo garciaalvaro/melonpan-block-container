@@ -7,9 +7,11 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "parcel watch src/index-front.js -o melonpan-block-container-front.js -d build --no-hmr & parcel watch src/index-editor.js -o melonpan-block-container-editor.js -d build --no-hmr",
+		"prod": "parcel build src/index-front.js -o melonpan-block-container-front.min.js -d build & parcel build src/index-editor.js -o melonpan-block-container-editor.min.js -d build",
 		"backup": "gulp backup",
 		"release": "gulp release",
-		"test": "jest --watch"
+		"test": "jest --watch",
+		"check-types": "tsc"
 	},
 	"alias": {
 		"utils": "./src/js/utils"
@@ -17,9 +19,13 @@
 	"devDependencies": {
 		"@babel/core": "^7.4.4",
 		"@babel/plugin-proposal-class-properties": "^7.4.4",
+		"@babel/plugin-proposal-object-rest-spread": "^7.4.4",
 		"@babel/preset-env": "^7.4.4",
 		"@babel/preset-react": "^7.0.0",
+		"@babel/preset-typescript": "^7.3.3",
 		"@babel/register": "^7.4.4",
+		"@types/lodash": "^4.14.130",
+		"@types/node": "^12.0.2",
 		"@wordpress/components": "^7.3.2",
 		"@wordpress/editor": "^9.2.5",
 		"@wordpress/element": "^2.3.0",
@@ -39,7 +45,8 @@
 		"jest": "^24.8.0",
 		"lodash": "^4.17.11",
 		"merge2": "^1.2.3",
-		"stylus": "^0.54.5"
+		"stylus": "^0.54.5",
+		"typescript": "^3.4.5"
 	},
 	"dependencies": {
 		"tinycolor2": "^1.4.1"
