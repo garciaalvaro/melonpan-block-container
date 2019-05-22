@@ -4,23 +4,15 @@ import prepareAttributes from "./prepareAttributes";
 import prepareExtraProps from "./prepareExtraProps";
 import EditSave from "../Components/EditSave/EditSave";
 
-const {
-	isUndefined,
-	isArray,
-	isEmpty,
-	difference,
-	forEach,
-	keys,
-	omit
-} = lodash;
+const { isUndefined, isEmpty, difference, forEach, keys, omit } = lodash;
 
 // Prepare the deprecated array of objects.
-const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
-	if (!isArray(deprecated)) {
-		return [];
-	}
-
-	const deprecated_prepared = deprecated.map(deprecated => {
+const prepareDeprecated = (
+	deprecated: Object[],
+	settings_new: Object,
+	extra_props_new: Object
+) => {
+	const deprecated_prepared = deprecated.map((deprecated: Object) => {
 		const settings = !isUndefined(deprecated.settings)
 			? prepareSettings(deprecated.settings)
 			: settings_new;
@@ -32,7 +24,7 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 
 		return {
 			attributes: attributes_definition,
-			migrate: old_attributes => {
+			migrate: (old_attributes: Object) => {
 				const deprecated_custom_keys = difference(
 					keys(old_attributes.custom),
 					keys(settings_new.custom)
@@ -45,7 +37,7 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 
 				return updated_attributes;
 			},
-			save: props => {
+			save: (props: Object) => {
 				// If the custom property changed we need to manually include
 				// the old keys in the old version of the attribute.
 				const missing_keys = difference(
@@ -54,7 +46,7 @@ const prepareDeprecated = (deprecated, settings_new, extra_props_new) => {
 				);
 
 				if (!isEmpty(missing_keys)) {
-					const custom_old = {};
+					const custom_old: Object = {};
 
 					forEach(missing_keys, missing_key => {
 						custom_old[missing_key] = settings.custom[missing_key].default;

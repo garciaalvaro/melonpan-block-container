@@ -111,11 +111,11 @@ const attributes_defaults = {
 };
 
 // Prepare attributes object. Pass the default values from settings object.
-const prepareAttributes = settings => {
+const prepareAttributes = (settings: Object) => {
 	// Assign only the attributes that are passed in the settings.
 	const attributes = reduce(
 		attributes_defaults,
-		(acc, attribute, key) => {
+		(acc: Object, attribute: Object, key: string) => {
 			// We need to pass all attributes because the migrate function
 			// in deprecate doesn't recognize removed attributes otherwise.
 			// (This only applies to certain attributes like background_color).

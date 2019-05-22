@@ -2,9 +2,6 @@ import l, { Div, addPrefix } from "utils";
 import Background from "./Background";
 import Content from "./Content";
 
-interface Object {
-	[key: string]: any;
-}
 interface Props {
 	extra_props: Object;
 	values: Object;

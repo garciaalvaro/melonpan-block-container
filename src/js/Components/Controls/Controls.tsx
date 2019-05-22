@@ -4,12 +4,18 @@ import Content from "./Content";
 import Padding from "./Padding";
 import ShadowBorder from "./ShadowBorder";
 
+interface Props {
+	values: Object;
+	settings: BlockSettings;
+	[rest: string]: any;
+}
+
 const { isUndefined } = lodash;
 const { Component } = wp.element;
 const { withState } = wp.compose;
 const { InspectorControls } = wp.editor;
 
-class Controls extends Component {
+class Controls extends Component<Props> {
 	componentDidMount() {
 		const { settings, setState } = this.props;
 		const controls_to_show = [];

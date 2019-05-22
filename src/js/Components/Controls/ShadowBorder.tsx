@@ -1,11 +1,17 @@
 import l, { Span, addPrefix } from "utils";
 
+interface Props {
+	values: Object;
+	settings: BlockSettings;
+	[rest: string]: any;
+}
+
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const { ColorPalette } = wp.editor;
 const { RangeControl, BaseControl, PanelBody, ColorIndicator } = wp.components;
 
-const ShadowBorder = props => {
+const ShadowBorder: React.FunctionComponent<Props> = props => {
 	const { setAttributes, values, settings } = props;
 	const {
 		border_width,
@@ -30,7 +36,7 @@ const ShadowBorder = props => {
 					step={border_width.step}
 					min={border_width.min}
 					max={border_width.max}
-					onChange={value =>
+					onChange={(value: number) =>
 						setAttributes({
 							border_width: value
 						})
@@ -54,7 +60,7 @@ const ShadowBorder = props => {
 					<ColorPalette
 						colors={border_color.colors}
 						value={values.border_color}
-						onChange={value =>
+						onChange={(value: string) =>
 							setAttributes({
 								border_color: value
 							})
@@ -75,7 +81,7 @@ const ShadowBorder = props => {
 					step={border_color_opacity.step}
 					min={border_color_opacity.min}
 					max={border_color_opacity.max}
-					onChange={value =>
+					onChange={(value: number) =>
 						setAttributes({
 							border_color_opacity: value
 						})
@@ -91,7 +97,7 @@ const ShadowBorder = props => {
 					step={shadow_width.step}
 					min={shadow_width.min}
 					max={shadow_width.max}
-					onChange={value =>
+					onChange={(value: number) =>
 						setAttributes({
 							shadow_width: value
 						})
@@ -116,7 +122,7 @@ const ShadowBorder = props => {
 					<ColorPalette
 						colors={shadow_color.colors}
 						value={values.shadow_color}
-						onChange={value =>
+						onChange={(value: string) =>
 							setAttributes({
 								shadow_color: value
 							})
@@ -137,7 +143,7 @@ const ShadowBorder = props => {
 					step={shadow_color_opacity.step}
 					min={shadow_color_opacity.min}
 					max={shadow_color_opacity.max}
-					onChange={value =>
+					onChange={(value: number) =>
 						setAttributes({
 							shadow_color_opacity: value
 						})

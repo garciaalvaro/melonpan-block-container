@@ -2,23 +2,6 @@ import l from "utils";
 import prepareBlock from "./prepareBlock";
 import EditSave from "../Components/EditSave/EditSave";
 
-interface Object {
-	[key: string]: any;
-}
-interface Block extends Object {
-	blocktype_props: {
-		name: string;
-		title: string;
-		icon: string | JSX.Element;
-		category: string;
-		supports: Object;
-	};
-	settings: Object;
-	deprecated?: Object[];
-	innerblocks_props?: Object;
-	extra_props?: Object;
-}
-
 const { reduce, mapValues, isUndefined, pickBy } = lodash;
 const { registerBlockType } = wp.blocks;
 const getValues = (settings: Object, attributes: Object, is_edit: boolean) =>
@@ -58,13 +41,18 @@ const getValues = (settings: Object, attributes: Object, is_edit: boolean) =>
 // Register block function helper.
 const registerBlock = (block: Block) => {
 	// Normalize the block.
-	block = prepareBlock(block);
+	const block_prepared = prepareBlock(block);
 
-	if (!block) {
+	if (!block_prepared) {
 		return;
 	}
 
-	const { blocktype_props, settings, innerblocks_props, extra_props } = block;
+	const {
+		blocktype_props,
+		settings,
+		innerblocks_props,
+		extra_props
+	} = block_prepared;
 	const config = {
 		...blocktype_props,
 		supports: {

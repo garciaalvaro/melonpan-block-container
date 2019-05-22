@@ -2,18 +2,18 @@
 // Project: https://github.com/WordPress/gutenberg/tree/master/packages/plugins
 // Definitions by: Derek P Sifford <https://github.com/dsifford>
 
-import { Dashicon } from '@wordpress/dashicons';
-import { ComponentType } from 'react';
+import { Dashicon } from "../wordpress__dashicons";
+import { ComponentType } from "react";
 
 export interface PluginSettings {
-    /**
-     * The Dashicon icon slug string, or an SVG WP element, to be rendered when the sidebar is pinned to toolbar.
-     */
-    icon: Dashicon | ComponentType;
-    /**
-     * A component containing the UI elements to be rendered.
-     */
-    render: ComponentType;
+	/**
+	 * The Dashicon icon slug string, or an SVG WP element, to be rendered when the sidebar is pinned to toolbar.
+	 */
+	icon: Dashicon | ComponentType;
+	/**
+	 * A component containing the UI elements to be rendered.
+	 */
+	render: ComponentType;
 }
 
 /**

@@ -7,7 +7,7 @@ import prepareExtraProps from "./prepareExtraProps";
 const { isObject } = lodash;
 
 // Normalize the block props.
-const prepareBlock = block => {
+const prepareBlock = (block: Block) => {
 	if (!isObject(block)) {
 		return null;
 	}
@@ -21,10 +21,14 @@ const prepareBlock = block => {
 	const supports = !isObject(block.blocktype_props.supports)
 		? {}
 		: block.blocktype_props.supports;
-	const extra_props = prepareExtraProps(block.extra_props);
-	const deprecated = prepareDeprecated(block.deprecated, settings, extra_props);
+	const extra_props = block.extra_props
+		? prepareExtraProps(block.extra_props)
+		: { container: {}, content: {}, background: {} };
+	const deprecated = block.deprecated
+		? prepareDeprecated(block.deprecated, settings, extra_props)
+		: [];
 
-	block = {
+	return {
 		blocktype_props: {
 			...block.blocktype_props,
 			attributes,
@@ -35,8 +39,6 @@ const prepareBlock = block => {
 		settings,
 		innerblocks_props
 	};
-
-	return block;
 };
 
 export default prepareBlock;

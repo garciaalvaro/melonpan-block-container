@@ -1,8 +1,14 @@
 import l, { Div, Img, getRgbaColor } from "utils";
 
+interface Props {
+	values: Object;
+	extra_props: BlockExtraProps;
+	[rest: string]: any;
+}
+
 const { isUndefined, isObject } = lodash;
 
-const Background = props => {
+const Background: React.FunctionComponent<Props> = props => {
 	const { extra_props, values } = props;
 	const {
 		border_color,

@@ -1,5 +1,11 @@
 import l, { Div, Span, addPrefix, getSrcset, icons } from "utils";
 
+interface Props {
+	values: Object;
+	settings: BlockSettings;
+	[rest: string]: any;
+}
+
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
@@ -14,9 +20,9 @@ const {
 	Icon
 } = wp.components;
 
-const Background = props => {
+const Background: React.FunctionComponent<Props> = props => {
 	const { setAttributes, values, settings } = props;
-	const addImage = image => {
+	const addImage = (image: Object) => {
 		const { id, sizes, alt } = image;
 		const size =
 			sizes.medium_large || sizes.large || sizes.medium || sizes.thumbnail;
@@ -66,7 +72,7 @@ const Background = props => {
 					<ColorPalette
 						colors={background_color.colors}
 						value={values.background_color}
-						onChange={value =>
+						onChange={(value: string) =>
 							setAttributes({
 								background_color: value
 							})
@@ -87,7 +93,7 @@ const Background = props => {
 					step={background_color_opacity.step}
 					min={background_color_opacity.min}
 					max={background_color_opacity.max}
-					onChange={value =>
+					onChange={(value: number) =>
 						setAttributes({
 							background_color_opacity: value
 						})
@@ -107,7 +113,7 @@ const Background = props => {
 					<ToggleControl
 						label={values.background_fixed ? __("Fixed") : __("Not fixed")}
 						checked={values.background_fixed}
-						onChange={value =>
+						onChange={(value: boolean) =>
 							setAttributes({
 								background_fixed: value
 							})
@@ -133,12 +139,16 @@ const Background = props => {
 									allowedTypes={["image"]}
 									value={values.background_image_id}
 									multiple={false}
-									render={({ open }) => (
-										<Button onClick={open} isDefault>
-											<Icon icon={icons.edit} />
-											{__("Change")}
-										</Button>
-									)}
+									render={(props: Object) => {
+										const { open } = props;
+
+										return (
+											<Button onClick={open} isDefault>
+												<Icon icon={icons.edit} />
+												{__("Change")}
+											</Button>
+										);
+									}}
 								/>
 								<Button onClick={removeImage} isDefault>
 									<Icon icon={icons.remove} />
@@ -151,11 +161,15 @@ const Background = props => {
 								allowedTypes={["image"]}
 								value={values.background_image_id}
 								multiple={false}
-								render={({ open }) => (
-									<Button onClick={open} isDefault>
-										{__("Open Media Library")}
-									</Button>
-								)}
+								render={(props: Object) => {
+									const { open } = props;
+
+									return (
+										<Button onClick={open} isDefault>
+											{__("Open Media Library")}
+										</Button>
+									);
+								}}
 							/>
 						)}
 					</Div>

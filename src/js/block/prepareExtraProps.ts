@@ -3,11 +3,7 @@ import l from "utils";
 const { isObject } = lodash;
 
 // Normalize the extra_props object.
-const prepareExtraProps = extra_props => {
-	if (!isObject(extra_props)) {
-		return { container: {}, content: {}, background: {} };
-	}
-
+const prepareExtraProps = (extra_props: BlockExtraProps) => {
 	const container = isObject(extra_props.container)
 		? extra_props.container
 		: {};

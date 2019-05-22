@@ -1,4 +1,4 @@
-import { dispatch, select } from '@wordpress/data';
+import { dispatch, select } from "@wordpress/data";
 
 // prettier-ignore
 declare module '@wordpress/data' {

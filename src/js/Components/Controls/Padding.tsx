@@ -1,5 +1,11 @@
 import l, { addPrefix } from "utils";
 
+interface Props {
+	values: Object;
+	settings: BlockSettings;
+	[rest: string]: any;
+}
+
 const { __ } = wp.i18n;
 const { RangeControl, PanelBody } = wp.components;
 const paddings = [
@@ -61,7 +67,7 @@ const paddings = [
 	}
 ];
 
-const Padding = props => {
+const Padding: React.FunctionComponent<Props> = props => {
 	const { setAttributes, values, settings } = props;
 
 	return (
@@ -86,7 +92,7 @@ const Padding = props => {
 						step={setting.step}
 						min={setting.min}
 						max={setting.max}
-						onChange={value => setAttributes({ [name]: value })}
+						onChange={(value: number) => setAttributes({ [name]: value })}
 					/>
 				);
 			})}

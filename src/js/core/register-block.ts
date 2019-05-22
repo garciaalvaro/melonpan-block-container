@@ -4,7 +4,7 @@ import l, { plugin_namespace, plugin_title, icons } from "utils";
 wp.hooks.addFilter(
 	"melonpanBlockContainer.createBlock",
 	`${plugin_namespace}/container`,
-	blocks => [
+	(blocks: Block[]) => [
 		...blocks,
 		{
 			blocktype_props: {

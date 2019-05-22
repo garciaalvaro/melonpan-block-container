@@ -1,5 +1,11 @@
 import l, { Span, addPrefix } from "utils";
 
+interface Props {
+	values: Object;
+	settings: BlockSettings;
+	[rest: string]: any;
+}
+
 const { compact } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
@@ -13,11 +19,11 @@ const {
 } = wp.components;
 const { ColorPalette } = wp.editor;
 
-class Content extends Component {
+class Content extends Component<Props> {
 	componentDidMount() {
 		const { setAttributes, values, setState, settings } = this.props;
 		const { content_align } = settings;
-		const align_controls = content_align.options.map(control => {
+		const align_controls = content_align!.options.map((control: string) => {
 			switch (control) {
 				case "left":
 					return {
@@ -71,7 +77,7 @@ class Content extends Component {
 	render() {
 		const { setAttributes, values, settings } = this.props;
 		const { content_maxwidth, content_color, content_align } = settings;
-		const align_controls = this.props.align_controls.map(control => ({
+		const align_controls = this.props.align_controls.map((control: Object) => ({
 			...control,
 			isActive: values.content_align === control.name
 		}));
@@ -111,7 +117,9 @@ class Content extends Component {
 						step={content_maxwidth.step}
 						min={content_maxwidth.min}
 						max={content_maxwidth.max}
-						onChange={value => setAttributes({ content_maxwidth: value })}
+						onChange={(value: number) =>
+							setAttributes({ content_maxwidth: value })
+						}
 					/>
 				)}
 
@@ -132,7 +140,7 @@ class Content extends Component {
 						<ColorPalette
 							colors={content_color.colors}
 							value={values.content_color}
-							onChange={value =>
+							onChange={(value: string) =>
 								setAttributes({
 									content_color: value
 								})

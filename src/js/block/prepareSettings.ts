@@ -71,7 +71,7 @@ const settings_privates = {
 };
 
 // Array of all available settings.
-let settings_defaults;
+let settings_defaults: Object;
 settings_defaults = {
 	custom: {},
 	align: {
@@ -224,20 +224,20 @@ settings_defaults = mapValues(settings_defaults, setting => ({
 }));
 
 // Normalize the settings passed.
-const prepareSettings = block => {
+const prepareSettings = (block: Block) => {
 	if (!block.settings || !isObject(block.settings)) {
 		return {};
 	}
 
 	let { settings } = block;
-	const defaults = settings_defaults;
-	const privates = settings_privates;
+	const defaults: Object = settings_defaults;
+	const privates: Object = settings_privates;
 
 	// Exclude not allowed settings.
 	settings = pick(settings, keys(defaults));
 
 	// Filter allowed keys in each setting.
-	settings = mapValues(settings, (setting, key) => {
+	settings = mapValues(settings, (setting: Object, key: string) => {
 		// Exclude not allowed properties.
 		setting = pick(setting, keys(defaults[key]));
 		// Fill not-set properties with the ones from defaults.
@@ -252,10 +252,10 @@ const prepareSettings = block => {
 	});
 
 	// Assign custom attribute.
-	if (isObject(settings.custom)) {
+	if (isObject(settings!.custom)) {
 		const custom = reduce(
 			settings.custom,
-			(acc, value, key) => {
+			(acc: Object, value: any, key: string) => {
 				if (!isObject(value)) {
 					return acc;
 				}
