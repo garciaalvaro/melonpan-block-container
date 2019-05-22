@@ -1,7 +1,7 @@
 import l from "utils";
 import { pr } from "./data-plugin";
 
-const { compact } = lodash;
+const { compact, flow } = lodash;
 
 const resolvePrefix = (el: string, separator: string): string => {
 	if (el.startsWith("#")) {
@@ -12,17 +12,22 @@ const resolvePrefix = (el: string, separator: string): string => {
 };
 
 const addPrefix = (
-	els: string | (string | null)[],
+	els: string | null | (string | null)[],
 	separator: string = "-"
 ): string => {
+	if (els === null) {
+		return "";
+	}
+
 	if (typeof els === "string") {
 		return resolvePrefix(els, separator);
 	}
 
-	els = compact(els).map(el => resolvePrefix(el, separator));
-	els = els.join(" ");
-
-	return els;
+	return flow([
+		compact,
+		(els: string[]) => els.map((el: string) => resolvePrefix(el, separator)),
+		(els: string[]): string => els.join(" ")
+	])(els);
 };
 
 export default addPrefix;

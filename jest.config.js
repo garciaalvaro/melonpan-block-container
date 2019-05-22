@@ -38,6 +38,8 @@ module.exports = {
 	moduleNameMapper: {
 		"^utils$": "<rootDir>/src/js/utils"
 	},
-
 	setupFiles: ["<rootDir>/jest.globals.js"]
+	// transform: {
+	// 	"^.+\\.tsx?$": "ts-jest"
+	// }
 };
