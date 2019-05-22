@@ -20,5 +20,5 @@
 			"utils": ["./src/js/utils"]
 		}
 	},
-	"include": ["src", "types/*/*.d.ts", "types/index.ts"]
+	"include": ["src", "types/*/*.d.ts", "types/index.d.ts"]
 }
