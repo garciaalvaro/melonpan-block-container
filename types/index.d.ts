@@ -77,10 +77,10 @@ declare interface Block extends Object {
 		title: string;
 		icon: string | JSX.Element;
 		category: string;
-		supports: Object;
+		supports?: Object;
 	};
+	settings: BlockSettings;
 	deprecated?: Object[];
 	innerblocks_props?: Object;
 	extra_props?: BlockExtraProps;
-	settings: BlockSettings;
 }
