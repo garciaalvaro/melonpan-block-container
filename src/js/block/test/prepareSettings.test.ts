@@ -3,10 +3,10 @@ import prepareSettings, {
 	settings_defaults,
 	settings_privates
 } from "../prepareSettings";
-// import { settings_defaults } from "./_settings";
 
 const { defaultsDeep } = lodash;
 
+// TODO: tests related to background_image => background_image_url
 describe("prepareSettings", () => {
 	it("should return the default settings", () => {
 		const settings = settings_defaults;

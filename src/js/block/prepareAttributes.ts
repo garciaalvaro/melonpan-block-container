@@ -1,6 +1,6 @@
 import l, { addPrefix } from "utils";
 
-const { isUndefined, mapValues, reduce } = lodash;
+const { isUndefined, mapValues, reduce, cloneDeep } = lodash;
 const attributes_defaults = {
 	custom: {
 		type: "object",
@@ -114,13 +114,13 @@ const attributes_defaults = {
 const prepareAttributes = (settings: Object) => {
 	// Assign only the attributes that are passed in the settings.
 	const attributes = reduce(
-		attributes_defaults,
+		{ ...attributes_defaults },
 		(acc: Object, attribute: Object, key: string) => {
 			// We need to pass all attributes because the migrate function
 			// in deprecate doesn't recognize removed attributes otherwise.
 			// (This only applies to certain attributes like background_color).
 			// See: https://github.com/WordPress/gutenberg/issues/10406
-			acc[key] = attribute;
+			acc[key] = cloneDeep(attribute);
 
 			if (key === "custom" && !isUndefined(settings.custom)) {
 				acc.custom.default = mapValues(
@@ -143,3 +143,4 @@ const prepareAttributes = (settings: Object) => {
 };
 
 export default prepareAttributes;
+export { attributes_defaults };
