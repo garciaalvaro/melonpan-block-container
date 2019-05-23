@@ -224,44 +224,43 @@ settings_defaults = mapValues(settings_defaults, setting => ({
 }));
 
 // Normalize the settings passed.
-const prepareSettings = (block: Block) => {
-	if (!block.settings || !isObject(block.settings)) {
-		return {};
-	}
-
-	let { settings } = block;
+const prepareSettings = (settings: BlockSettings) => {
 	const defaults: Object = settings_defaults;
 	const privates: Object = settings_privates;
+	let settings_prepared = {};
 
 	// Exclude not allowed settings.
-	settings = pick(settings, keys(defaults));
+	settings_prepared = pick(settings, keys(defaults));
 
 	// Filter allowed keys in each setting.
-	settings = mapValues(settings, (setting: Object, key: string) => {
-		// Exclude not allowed properties.
-		setting = pick(setting, keys(defaults[key]));
-		// Fill not-set properties with the ones from defaults.
-		setting = { ...defaults[key], ...setting };
+	settings_prepared = mapValues(
+		settings_prepared,
+		(setting: Object, key: string) => {
+			// Exclude not allowed properties.
+			setting = pick(setting, keys(defaults[key]));
+			// Fill not-set properties with the ones from defaults.
+			setting = { ...defaults[key], ...setting };
 
-		if (!isUndefined(privates[key])) {
-			// Assign private properties.
-			setting = { ...privates[key], ...setting };
+			if (!isUndefined(privates[key])) {
+				// Assign private properties.
+				setting = { ...setting, ...privates[key] };
+			}
+
+			return setting;
 		}
-
-		return setting;
-	});
+	);
 
 	// Assign custom attribute.
-	if (isObject(settings!.custom)) {
+	if (isObject(settings.custom)) {
 		const custom = reduce(
 			settings.custom,
-			(acc: Object, value: any, key: string) => {
+			(acc: Object, value: Object, key: string) => {
 				if (!isObject(value)) {
 					return acc;
 				}
 
 				value = pick(value, ["default"]);
-				value = { default: "", ...value };
+				value = lodash.defaults(value, { default: "" });
 
 				acc[key] = value;
 
@@ -270,10 +269,11 @@ const prepareSettings = (block: Block) => {
 			{}
 		);
 
-		settings = { ...settings, custom };
+		settings_prepared = { ...settings_prepared, custom };
 	}
 
-	return settings;
+	return settings_prepared;
 };
 
 export default prepareSettings;
+export { settings_defaults, settings_privates };
