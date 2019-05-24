@@ -2,10 +2,9 @@ import l, { Div, addPrefix } from "utils";
 import Background from "./Background";
 import Content from "./Content";
 
-interface Props {
-	extra_props: Object;
+interface Props extends Object {
 	values: Object;
-	[rest: string]: any;
+	extra_props: BlockExtraProps;
 }
 
 const { isBoolean, toString, map, deburr } = lodash;
@@ -16,30 +15,30 @@ const getCustomAttClasses = (custom: Object) => {
 			if (isBoolean(value)) {
 				const state = value ? "enabled" : "disabled";
 
-				return addPrefix(`${key}-${state}`);
+				return `${key}-${state}`;
 			}
 
 			value = toString(value);
 			value = deburr(value);
 			value = value.replace(/[^\w-_]/g, "");
 
-			return addPrefix(`${key}-${value}`);
+			return `${key}-${value}`;
 		}
 	);
 
-	return custom_classes.join(" ");
+	return custom_classes;
 };
 
 const Container: React.FunctionComponent<Props> = props => {
 	const { extra_props, values } = props;
+	const {
+		className: extra_props_className,
+		...rest_extra_props
+	} = extra_props.container;
 	const custom_classes = values.custom
 		? getCustomAttClasses(values.custom)
 		: [];
-	const classes = [
-		"container",
-		extra_props.container.className,
-		...custom_classes
-	];
+	const classes = ["container", ...extra_props_className, ...custom_classes];
 	const classes_from_value = [
 		// Padding
 		"padding",
@@ -61,7 +60,7 @@ const Container: React.FunctionComponent<Props> = props => {
 
 	return (
 		<Div
-			{...extra_props.container}
+			{...rest_extra_props}
 			classes={classes}
 			classes_from_value={{ classes: classes_from_value, values }}
 		>

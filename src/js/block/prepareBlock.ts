@@ -2,6 +2,7 @@ import l from "utils";
 import prepareAttributes from "./prepareAttributes";
 import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
+import prepareExtraProps from "./prepareExtraProps";
 
 const { isObject, defaults } = lodash;
 
@@ -22,11 +23,13 @@ const prepareBlock = (block: Block) => {
 	block.settings = block.settings ? block.settings : {};
 	block.supports = block.supports ? block.supports : {};
 	block.deprecated = block.deprecated ? block.deprecated : [];
-	block.extra_props = defaults(block.extra_props, {
-		container: {},
-		content: {},
-		background: {}
-	});
+	block.extra_props = prepareExtraProps(
+		defaults(block.extra_props, {
+			container: {},
+			content: {},
+			background: {}
+		})
+	);
 	block.innerblocks_props = block.innerblocks_props
 		? block.innerblocks_props
 		: {};

@@ -1,15 +1,18 @@
 import l, { Div, Img, getRgbaColor } from "utils";
 
-interface Props {
+interface Props extends Object {
 	values: Object;
 	extra_props: BlockExtraProps;
-	[rest: string]: any;
 }
 
 const { isUndefined, isObject } = lodash;
 
 const Background: React.FunctionComponent<Props> = props => {
 	const { extra_props, values } = props;
+	const {
+		className: extra_props_className,
+		...rest_extra_props
+	} = extra_props.background;
 	const {
 		border_color,
 		border_color_opacity,
@@ -23,8 +26,7 @@ const Background: React.FunctionComponent<Props> = props => {
 	} = values;
 	const classes = [
 		"background",
-		extra_props.background.className,
-
+		...extra_props_className,
 		background_image_url ? "has-image" : null
 	];
 	const classes_from_value = [
@@ -59,7 +61,7 @@ const Background: React.FunctionComponent<Props> = props => {
 
 	return (
 		<Div
-			{...extra_props.background}
+			{...rest_extra_props}
 			classes={classes}
 			style={style}
 			classes_from_value={{ classes: classes_from_value, values }}

@@ -1,7 +1,7 @@
 // Wordpress
 declare const wp: {
 	apiFetch: typeof import("./academic-bloggers-toolkit-master/wordpress__api-fetch");
-	blockEditor: typeof import("./academic-bloggers-toolkit-master/wordpress__block-editor");
+	// blockEditor: typeof import("./academic-bloggers-toolkit-master/wordpress__block-editor");
 	blocks: typeof import("./academic-bloggers-toolkit-master/wordpress__blocks");
 	// components: typeof import("./academic-bloggers-toolkit-master/wordpress__components");
 	// compose: typeof import("./academic-bloggers-toolkit-master/wordpress__compose");
@@ -20,6 +20,7 @@ declare const wp: {
 	components: Object;
 	editor: Object;
 	compose: Object;
+	blockEditor: Object;
 };
 
 // Lodash
@@ -32,14 +33,13 @@ declare interface Object {
 	[key: string]: any;
 }
 
-declare interface BlockExtraProps {
+declare interface BlockExtraProps extends Object {
 	container: Object;
 	content: Object;
 	background: Object;
 }
 
-declare interface BlockSettings {
-	[key: string]: any;
+declare interface BlockSettings extends Object {
 	custom?: Object;
 	align?: Object;
 	content_align?: Object;

@@ -4,22 +4,22 @@ describe("getSrcset", () => {
 	const sizes = {
 		thumbnail: {
 			width: 150,
-			source_url: "http://example/image-150x150.jpg",
+			url: "http://example/image-150x150.jpg",
 			extra: 123
 		},
 		medium: {
 			width: 51,
-			source_url: "http://example/image-51x300.jpg",
+			url: "http://example/image-51x300.jpg",
 			extra: false
 		},
 		large: {
 			width: 174,
-			source_url: "http://example/image-174x1024.jpg",
+			url: "http://example/image-174x1024.jpg",
 			extra: true
 		},
 		full: {
 			width: 500,
-			source_url: "http://example/image.jpg",
+			url: "http://example/image.jpg",
 			extra: null
 		}
 	};

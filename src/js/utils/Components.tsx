@@ -11,7 +11,7 @@ interface HTMLProps extends Props {
 	html_tag: string;
 }
 
-const { isBoolean, isUndefined, reduce } = lodash;
+const { isBoolean, reduce } = lodash;
 
 const Div: React.FunctionComponent<Props> = props => (
 	<HTML {...props} html_tag="div" />
@@ -54,14 +54,8 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 		];
 	}
 
-	let attributes;
-	attributes = {
-		...rest,
-		id: id ? addPrefix(id) : null,
-		className: classes ? addPrefix(classes) : null
-	};
-	attributes = reduce(
-		attributes,
+	const attributes = reduce(
+		rest,
 		(acc: { [key: string]: any }, value: any, key: string) => {
 			if (value) {
 				acc[key] = value;
@@ -74,15 +68,37 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 
 	switch (html_tag) {
 		case "div":
-			return <div {...attributes}>{children}</div>;
+			return (
+				<div
+					id={id ? addPrefix(id) : undefined}
+					className={classes && classes.length ? addPrefix(classes) : undefined}
+					{...attributes}
+				>
+					{children}
+				</div>
+			);
 			break;
 
 		case "span":
-			return <span {...attributes}>{children}</span>;
+			return (
+				<span
+					id={id ? addPrefix(id) : undefined}
+					className={classes && classes.length ? addPrefix(classes) : undefined}
+					{...attributes}
+				>
+					{children}
+				</span>
+			);
 			break;
 
 		case "img":
-			return <img {...attributes} />;
+			return (
+				<img
+					id={id ? addPrefix(id) : undefined}
+					className={classes && classes.length ? addPrefix(classes) : undefined}
+					{...attributes}
+				/>
+			);
 			break;
 
 		default:

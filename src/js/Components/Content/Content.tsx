@@ -1,10 +1,9 @@
 import l, { Div, getRgbaColor } from "utils";
 
-interface Props {
+interface Props extends Object {
 	values: Object;
 	extra_props: BlockExtraProps;
 	is_edit: boolean;
-	[rest: string]: any;
 }
 
 const { isUndefined, isObject, compact } = lodash;
@@ -12,10 +11,14 @@ const { InnerBlocks } = wp.editor;
 
 const Content: React.FunctionComponent<Props> = props => {
 	const { extra_props, values, is_edit } = props;
+	const {
+		className: extra_props_className,
+		...rest_extra_props
+	} = extra_props.content;
 	const { content_color, content_align } = values;
 	const classes = [
 		"content",
-		extra_props.content.className,
+		...extra_props_className,
 
 		// When clicking the Clear button, the value changes to undefined.
 		// However on reload the value is an empty string.
@@ -35,7 +38,7 @@ const Content: React.FunctionComponent<Props> = props => {
 
 	return (
 		<Div
-			{...extra_props.content}
+			{...rest_extra_props}
 			classes={classes}
 			style={style}
 			classes_from_value={{ classes: classes_from_value, values }}

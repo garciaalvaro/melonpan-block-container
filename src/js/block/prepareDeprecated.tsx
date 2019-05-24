@@ -1,10 +1,17 @@
-import l from "utils";
+import l, { getValues } from "utils";
 import prepareSettings from "./prepareSettings";
 import prepareAttributes from "./prepareAttributes";
-import prepareExtraProps from "./prepareExtraProps";
 import EditSave from "../Components/EditSave/EditSave";
 
-const { isUndefined, isEmpty, difference, forEach, keys, omit } = lodash;
+const {
+	isUndefined,
+	isEmpty,
+	difference,
+	forEach,
+	keys,
+	omit,
+	defaults
+} = lodash;
 
 // Prepare the deprecated array of objects.
 const prepareDeprecated = (
@@ -13,13 +20,17 @@ const prepareDeprecated = (
 	extra_props_new: Object
 ) => {
 	const deprecated_prepared = deprecated.map((deprecated: Object) => {
-		const settings = !isUndefined(deprecated.settings)
+		const settings = deprecated.settings
 			? prepareSettings(deprecated.settings)
 			: settings_new;
 		// This is the attributes object definition, not the values.
 		const attributes_definition = prepareAttributes(settings);
-		const extra_props = !isUndefined(deprecated.extra_props)
-			? prepareExtraProps(deprecated.extra_props)
+		const extra_props = deprecated.extra_props
+			? defaults(deprecated.extra_props, {
+					container: {},
+					content: {},
+					background: {}
+			  })
 			: extra_props_new;
 
 		return {
@@ -38,11 +49,12 @@ const prepareDeprecated = (
 				return updated_attributes;
 			},
 			save: (props: Object) => {
+				const { attributes } = props;
 				// If the custom property changed we need to manually include
 				// the old keys in the old version of the attribute.
 				const missing_keys = difference(
 					keys(settings.custom),
-					keys(props.attributes.custom)
+					keys(attributes.custom)
 				);
 
 				if (!isEmpty(missing_keys)) {
@@ -52,18 +64,21 @@ const prepareDeprecated = (
 						custom_old[missing_key] = settings.custom[missing_key].default;
 					});
 
-					props.attributes.custom = {
-						...props.attributes.custom,
+					attributes.custom = {
+						...attributes.custom,
 						...custom_old
 					};
 				}
+				const values = getValues(settings, attributes, false);
 
 				return (
 					<div>
 						<EditSave
 							{...props}
+							values={values}
 							settings={settings}
 							extra_props={extra_props}
+							innerblocks_props={{}}
 							is_edit={false}
 						/>
 					</div>

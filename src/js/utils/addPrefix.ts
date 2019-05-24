@@ -1,4 +1,4 @@
-import l from "utils";
+import l from "./log";
 import { pr } from "./data-plugin";
 
 const { compact, flow } = lodash;

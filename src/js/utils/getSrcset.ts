@@ -1,7 +1,7 @@
 import l from "./log";
 
 interface Img {
-	source_url: string;
+	url: string;
 	width: number;
 	[key: string]: any;
 }
@@ -21,9 +21,7 @@ const getSrcset = (sizes: Sizes): string => {
 		toArray,
 		(sizes: Img[]) => sortBy(sizes, "width"),
 		(sizes: Img[]) =>
-			sizes.map(
-				({ source_url, width }: Img): string => `${source_url} ${width}w`
-			),
+			sizes.map(({ url, width }: Img): string => `${url} ${width}w`),
 		(sizes: Img[]) => sizes.join(", ")
 	])(sizes);
 };

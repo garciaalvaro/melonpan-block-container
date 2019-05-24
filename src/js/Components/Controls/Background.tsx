@@ -131,7 +131,7 @@ const Background: React.FunctionComponent<Props> = props => {
 						"control-media"
 					])}
 				>
-					<Div className={addPrefix("background_image-buttons")}>
+					<Div classes="background_image-buttons">
 						{values.background_image_id ? (
 							<Fragment>
 								<MediaUpload
