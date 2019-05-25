@@ -89,5 +89,5 @@ declare interface Block extends Object {
 	settings?: BlockSettings;
 	deprecated?: Object[];
 	innerblocks_props?: Object;
-	extra_props?: Object;
+	extra_props?: any; // Needed
 }

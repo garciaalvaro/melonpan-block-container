@@ -4,8 +4,6 @@ import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
 import prepareExtraProps from "./prepareExtraProps";
 
-const { defaults } = lodash;
-
 // Normalize the block props.
 const prepareBlock = (block: Block): Object => {
 	// Set defaults
