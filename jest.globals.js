@@ -9,6 +9,7 @@ import * as components from "@wordpress/components";
 import * as editor from "@wordpress/editor";
 import * as compose from "@wordpress/compose";
 import * as hooks from "@wordpress/hooks";
+import * as blocks from "@wordpress/blocks";
 
 global.React = React;
 global.ReactDOM = ReactDOM;
@@ -20,5 +21,6 @@ global.wp = {
 	editor,
 	compose,
 	parse,
-	hooks
+	hooks,
+	blocks
 };

@@ -5,21 +5,29 @@ describe("Components Div", function() {
 	it("should render an empty div", function() {
 		expect(shallow(<Div />).html()).toBe("<div></div>");
 		expect(
-			shallow(<Div id="a" classes={["a", "#b", null]} data-a="b" />).html()
-		).toBe(`<div data-a=\"b\" id=\"mbc-a\" class=\"mbc-a b\"></div>`);
+			shallow(
+				<Div aaa="b" data-b="b" id="a" classes={["a", "#b", null]} />
+			).html()
+		).toBe(`<div id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"></div>`);
 	});
 
 	it("should render an empty span", function() {
 		expect(shallow(<Span />).html()).toBe("<span></span>");
 		expect(
-			shallow(<Span id="a" classes={["a", "#b", null]} data-a="b" />).html()
-		).toBe(`<span data-a=\"b\" id=\"mbc-a\" class=\"mbc-a b\"></span>`);
+			shallow(
+				<Span aaa="b" id="a" classes={["a", "#b", null]} data-b="b" />
+			).html()
+		).toBe(
+			`<span id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"></span>`
+		);
 	});
 
 	it("should render an img", function() {
 		expect(shallow(<Img />).html()).toBe("<img/>");
 		expect(
-			shallow(<Img id="a" classes={["a", "#b", null]} data-a="b" />).html()
-		).toBe(`<img data-a=\"b\" id=\"mbc-a\" class=\"mbc-a b\"/>`);
+			shallow(
+				<Img id="a" classes={["a", "#b", null]} aaa="b" data-b="b" />
+			).html()
+		).toBe(`<img id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"/>`);
 	});
 });

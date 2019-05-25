@@ -4,6 +4,9 @@ import registerBlock from "../registerBlock";
 
 describe("registerBlock", () => {
 	it("melonpan-block/container should register a valid block type", () => {
+		// We can not use a non-core category
+		melonpan_block_container.blocktype_props.category = "common";
+
 		expect(registerBlock(melonpan_block_container)).not.toBeUndefined();
 	});
 
