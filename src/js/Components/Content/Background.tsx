@@ -8,7 +8,7 @@ interface Props extends Object {
 const { isUndefined, isObject } = lodash;
 
 const Background: React.FunctionComponent<Props> = props => {
-	const { extra_props, values } = props;
+	const { extra_props, values, settings } = props;
 	const {
 		className: extra_props_className,
 		...rest_extra_props
@@ -39,16 +39,17 @@ const Background: React.FunctionComponent<Props> = props => {
 		color: getRgbaColor(shadow_color, shadow_color_opacity),
 		borderColor: getRgbaColor(border_color, border_color_opacity),
 		backgroundColor: getRgbaColor(background_color, background_color_opacity),
-		backgroundImage: background_image_url
-			? `url(${background_image_url})`
-			: null
+		backgroundImage:
+			settings.background_image && background_image_url
+				? `url(${background_image_url})`
+				: null
 	};
 	style = isObject(extra_props.background.style)
 		? { ...style, ...extra_props.background.style }
 		: style;
 
 	if (
-		isUndefined(background_image_url) &&
+		isUndefined(settings.background_image) &&
 		isUndefined(border_color) &&
 		isUndefined(border_color_opacity) &&
 		isUndefined(shadow_color) &&
