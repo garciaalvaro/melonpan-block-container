@@ -51,7 +51,6 @@ The plugin comes with a filter to register your own block extending this one, to
 **Notes**
 You can choose from the available settings, listed below, and assign the block's InnerBlocks properties to customize it.
 You may also pass your own attributes, inside the **custom** attribute, this adds a class to the **.mbc-container** div. Check the *How can I add a custom attribute?* section for more info.
-Also note that the align attribute is handled by Gutenberg so although you can deprecate the control, the class that the old block had assigned will remain.
 
 **Steps**
 First, you need to [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
