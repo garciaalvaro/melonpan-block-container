@@ -25,7 +25,9 @@ const Content: React.FunctionComponent<Props> = props => {
 		!isUndefined(content_color) && content_color !== "" ? "has-color" : null
 	];
 	const classes_from_value = compact([
-		!content_align || content_align !== "full" ? "content_maxwidth" : null,
+		// content_maxwidth is applied even if content_align is full.
+		// In the CSS it will be overriden if content_align is full.
+		"content_maxwidth",
 		"content_align"
 	]);
 	let style;

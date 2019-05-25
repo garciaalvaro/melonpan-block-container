@@ -3,15 +3,7 @@ import prepareSettings from "./prepareSettings";
 import prepareAttributes from "./prepareAttributes";
 import EditSave from "../Components/EditSave/EditSave";
 
-const {
-	isUndefined,
-	isEmpty,
-	difference,
-	forEach,
-	keys,
-	omit,
-	defaults
-} = lodash;
+const { isUndefined, difference, keys, omit, defaults } = lodash;
 
 // Prepare the deprecated array of objects.
 const prepareDeprecated = (
@@ -42,6 +34,12 @@ const prepareDeprecated = (
 				);
 
 				const updated_attributes = {
+					// Both new and old attributes object has all attributes.
+					// The difference is in the default value. We are passing the old one.
+					// This way if a block instance had a default attribute value,
+					// After the migration it will have that old default value applied,
+					// rather than inheriting the new default. This way the new default value
+					// only applies to new instances and not to old ones.
 					...old_attributes,
 					custom: omit(old_attributes.custom, deprecated_custom_keys)
 				};
@@ -57,10 +55,10 @@ const prepareDeprecated = (
 					keys(attributes.custom)
 				);
 
-				if (!isEmpty(missing_keys)) {
+				if (missing_keys.length) {
 					const custom_old: Object = {};
 
-					forEach(missing_keys, missing_key => {
+					missing_keys.forEach(missing_key => {
 						custom_old[missing_key] = settings.custom[missing_key].default;
 					});
 

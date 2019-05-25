@@ -23,7 +23,12 @@ class Content extends Component<Props> {
 	componentDidMount() {
 		const { setAttributes, values, setState, settings } = this.props;
 		const { content_align } = settings;
-		const align_controls = content_align!.options.map((control: string) => {
+
+		if (!content_align) {
+			return;
+		}
+
+		const align_controls = content_align.options.map((control: string) => {
 			switch (control) {
 				case "left":
 					return {
