@@ -1,9 +1,10 @@
 import l, { getValues } from "utils";
 import prepareSettings from "./prepareSettings";
 import prepareAttributes from "./prepareAttributes";
+import prepareExtraProps from "./prepareExtraProps";
 import EditSave from "../Components/EditSave/EditSave";
 
-const { isUndefined, difference, keys, omit, defaults } = lodash;
+const { isUndefined, difference, keys, omit } = lodash;
 
 // Prepare the deprecated array of objects.
 const prepareDeprecated = (
@@ -18,11 +19,7 @@ const prepareDeprecated = (
 		// This is the attributes object definition, not the values.
 		const attributes_definition = prepareAttributes(settings);
 		const extra_props = deprecated.extra_props
-			? defaults({}, deprecated.extra_props, {
-					container: {},
-					content: {},
-					background: {}
-			  })
+			? prepareExtraProps(deprecated.extra_props)
 			: extra_props_new;
 
 		return {
