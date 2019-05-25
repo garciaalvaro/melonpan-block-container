@@ -1,5 +1,5 @@
 import l from "utils";
-import isValid from "./registerBlock-utils";
+import isValid from "./block-utils";
 
 describe("block: my-plugin/my-block", () => {
 	const block_props = {
@@ -46,7 +46,7 @@ describe("block: my-plugin/my-block", () => {
 		]
 	};
 
-	it("should return true, custom block, deprecate custom attribute, modified custom attribute value", () => {
+	it("html from save() should be correct, custom block, deprecate custom attribute, modified custom attribute value", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block {"custom":{"prop_a":"text_B","prop_c":false,"prop_b":2}} -->
 			<div class="wp-block-my-plugin-my-block"><div class="mbc-container mbc-prop_a-text_B mbc-prop_b-2 mbc-prop_c-disabled"><div class="mbc-content mbc-content_maxwidth-800"><!-- wp:quote -->
 			<blockquote class="wp-block-quote"><p>sdf</p><cite>sdf</cite></blockquote>
@@ -69,7 +69,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, custom block, deprecate custom attribute, default custom attribute value", () => {
+	it("html from save() should be correct, custom block, deprecate custom attribute, default custom attribute value", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 			<div class="wp-block-my-plugin-my-block"><div class="mbc-container mbc-prop_a-value_A mbc-prop_b-2 mbc-prop_c-enabled"><div class="mbc-content mbc-content_maxwidth-800"><!-- wp:quote -->
 			<blockquote class="wp-block-quote"><p>sdf</p><cite>sdf</cite></blockquote>

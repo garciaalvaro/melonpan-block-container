@@ -2,14 +2,16 @@ import l, { getValues } from "utils";
 import prepareBlock from "./prepareBlock";
 import EditSave from "../Components/EditSave/EditSave";
 
+interface EditSaveProps extends Object {
+	attributes: BlockSettings;
+	settings: BlockSettings;
+	extra_props: BlockExtraProps;
+}
+
 // Register block function helper.
 const registerBlock = (block: Block) => {
 	// Normalize the block.
 	const block_prepared = prepareBlock(block);
-
-	if (!block_prepared) {
-		return;
-	}
 
 	const {
 		blocktype_props,
@@ -39,7 +41,7 @@ const registerBlock = (block: Block) => {
 				</div>
 			);
 		},
-		save: (props: any) => {
+		save: (props: EditSaveProps) => {
 			const values = getValues(settings, props.attributes, false);
 
 			return (
@@ -56,7 +58,7 @@ const registerBlock = (block: Block) => {
 		}
 	};
 
-	wp.blocks.registerBlockType(blocktype_props.name, config);
+	return wp.blocks.registerBlockType(blocktype_props.name, config);
 };
 
 export default registerBlock;

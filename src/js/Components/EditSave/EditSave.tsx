@@ -2,13 +2,13 @@ import l from "utils";
 import Controls from "../Controls/Controls";
 import Container from "../Content/Container";
 
-interface Props {
-	innerblocks_props: Object;
+interface Props extends Object {
+	innerblocks_props?: Object;
+	attributes: Object;
 	values: Object;
 	settings: BlockSettings;
 	extra_props: BlockExtraProps;
 	is_edit: boolean;
-	[rest: string]: any;
 }
 
 const { Fragment } = wp.element;

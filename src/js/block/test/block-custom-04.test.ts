@@ -1,5 +1,5 @@
 import l from "utils";
-import isValid from "./registerBlock-utils";
+import isValid from "./block-utils";
 
 describe("block: my-plugin/my-block", () => {
 	const block_props = {
@@ -9,22 +9,15 @@ describe("block: my-plugin/my-block", () => {
 			icon: "carrot",
 			category: "common"
 		},
-		extra_props: {
-			container: {
-				id: "my_id",
-				className: "my_container_class another_class"
-			},
-			content: {},
-			background: { className: "my_bg_class", style: { opacity: 0.5 } }
-		},
 		innerblocks_props: {
 			template: [["core/quote"]],
 			templateLock: false,
 			allowedBlocks: ["core/quote"]
-		}
+		},
+		settings: {}
 	};
 
-	it("should return true, attribute align", () => {
+	it("html from save() should be correct, attribute align", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 			<div class="wp-block-my-plugin-my-block alignfull"><div class="mbc-container"><div class="mbc-content"><!-- wp:quote -->
 			<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -41,7 +34,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute content_align", () => {
+	it("html from save() should be correct, attribute content_align", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-content mbc-content_align-right"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -58,7 +51,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute content_maxwidth", () => {
+	it("html from save() should be correct, attribute content_maxwidth", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-content mbc-content_maxwidth-555"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -77,7 +70,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute content_color", () => {
+	it("html from save() should be correct, attribute content_color", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-content mbc-has-color" style="color:rgb(255, 0, 0)"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -95,7 +88,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute background_color", () => {
+	it("html from save() should be correct, attribute background_color", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-background" style="background-color:rgb(238, 255, 153)"></div><div class="mbc-content"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -116,7 +109,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute background_color_opacity", () => {
+	it("html from save() should be correct, attribute background_color_opacity", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-background"></div><div class="mbc-content"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -135,7 +128,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute border_color", () => {
+	it("html from save() should be correct, attribute border_color", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container"><div class="mbc-background" style="border-color:rgb(255, 0, 0)"></div><div class="mbc-content"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>
@@ -153,7 +146,7 @@ describe("block: my-plugin/my-block", () => {
 		expect(is_valid).toBe(true);
 	});
 
-	it("should return true, attribute padding_top", () => {
+	it("html from save() should be correct, attribute padding_top", () => {
 		const block_instance = `<!-- wp:my-plugin/my-block -->
 		<div class="wp-block-my-plugin-my-block"><div class="mbc-container mbc-padding_top-20 mbc-padding_bottom-20"><div class="mbc-content"><!-- wp:quote -->
 		<blockquote class="wp-block-quote"><p></p></blockquote>

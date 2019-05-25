@@ -1,13 +1,19 @@
 import l, { getValues } from "utils";
-import { renderToString } from "@wordpress/element";
-import { parse } from "@wordpress/block-serialization-default-parser";
 import prepareBlock from "../prepareBlock";
 import prepareExtraProps from "../prepareExtraProps";
 import EditSave from "../../Components/EditSave/EditSave";
 
+interface EditSaveProps extends Object {
+	attributes: BlockSettings;
+	settings: BlockSettings;
+	extra_props: BlockExtraProps;
+}
+
+const { parse } = wp;
+const { renderToString } = wp.element;
 const { mapValues, compact, get, cloneDeep, difference, keys } = lodash;
 
-const getBlock = (block_props, index = null) => {
+const getBlock = (block_props: Block, index: number | null = null): Object => {
 	let { blocktype_props, settings, extra_props } = prepareBlock(
 		cloneDeep(block_props)
 	);
@@ -23,7 +29,7 @@ const getBlock = (block_props, index = null) => {
 
 	return {
 		attributes,
-		save: props => {
+		save: (props: EditSaveProps) => {
 			const { attributes } = props;
 
 			if (index !== null) {
@@ -33,7 +39,7 @@ const getBlock = (block_props, index = null) => {
 				);
 
 				if (missing_keys.length) {
-					const custom_old = {};
+					const custom_old: Object = {};
 
 					missing_keys.forEach(missing_key => {
 						custom_old[missing_key] = settings.custom[missing_key].default;
@@ -67,7 +73,11 @@ const getBlock = (block_props, index = null) => {
 	};
 };
 
-const isValid = (block_props, block_instance, index = null) => {
+const isValid = (
+	block_props: Block,
+	block_instance: string,
+	index: number | null = null
+): boolean => {
 	const { save, attributes: attributes_definition } = getBlock(
 		block_props,
 		index
@@ -87,8 +97,10 @@ const isValid = (block_props, block_instance, index = null) => {
 	const attributes = { ...attributes_defaults, ...attributes_modified };
 
 	const html_from_save_fn = renderToString(save({ attributes }));
-	l(html_from_save_fn, "\n\n", instance_html);
+
 	const is_valid = html_from_save_fn === instance_html;
+
+	// l(html_from_save_fn, "\n\n", instance_html);
 
 	return is_valid;
 };

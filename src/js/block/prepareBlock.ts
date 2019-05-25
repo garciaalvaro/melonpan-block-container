@@ -4,32 +4,17 @@ import prepareSettings from "./prepareSettings";
 import prepareDeprecated from "./prepareDeprecated";
 import prepareExtraProps from "./prepareExtraProps";
 
-const { isObject, defaults } = lodash;
+const { defaults } = lodash;
 
 // Normalize the block props.
-const prepareBlock = (block: Block) => {
-	if (
-		!isObject(block) ||
-		!block.blocktype_props ||
-		!block.blocktype_props.name ||
-		!block.blocktype_props.title ||
-		!block.blocktype_props.icon ||
-		!block.blocktype_props.category
-	) {
-		return null;
-	}
-
+const prepareBlock = (block: Block): Object => {
 	// Set defaults
 	block.settings = block.settings ? block.settings : {};
 	block.supports = block.supports ? block.supports : {};
 	block.deprecated = block.deprecated ? block.deprecated : [];
-	block.extra_props = prepareExtraProps(
-		defaults(block.extra_props, {
-			container: {},
-			content: {},
-			background: {}
-		})
-	);
+	block.extra_props = block.extra_props
+		? prepareExtraProps(block.extra_props)
+		: prepareExtraProps({});
 	block.innerblocks_props = block.innerblocks_props
 		? block.innerblocks_props
 		: {};

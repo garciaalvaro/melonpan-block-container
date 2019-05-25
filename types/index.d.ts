@@ -21,6 +21,7 @@ declare const wp: {
 	editor: Object;
 	compose: Object;
 	blockEditor: Object;
+	parse: (arg: string) => Object[];
 };
 
 // Lodash
@@ -79,8 +80,8 @@ declare interface Block extends Object {
 		category: string;
 		supports?: Object;
 	};
-	settings: BlockSettings;
+	settings?: BlockSettings;
 	deprecated?: Object[];
 	innerblocks_props?: Object;
-	extra_props?: BlockExtraProps;
+	extra_props?: Object;
 }

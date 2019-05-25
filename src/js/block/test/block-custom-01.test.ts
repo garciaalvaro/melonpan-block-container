@@ -1,5 +1,5 @@
 import l from "utils";
-import isValid from "./registerBlock-utils";
+import isValid from "./block-utils";
 
 describe("block: my-plugin/my-block", () => {
 	const block_instance = `<!-- wp:my-plugin/my-block {"content_maxwidth":1130,"content_color":"#d23f3f","background_color":"#ff7f50","background_color_opacity":24,"padding":5,"padding_top":5,"padding_bottom":10,"padding_left":10,"padding_right":15,"padding_leftright":10,"padding_small_screen":15,"padding_top_small_screen":15,"padding_bottom_small_screen":10,"padding_left_small_screen":15,"padding_right_small_screen":5,"padding_topbottom_small_screen":5,"padding_leftright_small_screen":10,"border_color":"#000000","border_color_opacity":57,"border_width":1,"shadow_color":"#000000","shadow_color_opacity":52,"shadow_width":7} -->
@@ -210,7 +210,7 @@ describe("block: my-plugin/my-block", () => {
 		}
 	};
 
-	it("should return true, custom block, custom and default props", () => {
+	it("html from save() should be correct, custom block, custom and default props", () => {
 		const is_valid = isValid(block_props, block_instance);
 
 		expect(is_valid).toBe(true);
