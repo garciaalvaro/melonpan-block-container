@@ -3,12 +3,6 @@ import prepareBlock from "../prepareBlock";
 import prepareExtraProps from "../prepareExtraProps";
 import EditSave from "../../Components/EditSave/EditSave";
 
-interface EditSaveProps extends Object {
-	attributes: BlockSettings;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
-}
-
 const { parse } = wp;
 const { renderToString } = wp.element;
 const { mapValues, compact, get, cloneDeep, difference, keys } = lodash;

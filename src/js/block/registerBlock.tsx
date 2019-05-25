@@ -2,12 +2,6 @@ import l, { getValues } from "utils";
 import prepareBlock from "./prepareBlock";
 import EditSave from "../Components/EditSave/EditSave";
 
-interface EditSaveProps extends Object {
-	attributes: BlockSettings;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
-}
-
 // Register block function helper.
 const registerBlock = (block: Block) => {
 	// Normalize the block.

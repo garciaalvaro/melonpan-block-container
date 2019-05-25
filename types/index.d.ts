@@ -34,6 +34,12 @@ declare interface Object {
 	[key: string]: any;
 }
 
+declare interface EditSaveProps extends Object {
+	attributes: BlockSettings;
+	settings: BlockSettings;
+	extra_props: BlockExtraProps;
+}
+
 declare interface BlockExtraProps extends Object {
 	container: Object;
 	content: Object;

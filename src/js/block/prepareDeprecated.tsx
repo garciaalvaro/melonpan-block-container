@@ -46,7 +46,7 @@ const prepareDeprecated = (
 
 				return updated_attributes;
 			},
-			save: (props: Object) => {
+			save: (props: EditSaveProps) => {
 				const { attributes } = props;
 				// If the custom property changed we need to manually include
 				// the old keys in the old version of the attribute.
