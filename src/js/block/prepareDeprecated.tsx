@@ -10,7 +10,7 @@ const { isUndefined, difference, keys, omit } = lodash;
 const prepareDeprecated = (
 	deprecated: Object[],
 	settings_new: Object,
-	extra_props_new: Object
+	extra_props_new: BlockExtraProps
 ) => {
 	const deprecated_prepared = deprecated.map((deprecated: Object) => {
 		const settings = deprecated.settings

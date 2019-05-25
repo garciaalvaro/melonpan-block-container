@@ -12,16 +12,17 @@ const addHash = (props: string) => {
 	return array.map((prop: string) => `#${prop}`);
 };
 
-const prepareExtraProps = (extra_props: Object) => {
+const prepareExtraProps = (extra_props: Object): BlockExtraProps => {
 	const properties = ["container", "content", "background"];
-	let extra_props_prepared: Object = {};
-
-	extra_props_prepared = pick(extra_props, properties);
-	extra_props_prepared = defaults({}, extra_props_prepared, {
-		container: {},
-		content: {},
-		background: {}
-	});
+	const extra_props_prepared: BlockExtraProps = defaults(
+		{},
+		pick(extra_props, properties),
+		{
+			container: {},
+			content: {},
+			background: {}
+		}
+	);
 
 	properties.forEach(el => {
 		if (typeof extra_props_prepared[el].id === "string") {
