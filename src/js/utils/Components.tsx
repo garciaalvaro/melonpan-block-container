@@ -1,7 +1,7 @@
 import addPrefix from "./addPrefix";
 
 interface Props {
-	children?: React.ReactChild;
+	children?: React.ReactNode;
 	id?: string | null;
 	classes?: string | (string | null)[];
 	classes_from_value?: { classes: string[]; values: { [key: string]: any } };

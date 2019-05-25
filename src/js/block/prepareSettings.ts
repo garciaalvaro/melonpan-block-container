@@ -260,7 +260,7 @@ const prepareSettings = (settings: BlockSettings) => {
 				}
 
 				value = pick(value, ["default"]);
-				value = lodash.defaults(value, { default: "" });
+				value = lodash.defaults({}, value, { default: "" });
 
 				acc[key] = value;
 

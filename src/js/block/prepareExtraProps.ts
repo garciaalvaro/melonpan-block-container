@@ -17,7 +17,7 @@ const prepareExtraProps = (extra_props: Object) => {
 	let extra_props_prepared: Object = {};
 
 	extra_props_prepared = pick(extra_props, properties);
-	extra_props_prepared = defaults(extra_props_prepared, {
+	extra_props_prepared = defaults({}, extra_props_prepared, {
 		container: {},
 		content: {},
 		background: {}

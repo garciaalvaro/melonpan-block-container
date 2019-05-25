@@ -18,7 +18,7 @@ const prepareDeprecated = (
 		// This is the attributes object definition, not the values.
 		const attributes_definition = prepareAttributes(settings);
 		const extra_props = deprecated.extra_props
-			? defaults(deprecated.extra_props, {
+			? defaults({}, deprecated.extra_props, {
 					container: {},
 					content: {},
 					background: {}

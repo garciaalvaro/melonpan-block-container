@@ -3,8 +3,12 @@ import Background from "./Background";
 import Content from "./Content";
 
 interface Props extends Object {
+	innerblocks_props?: Object;
+	attributes: Object;
 	values: Object;
+	settings: BlockSettings;
 	extra_props: BlockExtraProps;
+	is_edit: boolean;
 }
 
 const { isBoolean, toString, map, deburr } = lodash;

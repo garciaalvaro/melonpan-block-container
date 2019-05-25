@@ -66,6 +66,7 @@ const getBlock = (block_props: Block, index: number | null = null): Object => {
 						settings={settings}
 						extra_props={extra_props}
 						is_edit={false}
+						is_test={true}
 					/>
 				</div>
 			);

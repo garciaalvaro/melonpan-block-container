@@ -1,21 +1,25 @@
 import l, { Div, getRgbaColor } from "utils";
 
 interface Props extends Object {
+	innerblocks_props?: Object;
+	attributes: Object;
 	values: Object;
+	settings: BlockSettings;
 	extra_props: BlockExtraProps;
 	is_edit: boolean;
+	is_test?: boolean;
 }
 
 const { isUndefined, isObject, compact } = lodash;
 const { InnerBlocks } = wp.editor;
 
 const Content: React.FunctionComponent<Props> = props => {
-	const { extra_props, values, is_edit } = props;
+	const { extra_props, values, is_edit, is_test } = props;
 	const {
 		className: extra_props_className,
 		...rest_extra_props
 	} = extra_props.content;
-	const { content_color, content_align } = values;
+	const { content_color } = values;
 	const classes = [
 		"content",
 		...extra_props_className,
@@ -45,7 +49,7 @@ const Content: React.FunctionComponent<Props> = props => {
 			style={style}
 			classes_from_value={{ classes: classes_from_value, values }}
 		>
-			{is_edit ? (
+			{is_test ? null : is_edit ? (
 				<InnerBlocks {...props.innerblocks_props} />
 			) : (
 				<InnerBlocks.Content />
