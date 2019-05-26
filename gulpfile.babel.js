@@ -4,142 +4,89 @@ import header from "gulp-header";
 import rename from "gulp-rename";
 import replace from "gulp-replace";
 import run from "gulp-run-command";
-// import pot from "gulp-wp-pot";
 import fs from "fs";
 import merge2 from "merge2";
 import pkg from "./package.json";
 
-// const pot_package_name = pkg.name_title;
-const main_plugin_file = `${pkg.name}.php`;
+const { name, version } = pkg;
+const npm_run_command = task_name =>
+	`parcel build src/index-${task_name}.ts -o ${name}-${task_name}.min.js -d build --no-source-maps`;
 
 gulp.task(
-	"parcel",
-	run([
-		`parcel build src/index-front.js -o ${
-			pkg.name
-		}-front.min.js -d build --no-source-maps`,
-		`parcel build src/index-editor.js -o ${
-			pkg.name
-		}-editor.min.js -d build --no-source-maps`
-	])
+	"build_production_script",
+	run([npm_run_command("front"), npm_run_command("editor")])
 );
-
-gulp.task("version", () => {
+gulp.task("change_version_number", () => {
 	const main_php = gulp
-		.src(main_plugin_file)
-		.pipe(replace(/( \* Version: )\d+\.\d+\.\d+/g, "$1" + pkg.version))
-		.pipe(
-			replace(
-				/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+/g,
-				"$1" + pkg.version
-			)
-		)
+		.src(`${name}.php`)
+		.pipe(replace(/( \* Version: )\d+\.\d+\.\d+/g, "$1" + version))
+		.pipe(replace(/(define.*?PLUGIN_VERSION.*?)\d+\.\d+\.\d+/g, "$1" + version))
 		.pipe(gulp.dest("."));
 
 	const readme_txt = gulp
 		.src("readme.txt")
-		.pipe(replace(/(Stable tag: )\d+\.\d+\.\d+/g, "$1" + pkg.version))
+		.pipe(replace(/(Stable tag: )\d+\.\d+\.\d+/g, "$1" + version))
 		.pipe(gulp.dest("."));
 
 	return merge2(main_php, readme_txt);
 });
-
-// gulp.task("pot", () => {
-// 	return gulp
-// 		.src(["**/*.php", "!.*/**", "!node_modules/**", "!_extras/**"])
-// 		.pipe(
-// 			pot({
-// 				domain: pkg.name,
-// 				package: pot_package_name
-// 			})
-// 		)
-// 		.pipe(gulp.dest(`languages/${pkg.name}.pot`));
-// });
-
-gulp.task("zip", () => {
-	const js_with_header_editor = gulp
-		.src([`build/${pkg.name}-editor.min.js`], { base: "../" })
+gulp.task("create_zip_file", () => {
+	const js_with_header = gulp
+		.src([`build/${name}-editor.min.js`], { base: "../" })
 		.pipe(
 			header(fs.readFileSync("./src/js/#header", "utf8"), {
-				pkg: pkg
+				pkg
 			})
 		);
 
-	const css_with_header_editor = gulp
-		.src([`build/${pkg.name}-editor.min.css`], { base: "../" })
+	const css_with_header = gulp
+		.src([`build/${name}-editor.min.css`, `build/${name}-front.min.css`], {
+			base: "../"
+		})
 		.pipe(
 			header(fs.readFileSync("./src/css/#header", "utf8"), {
-				pkg: pkg
-			})
-		);
-	const css_with_header_front = gulp
-		.src([`build/${pkg.name}-front.min.css`], { base: "../" })
-		.pipe(
-			header(fs.readFileSync("./src/css/#header", "utf8"), {
-				pkg: pkg
+				pkg
 			})
 		);
 
-	const renamed = merge2(
-		js_with_header_editor,
-		css_with_header_editor,
-		css_with_header_front
-	).pipe(
+	const renamed_js_css = merge2(js_with_header, css_with_header).pipe(
 		rename(path => {
 			path.basename = path.basename.replace(".min", "");
 		})
 	);
 
 	return merge2(
-		renamed,
+		renamed_js_css,
 		gulp.src(
 			[
 				"**",
 				"!.*",
 				"!.*/**",
+
 				"!node_modules/**",
 				"!_extras/**",
-				"!gulp*",
-				"!yarn*",
-				"!src/**",
-				// "!src/**/#header",
-				"!package*",
 				"!build/**",
-				"!src/index.*"
+				"!src/**",
+				"!types/**",
+
+				"!gulpfile*",
+				"!yarn*",
+				"!package*",
+				"!*.config.js",
+				"!jest*",
+				"!tsconfig*"
 			],
 			{ base: "../" }
 		)
 	)
-		.pipe(zip(`${pkg.name}-${pkg.version}.zip`))
+		.pipe(zip(`${name}-${version}.zip`))
 		.pipe(gulp.dest("_extras/releases"));
 });
-
-gulp.task("backup", () => {
-	const now = new Date();
-	const year = now.getFullYear();
-	const month = now.getMonth() + 1;
-	const day = now.getDate();
-	const hour = now.getHours();
-	const minute = now.getMinutes();
-	const zip_name = `${pkg.name} - ${
-		pkg.version
-	} - ${year}.${month}.${day}.${hour}.${minute}`;
-
-	return gulp
-		.src(
-			[
-				"**",
-				".*",
-				"!.git/**",
-				"!.cache/**",
-				"!node_modules/**",
-				"!_extras/**",
-				"!build/**"
-			],
-			{ base: "../" }
-		)
-		.pipe(zip(`${zip_name}.zip`))
-		.pipe(gulp.dest("_extras/backups"));
-});
-
-gulp.task("release", gulp.series("parcel", "version", "zip"));
+gulp.task(
+	"release",
+	gulp.series(
+		"build_production_script",
+		"change_version_number",
+		"create_zip_file"
+	)
+);
