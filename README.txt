@@ -3,7 +3,7 @@ Contributors: melonpan
 Tags: gutenberg, blocks, editor, container, innerblocks
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -362,6 +362,9 @@ Here is an example of adding a control using Gutenberg filters:
     );
 
 == Changelog ==
+
+= 1.1.1 =
+* Fix bug for blocks created using the hook which had default colors assigned. In the colorpicker clicking clear to assign no color, saved undefined which was interpreted by the save function (after page reload) as the default value, thus throwing an incompatibility error.
 
 = 1.1.0 =
 * Improved code: Updated JS, added tests and migrated JS to Typescript.
