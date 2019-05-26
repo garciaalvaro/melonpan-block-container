@@ -6,6 +6,7 @@ interface Props {
 	[rest: string]: any;
 }
 
+const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const { ColorPalette } = wp.editor;
@@ -62,7 +63,12 @@ const ShadowBorder: React.FunctionComponent<Props> = props => {
 						value={values.border_color}
 						onChange={(value: string) =>
 							setAttributes({
-								border_color: value
+								border_color:
+									isUndefined(value) &&
+									settings.border_color &&
+									settings.border_color.default !== ""
+										? ""
+										: value
 							})
 						}
 					/>
@@ -124,7 +130,12 @@ const ShadowBorder: React.FunctionComponent<Props> = props => {
 						value={values.shadow_color}
 						onChange={(value: string) =>
 							setAttributes({
-								shadow_color: value
+								shadow_color:
+									isUndefined(value) &&
+									settings.shadow_color &&
+									settings.shadow_color.default !== ""
+										? ""
+										: value
 							})
 						}
 					/>

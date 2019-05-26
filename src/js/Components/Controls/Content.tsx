@@ -6,7 +6,7 @@ interface Props {
 	[rest: string]: any;
 }
 
-const { compact } = lodash;
+const { compact, isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { withState } = wp.compose;
@@ -147,7 +147,12 @@ class Content extends Component<Props> {
 							value={values.content_color}
 							onChange={(value: string) =>
 								setAttributes({
-									content_color: value
+									content_color:
+										isUndefined(value) &&
+										settings.content_color &&
+										settings.content_color.default !== ""
+											? ""
+											: value
 								})
 							}
 						/>

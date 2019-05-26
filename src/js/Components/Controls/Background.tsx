@@ -74,7 +74,12 @@ const Background: React.FunctionComponent<Props> = props => {
 						value={values.background_color}
 						onChange={(value: string) =>
 							setAttributes({
-								background_color: value
+								background_color:
+									isUndefined(value) &&
+									settings.background_color &&
+									settings.background_color.default !== ""
+										? ""
+										: value
 							})
 						}
 					/>

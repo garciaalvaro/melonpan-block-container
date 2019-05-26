@@ -16,6 +16,7 @@ describe("getRgbaColor", () => {
 	});
 
 	it("should return null", () => {
+		expect(getRgbaColor("")).toBe(null);
 		expect(getRgbaColor("a")).toBe(null);
 		expect(getRgbaColor("a", 99)).toBe(null);
 	});
