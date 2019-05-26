@@ -2,7 +2,7 @@
 Contributors: melonpan
 Tags: gutenberg, blocks, editor, container, innerblocks
 Requires at least: 5.0
-Tested up to: 5.0
+Tested up to: 5.2
 Stable tag: 1.0.1
 Requires PHP: 5.6
 License: GPLv3
