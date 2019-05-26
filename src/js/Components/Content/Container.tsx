@@ -1,4 +1,4 @@
-import l, { Div, addPrefix } from "utils";
+import l, { Div } from "utils";
 import Background from "./Background";
 import Content from "./Content";
 

@@ -54,7 +54,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 		];
 	}
 
-	const attributes = reduce(
+	const extra_props = reduce(
 		rest,
 		(acc: { [key: string]: any }, value: any, key: string) => {
 			if (value) {
@@ -72,7 +72,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 				<div
 					id={id ? addPrefix(id) : undefined}
 					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...attributes}
+					{...extra_props}
 				>
 					{children}
 				</div>
@@ -84,7 +84,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 				<span
 					id={id ? addPrefix(id) : undefined}
 					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...attributes}
+					{...extra_props}
 				>
 					{children}
 				</span>
@@ -96,7 +96,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 				<img
 					id={id ? addPrefix(id) : undefined}
 					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...attributes}
+					{...extra_props}
 				/>
 			);
 			break;

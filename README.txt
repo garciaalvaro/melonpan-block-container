@@ -8,11 +8,11 @@ Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Container block with settings that can have other blocks nested. Developers may also use it to create their own blocks making use of the build-in settings and controls.
+Container block with settings. Developers may also register their own block types taking advantage of the plugin settings and controls.
 
 == Description ==
 
-This block is a container that can have other blocks nested. It comes with several settings:
+This block is a container that can have other blocks nested. It comes with the following settings:
 
 * Background image, fixed, color & opacity
 * Content align, max-width, text color
@@ -20,7 +20,7 @@ This block is a container that can have other blocks nested. It comes with sever
 * Shadow width, color & opacity
 * Padding top, bottom, left, right, responsive paddings
 
-Developers: The plugin comes with a filter to register your own block based on this one. Check the *How can I use the filter to create my own block?* section for more info.
+Developers: The plugin comes with a filter to register your own block based on this one. Check the *How can I use the filter to register my own block?* section for more info.
 
 == Screenshots ==
 
@@ -28,9 +28,8 @@ Developers: The plugin comes with a filter to register your own block based on t
 
 == Usage ==
 
-This block will be added inside the blocks inserter menu under the *Melonpan Blocks* category.
-Once added in the page you can edit its settings and add other blocks inside.
-You may even add this same block type inside.
+The block can be found inside the blocks inserter menu under the *Melonpan Blocks* category.
+Once added in the post you can edit its settings and add blocks inside (you may even add a container).
 
 == Installation ==
 
@@ -44,23 +43,24 @@ Installation from the WordPress admin.
 
 == Frequently Asked Questions ==
 
-= How can I use the filter to create my own block? =
+= How can I use the filter to register my own block type? =
 
-The plugin comes with a filter to register your own block extending this one, to make use of the settings that come with it.
+The plugin comes with a filter to register your own block type extending this one. This way your block can make use of the plugin settings.
 
 **Notes**
 You can choose from the available settings, listed below, and assign the block's InnerBlocks properties to customize it.
-You may also pass your own attributes, inside the **custom** attribute, this adds a class to the **.mbc-container** div. Check the *How can I add a custom attribute?* section for more info.
+You may also pass your own attributes, inside the **custom** attribute. For more info check *How can I add a custom attribute?*.
 
 **Steps**
 First, you need to [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
+The script needs to have *'wp-hooks'* as a dependency.
 
 Inside your script call the filter in the following way (make sure *Melonpan Block - Container* plugin is active):
 
     // Custom block registration example using the filter.
     wp.hooks.addFilter("melonpanBlockContainer.createBlock", "my-plugin/my-block", blocks => {
         return blocks.concat({
-            // These are the default block registration properties. For more available properties:
+            // Default block registration properties. For more available properties:
             // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
             blocktype_props: {
                 name: "my-plugin/my-block",
@@ -90,7 +90,7 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
             // Set the "show_control" property to false if you want to apply the setting
             // with the default value but hide the control from the editor.
             settings: {
-                // Check the "How can I add a custom attribute?" section for more info.
+                // For more info check the section "How can I add a custom attribute?".
                 custom: {
                     example_attribute_name: { default: "value_A" },
                     another_example_attribute_name: { default: true }
@@ -223,8 +223,8 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
                     min: 0,
                     max: 100
                 },
-                // These paddings will apply to screens smaller than 600px in width.
-                // They are meant to override the previous paddings (over this comment).
+                // The following paddings will apply to screens smaller
+                // than 600px in width, overriding the previous paddings.
                 padding_small_screen: {
                     show_control: true,
                     default: 20,
@@ -268,9 +268,9 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
                     max: 100
                 }
             },
-            // This property is experimental. If you need to update the block to a new version,
+            // Experimental: If you need to update the block to a new version
             // because either the "settings" or the "extra_props" objects changed,
-            // you need to pass those objects as they were before the change, inside an object.
+            // pass those objects as they were before the change, inside an object.
             // Then wrap all the different versions inside an array.
             deprecated: [
                 {
@@ -295,25 +295,32 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
         });
     });
 
+
 = How can I add a custom attribute? =
 
-When creating your own block using the **melonpanBlockContainer.createBlock** filter, you can add custom attributes.
+You may include custom attributes, when creating a block type through the plugins filter.
 This setting is meant to be a helper that adds a class with the name and value of the attribute.
-One of the advantages of using it rather than the *blocks.registerBlockType* filter is that it should work if you need to deprecate the attribute.
+One of the advantages of using it rather than using the *blocks.registerBlockType* filter is that it should work if you need to deprecate the attribute.
 Keep in mind that it will simply add a class in the **.mbc-container** div, and that a *string*, *number* or *boolean* value can be used.
+
+**string or number**
 If the attribute is a *string* or *number* the class will include the name and the value (example_attribute_name => **.mbc-example_attribute_name-the_value**).
+
+**boolean**
 If the attribute is a *boolean* the class will include the name and *enabled* or *disabled* (example_attribute_name => **.mbc-example_attribute_name-enabled**).
-To add a control for the attribute you may use Gutenberg filters. Remember to remove the control if you deprecate the attribute.
-Here is an example of adding a control using Gutenberg filters:
+
+
+= How can I add a control to my custom attribute? =
+
+To add a control for your custom attribute use Gutenberg filters. Remember to remove the control if you deprecate the attribute.
+Here is an example of adding a control:
 
     const { __ } = wp.i18n;
-    const { addFilter } = wp.hooks;
-    const { createHigherOrderComponent } = wp.compose;
     const { Fragment } = wp.element;
     const { InspectorControls } = wp.editor;
     const { PanelBody, RadioControl } = wp.components;
 
-    const withMyAttributeControl = createHigherOrderComponent(BlockEdit => {
+    const withMyAttributeControl = wp.compose.createHigherOrderComponent(BlockEdit => {
         return props => {
             if (props.name !== "my-plugin/my-block") {
                 return <BlockEdit {...props} />;
@@ -341,6 +348,7 @@ Here is an example of adding a control using Gutenberg filters:
                                 onChange={value =>
                                     setAttributes({
                                         custom: {
+                                            // Its important to pass the whole object.
                                             ...attributes.custom,
                                             example_attribute_name: value
                                         }
@@ -355,11 +363,12 @@ Here is an example of adding a control using Gutenberg filters:
         };
     }, "withMyAttributeControl");
 
-    addFilter(
+    wp.hooks.addFilter(
         "editor.BlockEdit",
         "my-plugin/my-filter",
         withMyAttributeControl
     );
+
 
 == Changelog ==
 
@@ -375,6 +384,18 @@ Here is an example of adding a control using Gutenberg filters:
 = 1.0.0 =
 * Initial release.
 
+
 == Credits ==
 
 Screenshot background image belongs to [Sander Wehkamp](https://unsplash.com/@sanderwehkamp).
+
+
+== Other plugins ==
+
+If you found this plugin useful, you may also like these other plugins I created for the new Gutenberg editor:
+
+* [The Typography](https://wordpress.org/plugins/the-typography/): Add Typography to your site using Google Fonts. Select Blocks or enter CSS selectors.
+* [Post Meta Controls](https://wordpress.org/plugins/post-meta-controls/): Register, save, modify and get Meta data in the Gutenberg editor using controls.
+* [Demo Content for Blocks](https://wordpress.org/plugins/demo-content-for-blocks/): Add blocks with demo/dummy content to your post in one click.
+
+Thanks!
