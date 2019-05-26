@@ -11,7 +11,7 @@
 		"backup": "gulp backup",
 		"release": "gulp release",
 		"test": "jest --watch",
-		"check-types": "tsc"
+		"type": "tsc"
 	},
 	"alias": {
 		"utils": "./src/js/utils"

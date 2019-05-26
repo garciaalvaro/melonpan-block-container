@@ -10,15 +10,14 @@ const prepareBlock = (block: Block): Object => {
 	block.settings = block.settings ? block.settings : {};
 	block.supports = block.supports ? block.supports : {};
 	block.deprecated = block.deprecated ? block.deprecated : [];
-	block.extra_props = block.extra_props
-		? prepareExtraProps(block.extra_props)
-		: prepareExtraProps({});
+	block.extra_props = block.extra_props ? block.extra_props : {};
 	block.innerblocks_props = block.innerblocks_props
 		? block.innerblocks_props
 		: {};
 
 	// Prepare each property.
 	block.settings = prepareSettings(block.settings);
+	block.extra_props = prepareExtraProps(block.extra_props);
 	block.attributes = prepareAttributes(block.settings);
 	block.deprecated = prepareDeprecated(
 		block.deprecated,
