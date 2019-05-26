@@ -363,6 +363,9 @@ Here is an example of adding a control using Gutenberg filters:
 
 == Changelog ==
 
+= 1.1.0 =
+* Improved code: Updated JS, added tests and migrated JS to Typescript.
+
 = 1.0.1 =
 * Fix bug where the color was empty but the class .mbc-has-color was still assigned.
 
