@@ -2,6 +2,8 @@
  * Border
  */
 
-for num in (0..10)
-	.mbc-border_width-{num}
-		border (num)px solid
++prefix-classes('mbc-')
+
+	for num in (0..10)
+		.border_width-{num}
+			border (num)px solid
