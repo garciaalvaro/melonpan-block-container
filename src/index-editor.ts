@@ -1,6 +1,4 @@
-import "./css/both/*.css";
-import "./css/both/*.styl";
-import "./css/editor/*.css";
-import "./css/editor/*.styl";
-
-import "./js";
+import "./js/core/register-category";
+import "./js/core/register-block";
+import "./js/core/register-hook";
+import "./js/core/filter-image_color_palette";

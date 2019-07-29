@@ -79,5 +79,4 @@ function enqueue_editor() {
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
-
 }
