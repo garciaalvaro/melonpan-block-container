@@ -70,6 +70,8 @@ function enqueue_editor() {
 				? 'wp-block-editor'
 				: 'wp-editor',
 			'wp-components',
+			'wp-compose',
+			'wp-data',
 			'wp-element',
 			'wp-hooks',
 			'wp-i18n',
