@@ -1,4 +1,4 @@
-import l, { Div, Span, Img } from "utils";
+import { Div, Span, Img } from "utils/components";
 import { shallow } from "enzyme";
 
 describe("Components Div", function() {
@@ -6,7 +6,7 @@ describe("Components Div", function() {
 		expect(shallow(<Div />).html()).toBe("<div></div>");
 		expect(
 			shallow(
-				<Div aaa="b" data-b="b" id="a" classes={["a", "#b", null]} />
+				<Div aaa="b" data-b="b" id="a" classes={["a", "!b", null]} />
 			).html()
 		).toBe(`<div id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"></div>`);
 	});
@@ -15,7 +15,7 @@ describe("Components Div", function() {
 		expect(shallow(<Span />).html()).toBe("<span></span>");
 		expect(
 			shallow(
-				<Span aaa="b" id="a" classes={["a", "#b", null]} data-b="b" />
+				<Span aaa="b" id="a" classes={["a", "!b", null]} data-b="b" />
 			).html()
 		).toBe(
 			`<span id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"></span>`
@@ -26,7 +26,7 @@ describe("Components Div", function() {
 		expect(shallow(<Img />).html()).toBe("<img/>");
 		expect(
 			shallow(
-				<Img id="a" classes={["a", "#b", null]} aaa="b" data-b="b" />
+				<Img id="a" classes={["a", "!b", null]} aaa="b" data-b="b" />
 			).html()
 		).toBe(`<img id=\"mbc-a\" class=\"mbc-a b\" aaa=\"b\" data-b=\"b\"/>`);
 	});

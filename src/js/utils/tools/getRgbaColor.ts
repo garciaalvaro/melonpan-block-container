@@ -1,6 +1,8 @@
 import tinycolor from "tinycolor2";
 
-const getRgbaColor = (
+const { isUndefined } = lodash;
+
+export const getRgbaColor = (
 	color_string: string,
 	opacity?: number
 ): string | null => {
@@ -10,7 +12,7 @@ const getRgbaColor = (
 		return null;
 	}
 
-	if (typeof opacity === "number") {
+	if (!isUndefined("number")) {
 		opacity = Math.max(opacity, 0);
 		opacity = Math.min(opacity, 100);
 
@@ -19,5 +21,3 @@ const getRgbaColor = (
 
 	return color.toRgbString();
 };
-
-export default getRgbaColor;

@@ -1,29 +1,40 @@
-import addPrefix from "./addPrefix";
+import { icons, Icons } from "utils/data/icons";
+import { addPrefix } from "utils/tools/addPrefix";
 
-interface Props {
+interface ComponentProps {
 	children?: React.ReactNode;
 	id?: string | null;
 	classes?: string | (string | null)[];
 	classes_from_value?: { classes: string[]; values: { [key: string]: any } };
 	[rest: string]: any;
 }
-interface HTMLProps extends Props {
+
+export interface HTMLProps extends ComponentProps {
 	html_tag: string;
 }
 
-const { isBoolean, reduce } = lodash;
+interface IconProps {
+	icon: keyof Icons;
+}
 
-const Div: React.FunctionComponent<Props> = props => (
+export const Icon: React.ComponentType<IconProps> = props =>
+	icons[props.icon] ? icons[props.icon] : null;
+
+export const Div: React.FunctionComponent<ComponentProps> = props => (
 	<HTML {...props} html_tag="div" />
 );
-const Span: React.FunctionComponent<Props> = props => (
+
+export const Span: React.FunctionComponent<ComponentProps> = props => (
 	<HTML {...props} html_tag="span" />
 );
-const Img: React.FunctionComponent<Props> = props => (
+
+export const Img: React.FunctionComponent<ComponentProps> = props => (
 	<HTML {...props} html_tag="img" />
 );
 
-const HTML: React.FunctionComponent<HTMLProps> = props => {
+const { isBoolean, isUndefined, reduce } = lodash;
+
+const HTML: React.ComponentType<HTMLProps> = props_raw => {
 	let {
 		children,
 		id,
@@ -31,7 +42,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 		classes_from_value,
 		html_tag,
 		...rest
-	} = props;
+	} = props_raw;
 
 	if (classes_from_value) {
 		classes = [
@@ -39,7 +50,7 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 			...classes_from_value.classes.map((prop: string) => {
 				const value = classes_from_value!.values[prop];
 
-				if (typeof value === "undefined") {
+				if (isUndefined(value)) {
 					return null;
 				}
 
@@ -66,39 +77,23 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 		{}
 	);
 
+	const props = {
+		id: id ? addPrefix(id) : undefined,
+		className: classes && classes.length ? addPrefix(classes) : undefined,
+		...extra_props
+	};
+
 	switch (html_tag) {
 		case "div":
-			return (
-				<div
-					id={id ? addPrefix(id) : undefined}
-					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...extra_props}
-				>
-					{children}
-				</div>
-			);
+			return <div {...props}>{children}</div>;
 			break;
 
 		case "span":
-			return (
-				<span
-					id={id ? addPrefix(id) : undefined}
-					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...extra_props}
-				>
-					{children}
-				</span>
-			);
+			return <span {...props}>{children}</span>;
 			break;
 
 		case "img":
-			return (
-				<img
-					id={id ? addPrefix(id) : undefined}
-					className={classes && classes.length ? addPrefix(classes) : undefined}
-					{...extra_props}
-				/>
-			);
+			return <img {...props} />;
 			break;
 
 		default:
@@ -106,5 +101,3 @@ const HTML: React.FunctionComponent<HTMLProps> = props => {
 			break;
 	}
 };
-
-export { Div, Span, Img };

@@ -1,4 +1,4 @@
-import l, { addPrefix } from "utils";
+import { addPrefix } from "utils/tools/addPrefix";
 
 describe("addPrefix", () => {
 	it("should return a string with CSS classes with a Prefix", () => {
@@ -8,8 +8,8 @@ describe("addPrefix", () => {
 	});
 
 	it("should return a string with CSS classes without a Prefix or mixed", () => {
-		expect(addPrefix("#a")).toBe("a");
-		expect(addPrefix(["a", "#b"])).toBe("mbc-a b");
+		expect(addPrefix("!a")).toBe("a");
+		expect(addPrefix(["a", "!b"])).toBe("mbc-a b");
 	});
 
 	it("should return a string with CSS classes without a Prefix or mixed", () => {

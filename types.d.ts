@@ -22,6 +22,65 @@ interface Object {
 	[key: string]: any;
 }
 
+type ImageSize = {
+	width: number;
+	height: number;
+	url: string;
+};
+
+interface ImageRaw {
+	id: number;
+	alt: string;
+	link: string;
+	caption: string;
+	url: string;
+	sizes: {
+		full: ImageSize;
+		large?: ImageSize;
+		medium?: ImageSize;
+		thumbnail?: ImageSize;
+	};
+}
+
+interface Settings {
+	custom: any;
+	align: string;
+	content_align: string;
+	content_maxwidth: number;
+	content_color: string;
+	background_color: string;
+	background_color_opacity: number;
+	background_image: string;
+	background_fixed: boolean;
+	padding: number;
+	padding_top: number;
+	padding_bottom: number;
+	padding_left: number;
+	padding_right: number;
+	padding_topbottom: number;
+	padding_leftright: number;
+	padding_small_screen: number;
+	padding_top_small_screen: number;
+	padding_bottom_small_screen: number;
+	padding_left_small_screen: number;
+	padding_right_small_screen: number;
+	padding_topbottom_small_screen: number;
+	padding_leftright_small_screen: number;
+	border_color: string;
+	border_color_opacity: number;
+	border_width: number;
+	shadow_color: string;
+	shadow_color_opacity: number;
+	shadow_width: number;
+}
+
+interface Attributes extends Object, Omit<Settings, "background_image"> {
+	background_image_id: number;
+	background_image_url: string;
+	background_image_srcset: string;
+	background_image_alt: string;
+}
+
 interface EditSaveProps extends Object {
 	attributes: BlockSettings;
 	settings: BlockSettings;

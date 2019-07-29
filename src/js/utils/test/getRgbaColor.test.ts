@@ -1,4 +1,4 @@
-import l, { getRgbaColor } from "utils";
+import { getRgbaColor } from "utils/tools/getRgbaColor";
 
 describe("getRgbaColor", () => {
 	it("should return a RGB/RGBA string", () => {

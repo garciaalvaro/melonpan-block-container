@@ -1,11 +1,13 @@
-import l from "./log";
-
 const { reduce, mapValues, isUndefined, pickBy } = lodash;
 
-const getValues = (settings: Object, attributes: Object, is_edit: boolean) =>
-	reduce(
+export const getValues = (
+	settings: Settings,
+	attributes: Attributes,
+	is_edit: boolean
+) =>
+	reduce<Settings, Object>(
 		settings,
-		(acc: Object, value, key) => {
+		(acc, _, key) => {
 			if (key === "background_image") {
 				acc.background_image_url = attributes.background_image_url;
 				acc.background_image_srcset = attributes.background_image_srcset;
@@ -27,7 +29,7 @@ const getValues = (settings: Object, attributes: Object, is_edit: boolean) =>
 					custom = pickBy(custom, value => value !== null);
 					acc.custom = custom;
 				}
-			} else {
+			} else if (!isUndefined(attributes[key])) {
 				acc[key] = attributes[key];
 			}
 
@@ -35,5 +37,3 @@ const getValues = (settings: Object, attributes: Object, is_edit: boolean) =>
 		},
 		{}
 	);
-
-export default getValues;
