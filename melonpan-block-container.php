@@ -29,6 +29,7 @@ if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
  *
  * @since 1.0.0
  */
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_front' );
 function enqueue_front() {
 
 	wp_enqueue_style(
@@ -39,14 +40,16 @@ function enqueue_front() {
 	);
 
 }
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_front' );
 
 /**
  * Enqueue the plugin styles and scripts in the editor.
  *
  * @since 1.0.0
  */
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );
 function enqueue_editor() {
+
+	global $wp_scripts;
 
 	wp_enqueue_style(
 		PLUGIN_NAME . '-editor',
@@ -60,15 +63,19 @@ function enqueue_editor() {
 		BUILD_DIR . PLUGIN_NAME . '-editor.js',
 		array(
 			'lodash',
-			'wp-i18n',
-			'wp-element',
+			'wp-blocks',
+			// If wp-block-editor is registered (from WP 5.2)
+			// enqueue it. Otherwise enqueue wp-editor.
+			null !== $wp_scripts->registered['wp-block-editor']
+				? 'wp-block-editor'
+				: 'wp-editor',
 			'wp-components',
-			'wp-editor',
+			'wp-element',
 			'wp-hooks',
+			'wp-i18n',
 		),
 		PLUGIN_VERSION,
 		true // Enqueue in the footer.
 	);
 
 }
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );

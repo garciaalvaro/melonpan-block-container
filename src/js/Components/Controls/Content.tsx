@@ -17,7 +17,8 @@ const {
 	PanelBody,
 	ColorIndicator
 } = wp.components;
-const { ColorPalette } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { ColorPalette } = editor;
 
 class Content extends Component<Props> {
 	componentDidMount() {

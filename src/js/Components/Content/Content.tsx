@@ -11,7 +11,8 @@ interface Props extends Object {
 }
 
 const { isUndefined, isObject, compact } = lodash;
-const { InnerBlocks } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { InnerBlocks } = editor;
 
 const Content: React.FunctionComponent<Props> = props => {
 	const { extra_props, values, is_edit, is_test } = props;

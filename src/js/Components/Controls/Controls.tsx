@@ -13,7 +13,8 @@ interface Props {
 const { isUndefined } = lodash;
 const { Component } = wp.element;
 const { withState } = wp.compose;
-const { InspectorControls } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { InspectorControls } = editor;
 
 class Controls extends Component<Props> {
 	componentDidMount() {

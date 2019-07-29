@@ -9,7 +9,8 @@ interface Props {
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
-const { ColorPalette, MediaUpload } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { ColorPalette, MediaUpload } = editor;
 const {
 	RangeControl,
 	BaseControl,

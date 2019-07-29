@@ -317,7 +317,7 @@ Here is an example of adding a control:
 
     const { __ } = wp.i18n;
     const { Fragment } = wp.element;
-    const { InspectorControls } = wp.editor;
+    const { InspectorControls } = wp.blockEditor;
     const { PanelBody, RadioControl } = wp.components;
 
     const withMyAttributeControl = wp.compose.createHigherOrderComponent(BlockEdit => {

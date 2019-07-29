@@ -9,7 +9,8 @@ interface Props {
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
 const { Fragment } = wp.element;
-const { ColorPalette } = wp.editor;
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { ColorPalette } = editor;
 const { RangeControl, BaseControl, PanelBody, ColorIndicator } = wp.components;
 
 const ShadowBorder: React.FunctionComponent<Props> = props => {
