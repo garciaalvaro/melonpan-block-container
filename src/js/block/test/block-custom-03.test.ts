@@ -1,8 +1,7 @@
-import l from "utils";
-import isValid from "./block-utils";
+import { isValid } from "./block-utils";
 
 describe("block: my-plugin/my-block", () => {
-	const block_props = {
+	const block_raw: BlockRaw & { deprecated: Object[] } = {
 		blocktype_props: {
 			name: `my-plugin/my-block`,
 			title: "title",
@@ -52,17 +51,17 @@ describe("block: my-plugin/my-block", () => {
 			<blockquote class="wp-block-quote"><p>sdf</p><cite>sdf</cite></blockquote>
 			<!-- /wp:quote --></div></div></div>
 			<!-- /wp:my-plugin/my-block -->`;
-		let is_valid = isValid(block_props, block_instance);
+		let is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(false);
 
 		if (!is_valid) {
-			block_props.deprecated.forEach((_, index) => {
+			block_raw.deprecated.forEach((_, index) => {
 				if (is_valid) {
 					return;
 				}
 
-				is_valid = isValid(block_props, block_instance, index);
+				is_valid = isValid(block_raw, block_instance, index);
 			});
 		}
 
@@ -75,17 +74,17 @@ describe("block: my-plugin/my-block", () => {
 			<blockquote class="wp-block-quote"><p>sdf</p><cite>sdf</cite></blockquote>
 			<!-- /wp:quote --></div></div></div>
 			<!-- /wp:my-plugin/my-block -->`;
-		let is_valid = isValid(block_props, block_instance);
+		let is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(false);
 
 		if (!is_valid) {
-			block_props.deprecated.forEach((_, index) => {
+			block_raw.deprecated.forEach((_, index) => {
 				if (is_valid) {
 					return;
 				}
 
-				is_valid = isValid(block_props, block_instance, index);
+				is_valid = isValid(block_raw, block_instance, index);
 			});
 		}
 

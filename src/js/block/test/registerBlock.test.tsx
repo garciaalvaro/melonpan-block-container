@@ -1,6 +1,5 @@
-import l from "utils";
-import melonpan_block_container from "../../core/register-block";
-import registerBlock from "../registerBlock";
+import { melonpan_block_container } from "init/register-block";
+import { registerBlock } from "block/registerBlock";
 
 describe("registerBlock", () => {
 	it("melonpan-block/container should register a valid block type", () => {

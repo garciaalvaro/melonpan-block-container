@@ -1,24 +1,18 @@
-import l, { Div, getRgbaColor } from "utils";
-
-interface Props extends Object {
-	innerblocks_props?: Object;
-	attributes: Object;
-	values: Object;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
-	is_edit: boolean;
-	is_test?: boolean;
-}
+import { Div } from "utils/components";
+import { getRgbaColor } from "utils/tools/getRgbaColor";
 
 const { isUndefined, isObject, compact } = lodash;
 const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
 const { InnerBlocks } = editor;
+const { Fragment } = wp.element;
 
-const Content: React.FunctionComponent<Props> = props => {
+export const Content: React.ComponentType<
+	BlockPropsEdit | BlockPropsSave
+> = props => {
 	const { extra_props, values, is_edit, is_test } = props;
 	const {
 		className: extra_props_className,
-		...rest_extra_props
+		...extra_props_rest
 	} = extra_props.content;
 	const { content_color } = values;
 	const classes = [
@@ -45,18 +39,20 @@ const Content: React.FunctionComponent<Props> = props => {
 
 	return (
 		<Div
-			{...rest_extra_props}
+			{...extra_props_rest}
 			classes={classes}
 			style={style}
 			classes_from_value={{ classes: classes_from_value, values }}
 		>
 			{is_test ? null : is_edit ? (
-				<InnerBlocks {...props.innerblocks_props} />
+				<Fragment>
+					{/*
+					// @ts-ignore */}
+					<InnerBlocks {...props.innerblocks_props} />
+				</Fragment>
 			) : (
 				<InnerBlocks.Content />
 			)}
 		</Div>
 	);
 };
-
-export default Content;

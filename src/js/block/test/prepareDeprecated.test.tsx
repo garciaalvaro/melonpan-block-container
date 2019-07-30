@@ -1,8 +1,7 @@
-import l from "utils";
-import { attributes_defaults } from "../prepareAttributes";
-import prepareExtraProps from "../prepareExtraProps";
-import prepareSettings from "../prepareSettings";
-import prepareDeprecated from "../prepareDeprecated";
+import { attributes_defaults } from "block/prepareAttributes";
+import { prepareExtraProps } from "block/prepareExtraProps";
+import { prepareSettings } from "block/prepareSettings";
+import { prepareDeprecated } from "block/prepareDeprecated";
 
 const { mapValues } = lodash;
 

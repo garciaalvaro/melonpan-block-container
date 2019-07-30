@@ -1,14 +1,9 @@
-import l, { addPrefix } from "utils";
-
-interface Props {
-	values: Object;
-	settings: BlockSettings;
-	[rest: string]: any;
-}
+import { addPrefix } from "utils/tools/addPrefix";
 
 const { __ } = wp.i18n;
 const { RangeControl, PanelBody } = wp.components;
-const paddings = [
+
+const paddings: { name: keyof Paddings; label: string }[] = [
 	{
 		name: "padding",
 		label: __("Padding")
@@ -67,7 +62,7 @@ const paddings = [
 	}
 ];
 
-const Padding: React.FunctionComponent<Props> = props => {
+export const Padding: React.ComponentType<BlockPropsEdit> = props => {
 	const { setAttributes, values, settings } = props;
 
 	return (
@@ -77,18 +72,18 @@ const Padding: React.FunctionComponent<Props> = props => {
 			initialOpen={false}
 		>
 			{paddings.map(({ name, label }) => {
-				if (!settings[name] || !settings[name].show_control) {
+				const setting = settings[name];
+
+				if (!setting || !setting.show_control) {
 					return null;
 				}
-
-				const setting = settings[name];
 
 				return (
 					<RangeControl
 						key={name}
 						label={label}
 						className={addPrefix([name, "control", "control-range"])}
-						value={values[name]}
+						value={values[name as keyof typeof values]}
 						step={setting.step}
 						min={setting.min}
 						max={setting.max}
@@ -99,5 +94,3 @@ const Padding: React.FunctionComponent<Props> = props => {
 		</PanelBody>
 	);
 };
-
-export default Padding;

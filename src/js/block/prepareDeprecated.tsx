@@ -1,18 +1,18 @@
-import l, { getValues } from "utils";
-import prepareSettings from "./prepareSettings";
-import prepareAttributes from "./prepareAttributes";
-import prepareExtraProps from "./prepareExtraProps";
-import EditSave from "../Components/EditSave/EditSave";
+import { getValues } from "utils/tools/getValues";
+import { prepareSettings } from "./prepareSettings";
+import { prepareAttributes } from "./prepareAttributes";
+import { prepareExtraProps } from "./prepareExtraProps";
+import { EditSave } from "../Components/EditSave/EditSave";
 
 const { isUndefined, difference, keys, omit } = lodash;
 
 // Prepare the deprecated array of objects.
-const prepareDeprecated = (
+export const prepareDeprecated = (
 	deprecated: Object[],
-	settings_new: Object,
-	extra_props_new: BlockExtraProps
+	settings_new: Partial<Settings>,
+	extra_props_new: ExtraProps
 ) => {
-	const deprecated_prepared = deprecated.map((deprecated: Object) => {
+	const deprecated_prepared = deprecated.map(deprecated => {
 		const settings = deprecated.settings
 			? prepareSettings(deprecated.settings)
 			: settings_new;
@@ -24,7 +24,7 @@ const prepareDeprecated = (
 
 		return {
 			attributes: attributes_definition,
-			migrate: (old_attributes: Object) => {
+			migrate: (old_attributes: Attributes) => {
 				const deprecated_custom_keys = difference(
 					keys(old_attributes.custom),
 					keys(settings_new.custom)
@@ -43,7 +43,7 @@ const prepareDeprecated = (
 
 				return updated_attributes;
 			},
-			save: (props: EditSaveProps) => {
+			save: (props: BlockProps) => {
 				const { attributes } = props;
 				// If the custom property changed we need to manually include
 				// the old keys in the old version of the attribute.
@@ -87,5 +87,3 @@ const prepareDeprecated = (
 
 	return deprecated_prepared;
 };
-
-export default prepareDeprecated;

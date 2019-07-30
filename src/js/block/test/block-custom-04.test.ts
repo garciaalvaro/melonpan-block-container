@@ -1,8 +1,7 @@
-import l from "utils";
-import isValid from "./block-utils";
+import { isValid } from "./block-utils";
 
 describe("block: my-plugin/my-block", () => {
-	const block_props = {
+	const block_raw: BlockRaw = {
 		blocktype_props: {
 			name: `my-plugin/my-block`,
 			title: "title",
@@ -23,13 +22,13 @@ describe("block: my-plugin/my-block", () => {
 			<blockquote class="wp-block-quote"><p></p></blockquote>
 			<!-- /wp:quote --></div></div></div>
 			<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			align: {
 				default: "full",
 				options: ["left", "center", "full"]
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -40,13 +39,13 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			content_align: {
 				show_control: true,
 				default: "right"
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -57,7 +56,7 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			content_maxwidth: {
 				show_control: true,
 				default: 555,
@@ -65,7 +64,7 @@ describe("block: my-plugin/my-block", () => {
 				max: 2300
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -76,14 +75,14 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			content_color: {
 				show_control: true,
 				default: "#f00",
 				colors: [{ name: "aaa", color: "#222" }, { name: "bbb", color: "#ef9" }]
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -94,7 +93,7 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			background_color: {
 				show_control: true,
 				default: "#ef9",
@@ -104,7 +103,7 @@ describe("block: my-plugin/my-block", () => {
 				]
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -115,7 +114,7 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			background_color_opacity: {
 				show_control: true,
 				default: 50,
@@ -123,7 +122,7 @@ describe("block: my-plugin/my-block", () => {
 				max: 100
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -134,14 +133,14 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			border_color: {
 				show_control: true,
 				default: "#f00",
 				colors: [{ name: "black", color: "#000000" }]
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});
@@ -152,7 +151,7 @@ describe("block: my-plugin/my-block", () => {
 		<blockquote class="wp-block-quote"><p></p></blockquote>
 		<!-- /wp:quote --></div></div></div>
 		<!-- /wp:my-plugin/my-block -->`;
-		block_props.settings = {
+		block_raw.settings = {
 			padding_top: {
 				show_control: true,
 				default: 20,
@@ -166,7 +165,7 @@ describe("block: my-plugin/my-block", () => {
 				max: 200
 			}
 		};
-		const is_valid = isValid(block_props, block_instance);
+		const is_valid = isValid(block_raw, block_instance);
 
 		expect(is_valid).toBe(true);
 	});

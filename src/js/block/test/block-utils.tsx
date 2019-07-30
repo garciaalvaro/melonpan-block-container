@@ -1,29 +1,29 @@
-import l, { getValues } from "utils";
-import prepareBlock from "../prepareBlock";
-import prepareExtraProps from "../prepareExtraProps";
-import EditSave from "../../Components/EditSave/EditSave";
+import { getValues } from "utils/tools/getValues";
+import { prepareBlock } from "block/prepareBlock";
+import { prepareExtraProps } from "block/prepareExtraProps";
+import { EditSave } from "Components/EditSave/EditSave";
 
-const { parse } = wp;
+const { parse } = wp.blockSerializationDefaultParser;
 const { renderToString } = wp.element;
 const { mapValues, compact, get, cloneDeep, difference, keys } = lodash;
 
-const getBlock = (block_props: Block, index: number | null = null): Object => {
+const getBlock = (block_raw: BlockRaw, index: number | null = null): Object => {
 	let { blocktype_props, settings, extra_props } = prepareBlock(
-		cloneDeep(block_props)
+		cloneDeep(block_raw)
 	);
 	let attributes = blocktype_props.attributes;
 
 	if (index !== null) {
-		extra_props = get(block_props.deprecated, [index, "extra_props"])
-			? prepareExtraProps(get(block_props.deprecated, [index, "extra_props"]))
+		extra_props = get(block_raw.deprecated, [index, "extra_props"])
+			? prepareExtraProps(get(block_raw.deprecated, [index, "extra_props"]))
 			: extra_props;
-		settings = get(block_props.deprecated, [index, "settings"]);
+		settings = get(block_raw.deprecated, [index, "settings"]);
 		attributes = get(blocktype_props.deprecated, [index, "attributes"]);
 	}
 
 	return {
 		attributes,
-		save: (props: EditSaveProps) => {
+		save: (props: BlockPropsSave) => {
 			const { attributes } = props;
 
 			if (index !== null) {
@@ -68,13 +68,13 @@ const getBlock = (block_props: Block, index: number | null = null): Object => {
 	};
 };
 
-const isValid = (
-	block_props: Block,
+export const isValid = (
+	block_raw: BlockRaw,
 	block_instance: string,
 	index: number | null = null
 ): boolean => {
 	const { save, attributes: attributes_definition } = getBlock(
-		block_props,
+		block_raw,
 		index
 	);
 
@@ -99,5 +99,3 @@ const isValid = (
 
 	return is_valid;
 };
-
-export default isValid;

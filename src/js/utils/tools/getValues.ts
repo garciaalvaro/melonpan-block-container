@@ -1,13 +1,15 @@
 const { reduce, mapValues, isUndefined, pickBy } = lodash;
 
 export const getValues = (
-	settings: Settings,
-	attributes: Attributes,
+	settings: Partial<Settings>,
+	attributes: Partial<Attributes>,
 	is_edit: boolean
 ) =>
-	reduce<Settings, Object>(
+	reduce<Partial<Settings>, Partial<Attributes>>(
 		settings,
-		(acc, _, key) => {
+		(acc, _, setting_key) => {
+			const key = setting_key as keyof Settings;
+
 			if (key === "background_image") {
 				acc.background_image_url = attributes.background_image_url;
 				acc.background_image_srcset = attributes.background_image_srcset;
@@ -29,8 +31,8 @@ export const getValues = (
 					custom = pickBy(custom, value => value !== null);
 					acc.custom = custom;
 				}
-			} else if (!isUndefined(attributes[key])) {
-				acc[key] = attributes[key];
+			} else if (key in attributes) {
+				acc[key as keyof Attributes] = attributes[key];
 			}
 
 			return acc;

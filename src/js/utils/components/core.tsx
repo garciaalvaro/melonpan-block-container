@@ -20,15 +20,15 @@ interface IconProps {
 export const Icon: React.ComponentType<IconProps> = props =>
 	icons[props.icon] ? icons[props.icon] : null;
 
-export const Div: React.FunctionComponent<ComponentProps> = props => (
+export const Div: React.ComponentType<ComponentProps> = props => (
 	<HTML {...props} html_tag="div" />
 );
 
-export const Span: React.FunctionComponent<ComponentProps> = props => (
+export const Span: React.ComponentType<ComponentProps> = props => (
 	<HTML {...props} html_tag="span" />
 );
 
-export const Img: React.FunctionComponent<ComponentProps> = props => (
+export const Img: React.ComponentType<ComponentProps> = props => (
 	<HTML {...props} html_tag="img" />
 );
 

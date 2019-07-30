@@ -1,7 +1,8 @@
-import l, { addPrefix } from "utils";
+import { addPrefix } from "utils/tools/addPrefix";
 
-const { isUndefined, mapValues, reduce, cloneDeep } = lodash;
-const attributes_defaults = {
+const { mapValues, reduce, cloneDeep } = lodash;
+
+export const attributes_defaults: AttributesDefinition = {
 	custom: {
 		type: "object",
 		default: {}
@@ -111,27 +112,32 @@ const attributes_defaults = {
 };
 
 // Prepare attributes object. Pass the default values from settings object.
-const prepareAttributes = (settings: Object) => {
+export const prepareAttributes = (settings: Partial<Settings>) => {
 	// Assign only the attributes that are passed in the settings.
-	const attributes = reduce(
-		{ ...attributes_defaults },
-		(acc: Object, attribute: Object, key: string) => {
+	const attributes_definition = reduce<
+		AttributesDefinition,
+		Partial<AttributesDefinition>
+	>(
+		attributes_defaults,
+		(acc, attribute, attribute_key) => {
+			const key = attribute_key as keyof Attributes;
+
 			// We need to pass all attributes because the migrate function
 			// in deprecate doesn't recognize removed attributes otherwise.
 			// (This only applies to certain attributes like background_color).
 			// See: https://github.com/WordPress/gutenberg/issues/10406
 			acc[key] = cloneDeep(attribute);
 
-			if (key === "custom" && !isUndefined(settings.custom)) {
+			if (key === "custom" && "custom" in settings) {
 				acc.custom.default = mapValues(
 					settings.custom,
 					custom_prop => custom_prop.default
 				);
 			} else if (
-				!isUndefined(settings[key]) &&
-				!isUndefined(settings[key].default)
+				key in settings &&
+				"default" in settings[key as keyof Settings]
 			) {
-				acc[key].default = settings[key].default;
+				acc[key].default = settings[key as keyof Settings].default;
 			}
 
 			return acc;
@@ -139,8 +145,5 @@ const prepareAttributes = (settings: Object) => {
 		{}
 	);
 
-	return attributes;
+	return attributes_definition;
 };
-
-export default prepareAttributes;
-export { attributes_defaults };

@@ -1,10 +1,6 @@
-import l, { Div, Span, addPrefix, getSrcset, icons } from "utils";
-
-interface Props {
-	values: Object;
-	settings: BlockSettings;
-	[rest: string]: any;
-}
+import { Div, Span, Icon } from "utils/components";
+import { addPrefix } from "utils/tools/addPrefix";
+import { getSrcset } from "utils/tools/getSrcset";
 
 const { isUndefined } = lodash;
 const { __ } = wp.i18n;
@@ -17,16 +13,19 @@ const {
 	PanelBody,
 	ToggleControl,
 	ColorIndicator,
-	Button,
-	Icon
+	Button
 } = wp.components;
 
-const Background: React.FunctionComponent<Props> = props => {
+export const Background: React.ComponentType<BlockPropsEdit> = props => {
 	const { setAttributes, values, settings } = props;
-	const addImage = (image: Object) => {
+	const addImage = (image: ImageRaw) => {
 		const { id, sizes, alt } = image;
 		const size =
-			sizes.medium_large || sizes.large || sizes.medium || sizes.thumbnail;
+			sizes.medium_large ||
+			sizes.large ||
+			sizes.medium ||
+			sizes.thumbnail ||
+			sizes.full;
 
 		setAttributes({
 			background_image_id: id,
@@ -35,14 +34,14 @@ const Background: React.FunctionComponent<Props> = props => {
 			background_image_alt: alt
 		});
 	};
-	const removeImage = () => {
+	const removeImage = () =>
 		setAttributes({
 			background_image_id: undefined,
 			background_image_url: undefined,
 			background_image_srcset: undefined,
 			background_image_alt: undefined
 		});
-	};
+
 	const {
 		background_fixed,
 		background_color,
@@ -56,59 +55,67 @@ const Background: React.FunctionComponent<Props> = props => {
 			className={addPrefix("panel_body")}
 			initialOpen={false}
 		>
-			{background_color && background_color.show_control && (
-				<BaseControl
-					label={
-						<Fragment>
-							<Span>{__("Background color")}</Span>
-							<ColorIndicator colorValue={values.background_color} />
-						</Fragment>
-					}
-					className={addPrefix([
-						"background_color",
-						"control",
-						"control-colorpalette"
-					])}
-				>
-					<ColorPalette
-						colors={background_color.colors}
-						value={values.background_color}
-						onChange={(value: string) =>
+			{background_color &&
+				!isUndefined(values.background_color) &&
+				background_color.show_control && (
+					<BaseControl
+						id={addPrefix("background_color")}
+						label={
+							<Fragment>
+								<Span>{__("Background color")}</Span>
+								<ColorIndicator colorValue={values.background_color} />
+							</Fragment>
+						}
+						className={addPrefix([
+							"background_color",
+							"control",
+							"control-colorpalette"
+						])}
+					>
+						<ColorPalette
+							colors={background_color.colors}
+							// @ts-ignore. Value should accept string.
+							value={values.background_color}
+							// @ts-ignore. Value should be string.
+							onChange={(value: string) =>
+								setAttributes({
+									background_color:
+										isUndefined(value) &&
+										settings.background_color &&
+										settings.background_color.default !== ""
+											? ""
+											: value
+								})
+							}
+						/>
+					</BaseControl>
+				)}
+
+			{background_color_opacity &&
+				!isUndefined(values.background_color_opacity) &&
+				background_color_opacity.show_control && (
+					<RangeControl
+						label={__("Background color opacity")}
+						className={addPrefix([
+							"background_color_opacity",
+							"control",
+							"control-range"
+						])}
+						value={values.background_color_opacity}
+						step={background_color_opacity.step}
+						min={background_color_opacity.min}
+						max={background_color_opacity.max}
+						onChange={(value: number) =>
 							setAttributes({
-								background_color:
-									isUndefined(value) &&
-									settings.background_color &&
-									settings.background_color.default !== ""
-										? ""
-										: value
+								background_color_opacity: value
 							})
 						}
 					/>
-				</BaseControl>
-			)}
-
-			{background_color_opacity && background_color_opacity.show_control && (
-				<RangeControl
-					label={__("Background color opacity")}
-					className={addPrefix([
-						"background_color_opacity",
-						"control",
-						"control-range"
-					])}
-					value={values.background_color_opacity}
-					step={background_color_opacity.step}
-					min={background_color_opacity.min}
-					max={background_color_opacity.max}
-					onChange={(value: number) =>
-						setAttributes({
-							background_color_opacity: value
-						})
-					}
-				/>
-			)}
+				)}
 
 			{background_fixed && background_fixed.show_control && (
 				<BaseControl
+					id={addPrefix("background_fixed")}
 					label={__("Background image fixed")}
 					className={addPrefix([
 						"background_fixed",
@@ -130,6 +137,7 @@ const Background: React.FunctionComponent<Props> = props => {
 
 			{!isUndefined(background_image) && (
 				<BaseControl
+					id={addPrefix("background_image")}
 					label={__("Background image")}
 					className={addPrefix([
 						"background_image",
@@ -150,14 +158,14 @@ const Background: React.FunctionComponent<Props> = props => {
 
 										return (
 											<Button onClick={open} isDefault>
-												<Icon icon={icons.edit} />
+												<Icon icon="edit" />
 												{__("Change")}
 											</Button>
 										);
 									}}
 								/>
 								<Button onClick={removeImage} isDefault>
-									<Icon icon={icons.remove} />
+									<Icon icon="remove" />
 									{__("Remove")}
 								</Button>
 							</Fragment>
@@ -184,5 +192,3 @@ const Background: React.FunctionComponent<Props> = props => {
 		</PanelBody>
 	);
 };
-
-export default Background;

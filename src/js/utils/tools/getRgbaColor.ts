@@ -12,7 +12,7 @@ export const getRgbaColor = (
 		return null;
 	}
 
-	if (!isUndefined("number")) {
+	if (!isUndefined(opacity)) {
 		opacity = Math.max(opacity, 0);
 		opacity = Math.min(opacity, 100);
 

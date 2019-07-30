@@ -1,8 +1,8 @@
-import l from "utils";
-import prepareSettings, {
+import {
+	prepareSettings,
 	settings_defaults,
 	settings_privates
-} from "../prepareSettings";
+} from "block/prepareSettings";
 
 const { defaultsDeep } = lodash;
 
@@ -27,7 +27,8 @@ describe("prepareSettings", () => {
 	});
 
 	it("should add a setting's not set properties with the default value", () => {
-		const settings = {
+		const settings: Partial<Settings> = {
+			// @ts-ignore Ignore so we can test.
 			content_maxwidth: {}
 		};
 		const settings_expected = {
@@ -66,7 +67,8 @@ describe("prepareSettings", () => {
 	});
 
 	it("should not add incorrect properties to a setting", () => {
-		const settings = {
+		const settings: Partial<Settings> = {
+			// @ts-ignore Ignore so we can test.
 			content_maxwidth: {
 				incorrect_prop_1: false,
 				incorrect_prop_2: 100
@@ -86,10 +88,12 @@ describe("prepareSettings", () => {
 	});
 
 	it("should not modify private properties of a setting", () => {
-		const settings = {
+		const settings: Partial<Settings> = {
+			// @ts-ignore Ignore so we can test.
 			content_maxwidth: {
 				step: 5
 			},
+			// @ts-ignore Ignore so we can test.
 			border_width: {
 				step: 5,
 				min: 15,
@@ -117,7 +121,8 @@ describe("prepareSettings", () => {
 	});
 
 	it("should not add incorrect settings", () => {
-		const settings = {
+		const settings: Partial<Settings> = {
+			// @ts-ignore Ignore so we can test.
 			content_maxwidth: {
 				step: 5
 			},

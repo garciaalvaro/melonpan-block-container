@@ -38,20 +38,12 @@ interface ImageRaw {
 		full: ImageSize;
 		large?: ImageSize;
 		medium?: ImageSize;
+		medium_large?: ImageSize;
 		thumbnail?: ImageSize;
 	};
 }
 
-interface Settings {
-	custom: any;
-	align: string;
-	content_align: string;
-	content_maxwidth: number;
-	content_color: string;
-	background_color: string;
-	background_color_opacity: number;
-	background_image: string;
-	background_fixed: boolean;
+interface Paddings {
 	padding: number;
 	padding_top: number;
 	padding_bottom: number;
@@ -66,6 +58,9 @@ interface Settings {
 	padding_right_small_screen: number;
 	padding_topbottom_small_screen: number;
 	padding_leftright_small_screen: number;
+}
+
+interface BorderShadow {
 	border_color: string;
 	border_color_opacity: number;
 	border_width: number;
@@ -74,67 +69,92 @@ interface Settings {
 	shadow_width: number;
 }
 
-interface Attributes extends Object, Omit<Settings, "background_image"> {
+interface Attributes extends Paddings, BorderShadow {
+	custom: any;
+	align: string;
+	content_align: string;
+	content_maxwidth: number;
+	content_color: string;
+	background_color: string;
+	background_color_opacity: number;
 	background_image_id: number;
 	background_image_url: string;
 	background_image_srcset: string;
 	background_image_alt: string;
+	background_fixed: boolean;
 }
 
-interface EditSaveProps extends Object {
-	attributes: BlockSettings;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
+interface AttributesDefinition extends Record<keyof Attributes, any> {}
+
+interface Setting {
+	default: any;
+	[key: string]: any;
 }
 
-interface BlockExtraProps extends Object {
+interface Settings
+	extends Record<
+		keyof Omit<
+			Attributes,
+			| "custom"
+			| "background_image_id"
+			| "background_image_url"
+			| "background_image_srcset"
+			| "background_image_alt"
+		>,
+		Setting
+	> {
+	background_image: any;
+	custom: any;
+}
+
+interface ExtraProps {
 	container: Object;
 	content: Object;
 	background: Object;
 }
 
-interface BlockSettings extends Object {
-	custom?: Object;
-	align?: Object;
-	content_align?: Object;
-	content_maxwidth?: Object;
-	content_color?: Object;
-	background_color?: Object;
-	background_image?: Object;
-	background_fixed?: Object;
-	background_color_opacity?: Object;
-	border_color?: Object;
-	border_color_opacity?: Object;
-	border_width?: Object;
-	shadow_color?: Object;
-	shadow_color_opacity?: Object;
-	shadow_width?: Object;
-	padding?: Object;
-	padding_top?: Object;
-	padding_bottom?: Object;
-	padding_left?: Object;
-	padding_right?: Object;
-	padding_topbottom?: Object;
-	padding_leftright?: Object;
-	padding_small_screen?: Object;
-	padding_top_small_screen?: Object;
-	padding_bottom_small_screen?: Object;
-	padding_left_small_screen?: Object;
-	padding_right_small_screen?: Object;
-	padding_topbottom_small_screen?: Object;
-	padding_leftright_small_screen?: Object;
-}
-
-interface Block extends Object {
+interface BlockRaw {
 	blocktype_props: {
 		name: string;
 		title: string;
-		icon: string | JSX.Element;
+		icon: string | JSX.Element | React.ReactNode;
 		category: string;
-		supports?: Object;
 	};
-	settings?: BlockSettings;
+	supports?: Object;
+	settings?: Partial<Settings>;
 	deprecated?: Object[];
 	innerblocks_props?: Object;
-	extra_props?: any; // Needed
+	extra_props?: Partial<ExtraProps>;
 }
+
+interface Block {
+	blocktype_props: {
+		name: string;
+		title: string;
+		icon: string | JSX.Element | React.ReactNode;
+		category: string;
+		supports?: Object;
+		deprecated: Object[];
+		attributes: Partial<Attributes>;
+	};
+	settings: Partial<Settings>;
+	innerblocks_props: Object;
+	extra_props: ExtraProps;
+}
+
+interface BlockProps {
+	values: Partial<Attributes>;
+	attributes: Block["attributes"];
+	settings: Block["settings"];
+	innerblocks_props: Block["innerblocks_props"];
+	extra_props: Block["extra_props"];
+	is_edit: boolean;
+	is_test?: boolean;
+}
+
+interface BlockPropsEdit extends BlockProps {
+	className: string;
+	setAttributes: Function;
+}
+
+interface BlockPropsSave extends BlockProps {}

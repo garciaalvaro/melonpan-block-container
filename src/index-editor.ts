@@ -1,4 +1,4 @@
-import "./js/core/register-category";
-import "./js/core/register-block";
-import "./js/core/register-hook";
-import "./js/core/filter-image_color_palette";
+import "init/register-category";
+import "init/register-block";
+import "init/register-hook";
+import "init/filter-image_color_palette";

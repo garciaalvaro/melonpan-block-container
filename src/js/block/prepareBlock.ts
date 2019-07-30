@@ -1,42 +1,24 @@
-import l from "utils";
-import prepareAttributes from "./prepareAttributes";
-import prepareSettings from "./prepareSettings";
-import prepareDeprecated from "./prepareDeprecated";
-import prepareExtraProps from "./prepareExtraProps";
+import { prepareAttributes } from "./prepareAttributes";
+import { prepareSettings } from "./prepareSettings";
+import { prepareDeprecated } from "./prepareDeprecated";
+import { prepareExtraProps } from "./prepareExtraProps";
 
 // Normalize the block props.
-const prepareBlock = (block: Block): Object => {
-	// Set defaults
-	block.settings = block.settings ? block.settings : {};
-	block.supports = block.supports ? block.supports : {};
-	block.deprecated = block.deprecated ? block.deprecated : [];
-	block.extra_props = block.extra_props ? block.extra_props : {};
-	block.innerblocks_props = block.innerblocks_props
-		? block.innerblocks_props
-		: {};
-
-	// Prepare each property.
-	block.settings = prepareSettings(block.settings);
-	block.extra_props = prepareExtraProps(block.extra_props);
-	block.attributes = prepareAttributes(block.settings);
-	block.deprecated = prepareDeprecated(
-		block.deprecated,
-		block.settings,
-		block.extra_props
-	);
-
-	const {
-		attributes,
-		deprecated,
-		supports,
-		extra_props,
+export const prepareBlock = (block_raw: BlockRaw): Block => {
+	const settings = prepareSettings(block_raw.settings || {});
+	const attributes = prepareAttributes(settings);
+	const supports = block_raw.supports || {};
+	const extra_props = prepareExtraProps(block_raw.extra_props || {});
+	const innerblocks_props = block_raw.innerblocks_props || {};
+	const deprecated = prepareDeprecated(
+		block_raw.deprecated || [],
 		settings,
-		innerblocks_props
-	} = block;
+		extra_props
+	);
 
 	return {
 		blocktype_props: {
-			...block.blocktype_props,
+			...block_raw.blocktype_props,
 			attributes,
 			deprecated,
 			supports

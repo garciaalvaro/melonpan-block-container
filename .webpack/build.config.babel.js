@@ -21,7 +21,9 @@ export default {
 	resolve: {
 		alias: {
 			Components: __dirname + "/../src/js/Components",
-			utils: __dirname + "/../src/js/utils"
+			utils: __dirname + "/../src/js/utils",
+			init: __dirname + "/../src/js/init",
+			block: __dirname + "/../src/js/block"
 		}
 	},
 	externals: {

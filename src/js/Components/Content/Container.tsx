@@ -1,18 +1,9 @@
-import l, { Div } from "utils";
-import Background from "./Background";
-import Content from "./Content";
-
-interface Props extends Object {
-	innerblocks_props?: Object;
-	attributes: Object;
-	values: Object;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
-	is_edit: boolean;
-}
+import { Div } from "utils/components";
+import { Background } from "./Background";
+import { Content } from "./Content";
 
 const { isBoolean, toString, map, deburr } = lodash;
-const getCustomAttClasses = (custom: Object) => {
+const getCustomAttClasses = (custom: Attributes["custom"]) => {
 	const custom_classes = map(
 		custom,
 		(value: string | number | boolean, key: string) => {
@@ -33,11 +24,13 @@ const getCustomAttClasses = (custom: Object) => {
 	return custom_classes;
 };
 
-const Container: React.FunctionComponent<Props> = props => {
+export const Container: React.ComponentType<
+	BlockPropsEdit | BlockPropsSave
+> = props => {
 	const { extra_props, values } = props;
 	const {
 		className: extra_props_className,
-		...rest_extra_props
+		...extra_props_rest
 	} = extra_props.container;
 	const custom_classes = values.custom
 		? getCustomAttClasses(values.custom)
@@ -64,7 +57,7 @@ const Container: React.FunctionComponent<Props> = props => {
 
 	return (
 		<Div
-			{...rest_extra_props}
+			{...extra_props_rest}
 			classes={classes}
 			classes_from_value={{ classes: classes_from_value, values }}
 		>
@@ -73,5 +66,3 @@ const Container: React.FunctionComponent<Props> = props => {
 		</Div>
 	);
 };
-
-export default Container;

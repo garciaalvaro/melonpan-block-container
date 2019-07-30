@@ -1,7 +1,7 @@
-import l, { getValues } from "utils";
-import EditSave from "../EditSave";
-import prepareBlock from "../../../block/prepareBlock";
-import melonpan_block_container from "../../../core/register-block";
+import { getValues } from "utils/tools/getValues";
+import { EditSave } from "Components/EditSave/EditSave";
+import { prepareBlock } from "block/prepareBlock";
+import { melonpan_block_container } from "init/register-block";
 import { shallow } from "enzyme";
 
 const { mapValues, compact, defaults, map } = lodash;
@@ -28,7 +28,7 @@ const getHTML = (modified_attributes?: Object) => {
 		`wp-block-${blocktype_props.name.replace("/", "-")}`,
 		attributes.align ? `align${attributes.align}` : null
 	]).join(" ");
-	const Testing: React.FunctionComponent = () => (
+	const Testing: React.ComponentType = () => (
 		<div className={wrapper_class}>
 			<EditSave {...props} />
 		</div>

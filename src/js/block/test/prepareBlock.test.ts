@@ -1,9 +1,8 @@
-import l from "utils";
-import prepareBlock from "../prepareBlock";
-import melonpan_block_container from "../../core/register-block";
-import prepareAttributes from "../prepareAttributes";
-import prepareExtraProps from "../prepareExtraProps";
-import prepareSettings from "../prepareSettings";
+import { prepareBlock } from "block/prepareBlock";
+import { melonpan_block_container } from "init/register-block";
+import { prepareAttributes } from "block/prepareAttributes";
+import { prepareExtraProps } from "block/prepareExtraProps";
+import { prepareSettings } from "block/prepareSettings";
 
 describe("prepareBlock", () => {
 	it("should return expected object from custom block, few props", () => {

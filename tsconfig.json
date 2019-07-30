@@ -17,8 +17,10 @@
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
+			"Components/*": ["src/js/Components/*"],
 			"utils/*": ["src/js/utils/*"],
-			"Components/*": ["src/js/Components/*"]
+			"init/*": ["src/js/init/*"],
+			"block/*": ["src/js/block/*"]
 		},
 		// https://stackoverflow.com/a/52404148
 		"skipLibCheck": true

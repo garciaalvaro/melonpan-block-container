@@ -1,5 +1,4 @@
-import l from "utils";
-import prepareExtraProps from "../prepareExtraProps";
+import { prepareExtraProps } from "block/prepareExtraProps";
 
 describe("prepareExtraProps", () => {
 	it("should return defaults when receiving an empty object", () => {
@@ -25,6 +24,7 @@ describe("prepareExtraProps", () => {
 			background: { className: [] }
 		};
 
+		// @ts-ignore Ignore so we can test.
 		expect(prepareExtraProps(testing)).toStrictEqual(expected);
 	});
 
@@ -39,9 +39,9 @@ describe("prepareExtraProps", () => {
 			content: { className: [] },
 			container: { className: [] },
 			background: {
-				id: "#aaa",
+				id: "!aaa",
 				aaa: true,
-				className: ["#aaa", "#bbb"],
+				className: ["!aaa", "!bbb"],
 				"data-a": 123
 			}
 		};

@@ -1,9 +1,7 @@
-import l from "utils";
-
-const { isObject, isUndefined, reduce, pick, mapValues, keys } = lodash;
+const { isObject, reduce, pick, mapValues, keys, defaults } = lodash;
 
 // Object containing settings properties meant to be private.
-const settings_privates = {
+export const settings_privates: Partial<Record<keyof Settings, any>> = {
 	content_maxwidth: {
 		step: 10
 	},
@@ -71,8 +69,7 @@ const settings_privates = {
 };
 
 // Array of all available settings.
-let settings_defaults: Object;
-settings_defaults = {
+const settings_defaults_raw: Settings = {
 	custom: {},
 	align: {
 		default: "",
@@ -217,33 +214,38 @@ settings_defaults = {
 		default: 0
 	}
 };
+
 // Assign the show_control property to each setting.
-settings_defaults = mapValues(settings_defaults, setting => ({
-	...setting,
-	show_control: true
-}));
+export const settings_defaults: Settings = mapValues(
+	settings_defaults_raw,
+	setting => ({
+		...setting,
+		show_control: true
+	})
+);
 
 // Normalize the settings passed.
-const prepareSettings = (settings: BlockSettings) => {
-	const defaults: Object = settings_defaults;
-	const privates: Object = settings_privates;
-	let settings_prepared = {};
-
+export const prepareSettings = (settings: Partial<Settings>) => {
+	let custom = settings.custom;
 	// Exclude not allowed settings.
-	settings_prepared = pick(settings, keys(defaults));
+	const settings_only_valid_keys = pick(settings, keys(settings_defaults));
 
 	// Filter allowed keys in each setting.
-	settings_prepared = mapValues(
-		settings_prepared,
-		(setting: Object, key: string) => {
-			// Exclude not allowed properties.
-			setting = pick(setting, keys(defaults[key]));
-			// Fill not-set properties with the ones from defaults.
-			setting = { ...defaults[key], ...setting };
+	const settings_with_valid_props: Partial<Settings> = mapValues(
+		settings_only_valid_keys,
+		(setting, setting_key) => {
+			const key = setting_key as keyof Settings;
 
-			if (!isUndefined(privates[key])) {
+			if (key in settings_defaults) {
+				// Exclude not allowed properties.
+				setting = pick(setting, keys(settings_defaults[key]));
+				// Fill not-set properties with the ones from settings_defaults.
+				setting = { ...settings_defaults[key], ...setting };
+			}
+
+			if (key in settings_privates) {
 				// Assign private properties.
-				setting = { ...setting, ...privates[key] };
+				setting = { ...setting, ...settings_privates[key] };
 			}
 
 			return setting;
@@ -251,29 +253,25 @@ const prepareSettings = (settings: BlockSettings) => {
 	);
 
 	// Assign custom attribute.
-	if (isObject(settings.custom)) {
-		const custom = reduce(
-			settings.custom,
-			(acc: Object, value: Object, key: string) => {
+	if (isObject(custom)) {
+		settings_with_valid_props.custom = reduce<Object, Object>(
+			custom,
+			(acc, value, key) => {
 				if (!isObject(value)) {
 					return acc;
 				}
 
 				value = pick(value, ["default"]);
-				value = lodash.defaults({}, value, { default: "" });
+				value = defaults({}, value, { default: "" });
 
-				acc[key] = value;
-
-				return acc;
+				return {
+					...acc,
+					[key]: value
+				};
 			},
 			{}
 		);
-
-		settings_prepared = { ...settings_prepared, custom };
 	}
 
-	return settings_prepared;
+	return settings_with_valid_props;
 };
-
-export default prepareSettings;
-export { settings_defaults, settings_privates };

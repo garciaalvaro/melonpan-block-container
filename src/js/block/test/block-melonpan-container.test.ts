@@ -1,6 +1,5 @@
-import l from "utils";
-import isValid from "./block-utils";
-import melonpan_block_container from "../../core/register-block";
+import { isValid } from "./block-utils";
+import { melonpan_block_container } from "init/register-block";
 
 describe("block: my-plugin/my-block", () => {
 	it("html from save() should be correct, plain without modifying any attribute", () => {

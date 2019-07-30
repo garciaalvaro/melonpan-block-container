@@ -1,20 +1,24 @@
-import l from "utils";
+const { castArray, pick, defaults, isString } = lodash;
 
-const { castArray, pick, defaults } = lodash;
-
-const addHash = (props: string) => {
+const addPrefixExclude = (props: string) => {
 	const array = props.split(" ");
 
 	if (array.length === 1) {
-		return `#${props}`;
+		return `!${props}`;
 	}
 
-	return array.map((prop: string) => `#${prop}`);
+	return array.map((prop: string) => `!${prop}`);
 };
 
-const prepareExtraProps = (extra_props: Object): BlockExtraProps => {
-	const properties = ["container", "content", "background"];
-	const extra_props_prepared: BlockExtraProps = defaults(
+export const prepareExtraProps = (
+	extra_props: Partial<ExtraProps>
+): ExtraProps => {
+	const properties: ("container" | "content" | "background")[] = [
+		"container",
+		"content",
+		"background"
+	];
+	const extra_props_prepared: ExtraProps = defaults(
 		{},
 		pick(extra_props, properties),
 		{
@@ -25,13 +29,15 @@ const prepareExtraProps = (extra_props: Object): BlockExtraProps => {
 	);
 
 	properties.forEach(el => {
-		if (typeof extra_props_prepared[el].id === "string") {
-			extra_props_prepared[el].id = addHash(extra_props_prepared[el].id);
+		if (isString(extra_props_prepared[el].id)) {
+			extra_props_prepared[el].id = addPrefixExclude(
+				extra_props_prepared[el].id
+			);
 		}
 
-		if (typeof extra_props_prepared[el].className === "string") {
+		if (isString(extra_props_prepared[el].className)) {
 			extra_props_prepared[el].className = castArray(
-				addHash(extra_props_prepared[el].className)
+				addPrefixExclude(extra_props_prepared[el].className)
 			);
 		} else {
 			extra_props_prepared[el].className = [];
@@ -40,5 +46,3 @@ const prepareExtraProps = (extra_props: Object): BlockExtraProps => {
 
 	return extra_props_prepared;
 };
-
-export default prepareExtraProps;

@@ -1,11 +1,20 @@
-import l, { plugin_namespace, plugin_title, icons } from "utils";
+import { Icon } from "utils/components";
+import {
+	plugin_namespace,
+	plugin_title,
+	block_category
+} from "utils/data/plugin";
 
-const melonpan_block_container = {
+interface MelonpanBlockRaw extends BlockRaw {
+	settings: Partial<Settings>;
+}
+
+export const melonpan_block_container: MelonpanBlockRaw = {
 	blocktype_props: {
 		name: `${plugin_namespace}/container`,
 		title: plugin_title,
-		icon: icons.block,
-		category: "melonpan"
+		icon: () => <Icon icon="logo" />,
+		category: block_category
 	},
 	settings: {
 		align: {
@@ -147,7 +156,5 @@ const melonpan_block_container = {
 wp.hooks.addFilter(
 	"melonpanBlockContainer.createBlock",
 	`${plugin_namespace}/container`,
-	(blocks: Block[]) => [...blocks, melonpan_block_container]
+	(blocks: BlockRaw[]) => [...blocks, melonpan_block_container]
 );
-
-export default melonpan_block_container;

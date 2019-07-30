@@ -1,25 +1,21 @@
-import l, { getValues } from "utils";
-import prepareBlock from "./prepareBlock";
-import EditSave from "../Components/EditSave/EditSave";
+import { getValues } from "utils/tools/getValues";
+import { prepareBlock } from "./prepareBlock";
+import { EditSave } from "Components/EditSave/EditSave";
 
 // Register block function helper.
-const registerBlock = (block: Block) => {
+export const registerBlock = (block_raw: BlockRaw) => {
 	// Normalize the block.
-	const block_prepared = prepareBlock(block);
+	const block = prepareBlock(block_raw);
 
-	const {
-		blocktype_props,
-		settings,
-		innerblocks_props,
-		extra_props
-	} = block_prepared;
+	const { blocktype_props, settings, innerblocks_props, extra_props } = block;
+
 	const config = {
 		...blocktype_props,
 		supports: {
 			...blocktype_props.supports,
-			align: settings.align ? settings.align.options : false
+			align: settings.align ? (settings.align.options as string[]) : false
 		},
-		edit: (props: any) => {
+		edit: (props: BlockPropsEdit) => {
 			const values = getValues(settings, props.attributes, true);
 
 			return (
@@ -35,7 +31,7 @@ const registerBlock = (block: Block) => {
 				</div>
 			);
 		},
-		save: (props: EditSaveProps) => {
+		save: (props: BlockPropsSave) => {
 			const values = getValues(settings, props.attributes, false);
 
 			return (
@@ -52,7 +48,6 @@ const registerBlock = (block: Block) => {
 		}
 	};
 
+	// @ts-ignore TODO
 	return wp.blocks.registerBlockType(blocktype_props.name, config);
 };
-
-export default registerBlock;

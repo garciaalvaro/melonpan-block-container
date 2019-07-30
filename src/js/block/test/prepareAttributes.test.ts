@@ -1,19 +1,21 @@
-import l from "utils";
-import prepareSettings, { settings_defaults } from "../prepareSettings";
-import prepareAttributes, { attributes_defaults } from "../prepareAttributes";
+import { prepareSettings, settings_defaults } from "block/prepareSettings";
+import {
+	prepareAttributes,
+	attributes_defaults
+} from "block/prepareAttributes";
 
-const { cloneDeep, mapValues, isUndefined } = lodash;
+const { cloneDeep, mapValues } = lodash;
 
 describe("prepareAttributes", () => {
 	it("should return the default attributes, given default settings", () => {
-		const settings: BlockSettings = prepareSettings(settings_defaults);
-		let attributes;
+		const settings = prepareSettings(settings_defaults);
+		let attributes: Partial<Attributes>;
 		attributes = cloneDeep(attributes_defaults);
 		attributes = mapValues(attributes, (value, key) => {
-			if (settings[key] && !isUndefined(settings[key].default)) {
+			if (key in settings && "default" in settings[key as keyof Settings]) {
 				return {
 					...value,
-					default: settings[key].default
+					default: settings[key as keyof Settings].default
 				};
 			}
 			return value;
@@ -65,7 +67,8 @@ describe("prepareAttributes", () => {
 	});
 
 	it("should not let a setting modify private properties", () => {
-		const settings = {
+		const settings: Partial<Settings> = {
+			// @ts-ignore Ignore so we can test.
 			padding_topbottom_small_screen: {
 				type: "boolean"
 			}

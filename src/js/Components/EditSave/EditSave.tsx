@@ -1,15 +1,5 @@
-import l from "utils";
-import Controls from "../Controls/Controls";
-import Container from "../Content/Container";
-
-interface Props extends Object {
-	innerblocks_props?: Object;
-	attributes: Object;
-	values: Object;
-	settings: BlockSettings;
-	extra_props: BlockExtraProps;
-	is_edit: boolean;
-}
+import { Controls } from "Components/Controls/Controls";
+import { Container } from "Components/Content/Container";
 
 const { Fragment } = wp.element;
 
@@ -17,13 +7,13 @@ const { Fragment } = wp.element;
 // the block registration function. The only difference is the is_edit prop
 // which will add or not the Controls component and
 // make use of Innerblocks or Innerblocks.Content component.
-const EditSave: React.FunctionComponent<Props> = props => {
+export const EditSave: React.ComponentType<
+	BlockPropsSave | BlockPropsEdit
+> = props => {
 	return (
 		<Fragment>
-			{props.is_edit && <Controls {...props} />}
+			{props.is_edit && <Controls {...props as BlockPropsEdit} />}
 			<Container {...props} />
 		</Fragment>
 	);
 };
-
-export default EditSave;
