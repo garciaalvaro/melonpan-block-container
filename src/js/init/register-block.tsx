@@ -9,7 +9,17 @@ interface MelonpanBlockRaw extends BlockRaw {
 	settings: Partial<Settings>;
 }
 
+const editor = wp.blockEditor ? wp.blockEditor : wp.editor;
+const { InnerBlocks } = editor;
+
 export const melonpan_block_container: MelonpanBlockRaw = {
+	// @ts-ignore InnerBlock should have ButtonBlockAppender.
+	innerblocks_props: InnerBlocks.ButtonBlockAppender
+		? {
+				// @ts-ignore InnerBlock should have ButtonBlockAppender.
+				renderAppender: () => <InnerBlocks.ButtonBlockAppender />
+		  }
+		: {},
 	blocktype_props: {
 		name: `${plugin_namespace}/container`,
 		title: plugin_title,
