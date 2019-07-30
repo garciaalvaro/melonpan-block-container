@@ -151,14 +151,18 @@ export const Content: React.ComponentType<BlockPropsEdit> = withState<
 						)}
 
 					{content_color &&
-						!isUndefined(values.content_color) &&
+						"content_color" in values &&
 						content_color.show_control && (
 							<BaseControl
 								id={addPrefix("content_color")}
 								label={
 									<Fragment>
 										<Span>{__("Text color")}</Span>
-										<ColorIndicator colorValue={values.content_color} />
+										<ColorIndicator
+											colorValue={
+												values["content_color" as keyof typeof values]
+											}
+										/>
 									</Fragment>
 								}
 								className={addPrefix([
@@ -170,7 +174,7 @@ export const Content: React.ComponentType<BlockPropsEdit> = withState<
 								<ColorPalette
 									colors={content_color.colors}
 									// @ts-ignore. Value should accept string.
-									value={values.content_color}
+									value={values["content_color" as keyof typeof values]}
 									// @ts-ignore. Value should be string.
 									onChange={(value: string) =>
 										setAttributes({

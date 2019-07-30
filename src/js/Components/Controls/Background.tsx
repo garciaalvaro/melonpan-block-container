@@ -56,14 +56,16 @@ export const Background: React.ComponentType<BlockPropsEdit> = props => {
 			initialOpen={false}
 		>
 			{background_color &&
-				!isUndefined(values.background_color) &&
+				"background_color" in values &&
 				background_color.show_control && (
 					<BaseControl
 						id={addPrefix("background_color")}
 						label={
 							<Fragment>
 								<Span>{__("Background color")}</Span>
-								<ColorIndicator colorValue={values.background_color} />
+								<ColorIndicator
+									colorValue={values["background_color" as keyof typeof values]}
+								/>
 							</Fragment>
 						}
 						className={addPrefix([
@@ -75,7 +77,7 @@ export const Background: React.ComponentType<BlockPropsEdit> = props => {
 						<ColorPalette
 							colors={background_color.colors}
 							// @ts-ignore. Value should accept string.
-							value={values.background_color}
+							value={values["background_color" as keyof typeof values]}
 							// @ts-ignore. Value should be string.
 							onChange={(value: string) =>
 								setAttributes({

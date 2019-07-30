@@ -42,41 +42,41 @@ export const ShadowBorder: React.ComponentType<BlockPropsEdit> = props => {
 						}
 					/>
 				)}
-			{border_color &&
-				!isUndefined(values.border_color) &&
-				border_color.show_control && (
-					<BaseControl
-						id={addPrefix("border_color")}
-						label={
-							<Fragment>
-								<Span>{__("Border color")}</Span>
-								<ColorIndicator colorValue={values.border_color} />
-							</Fragment>
+			{border_color && "border_color" in values && border_color.show_control && (
+				<BaseControl
+					id={addPrefix("border_color")}
+					label={
+						<Fragment>
+							<Span>{__("Border color")}</Span>
+							<ColorIndicator
+								colorValue={values["border_color" as keyof typeof values]}
+							/>
+						</Fragment>
+					}
+					className={addPrefix([
+						"border_color",
+						"control",
+						"control-colorpalette"
+					])}
+				>
+					<ColorPalette
+						colors={border_color.colors}
+						// @ts-ignore. Value should accept string.
+						value={values["border_color" as keyof typeof values]}
+						// @ts-ignore. Value should be string.
+						onChange={(value: string) =>
+							setAttributes({
+								border_color:
+									isUndefined(value) &&
+									settings.border_color &&
+									settings.border_color.default !== ""
+										? ""
+										: value
+							})
 						}
-						className={addPrefix([
-							"border_color",
-							"control",
-							"control-colorpalette"
-						])}
-					>
-						<ColorPalette
-							colors={border_color.colors}
-							// @ts-ignore. Value should accept string.
-							value={values.border_color}
-							// @ts-ignore. Value should be string.
-							onChange={(value: string) =>
-								setAttributes({
-									border_color:
-										isUndefined(value) &&
-										settings.border_color &&
-										settings.border_color.default !== ""
-											? ""
-											: value
-								})
-							}
-						/>
-					</BaseControl>
-				)}
+					/>
+				</BaseControl>
+			)}
 
 			{border_color_opacity &&
 				!isUndefined(values.border_color_opacity) &&
@@ -118,41 +118,41 @@ export const ShadowBorder: React.ComponentType<BlockPropsEdit> = props => {
 					/>
 				)}
 
-			{shadow_color &&
-				!isUndefined(values.shadow_color) &&
-				shadow_color.show_control && (
-					<BaseControl
-						id={addPrefix("shadow_color")}
-						label={
-							<Fragment>
-								<Span>{__("Shadow color")}</Span>
-								<ColorIndicator colorValue={values.shadow_color} />
-							</Fragment>
+			{shadow_color && "shadow_color" in values && shadow_color.show_control && (
+				<BaseControl
+					id={addPrefix("shadow_color")}
+					label={
+						<Fragment>
+							<Span>{__("Shadow color")}</Span>
+							<ColorIndicator
+								colorValue={values["shadow_color" as keyof typeof values]}
+							/>
+						</Fragment>
+					}
+					className={addPrefix([
+						"shadow_color",
+						"control",
+						"control-colorpalette"
+					])}
+				>
+					<ColorPalette
+						colors={shadow_color.colors}
+						// @ts-ignore. Value should accept string.
+						value={values["shadow_color" as keyof typeof values]}
+						// @ts-ignore. Value should be string.
+						onChange={(value: string) =>
+							setAttributes({
+								shadow_color:
+									isUndefined(value) &&
+									settings.shadow_color &&
+									settings.shadow_color.default !== ""
+										? ""
+										: value
+							})
 						}
-						className={addPrefix([
-							"shadow_color",
-							"control",
-							"control-colorpalette"
-						])}
-					>
-						<ColorPalette
-							colors={shadow_color.colors}
-							// @ts-ignore. Value should accept string.
-							value={values.shadow_color}
-							// @ts-ignore. Value should be string.
-							onChange={(value: string) =>
-								setAttributes({
-									shadow_color:
-										isUndefined(value) &&
-										settings.shadow_color &&
-										settings.shadow_color.default !== ""
-											? ""
-											: value
-								})
-							}
-						/>
-					</BaseControl>
-				)}
+					/>
+				</BaseControl>
+			)}
 
 			{shadow_color_opacity &&
 				!isUndefined(values.shadow_color_opacity) &&
