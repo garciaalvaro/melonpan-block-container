@@ -1,18 +1,18 @@
 === Melonpan Block - Container ===
 Contributors: melonpan
 Tags: gutenberg, blocks, editor, container, innerblocks
-Requires at least: 5.0
+Requires at least: 5.1
 Tested up to: 5.2
-Stable tag: 1.1.1
-Requires PHP: 5.6
+Stable tag: 1.2.0
+Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Container block with settings. Developers may also register their own block types taking advantage of the plugin settings and controls.
+Container block with settings, that can have other blocks nested.
 
 == Description ==
 
-This block is a container that can have other blocks nested. It comes with the following settings:
+This plugin provides a container block which can have other blocks nested. It comes with the following settings:
 
 * Background image, fixed, color & opacity
 * Content align, max-width, text color
@@ -43,16 +43,16 @@ Installation from the WordPress admin.
 
 == Frequently Asked Questions ==
 
-= How can I use the filter to register my own block type? =
+= Registering a custom block =
 
-The plugin comes with a filter to register your own block type extending this one. This way your block can make use of the plugin settings.
+The plugin comes with a filter that lets you register your own block type extending this one. This way your block can make use of the plugin settings and controls.
 
 **Notes**
-You can choose from the available settings, listed below, and assign the block's InnerBlocks properties to customize it.
-You may also pass your own attributes, inside the **custom** attribute. For more info check *How can I add a custom attribute?*.
+You can choose from the available settings, listed below, and assign the block’s InnerBlocks properties to customize it.
+You may also pass your own attributes, inside the **custom** attribute. For more info check *Adding a custom attribute*.
 
 **Steps**
-First, you need to [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
+First, [enqueue your script in the editor](https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/).
 The script needs to have *'wp-hooks'* as a dependency.
 
 Inside your script call the filter in the following way (make sure *Melonpan Block - Container* plugin is active):
@@ -90,7 +90,7 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
             // Set the "show_control" property to false if you want to apply the setting
             // with the default value but hide the control from the editor.
             settings: {
-                // For more info check the section "How can I add a custom attribute?".
+                // For more info check the section "Adding a custom attribute".
                 custom: {
                     example_attribute_name: { default: "value_A" },
                     another_example_attribute_name: { default: true }
@@ -296,7 +296,7 @@ Inside your script call the filter in the following way (make sure *Melonpan Blo
     });
 
 
-= How can I add a custom attribute? =
+= Adding a custom attribute =
 
 You may include custom attributes, when creating a block type through the plugins filter.
 This setting is meant to be a helper that adds a class with the name and value of the attribute.
@@ -310,7 +310,7 @@ If the attribute is a *string* or *number* the class will include the name and t
 If the attribute is a *boolean* the class will include the name and *enabled* or *disabled* (example_attribute_name => **.mbc-example_attribute_name-enabled**).
 
 
-= How can I add a control to my custom attribute? =
+= Adding a control to a custom attribute =
 
 To add a control for your custom attribute use Gutenberg filters. Remember to remove the control if you deprecate the attribute.
 Here is an example of adding a control:
@@ -371,6 +371,11 @@ Here is an example of adding a control:
 
 
 == Changelog ==
+
+= 1.2.0 =
+* Added ButtonBlockAppender in block InnerBlocks, for future WordPress version.
+* Fixed dependencies. Use wp-block-editor instead of wp-editor if its available.
+* Cleaned TypeScript types, code and tests.
 
 = 1.1.1 =
 * Fix bug for blocks created using the hook which had default colors assigned. In the colorpicker clicking clear to assign no color, saved undefined which was interpreted by the save function (after page reload) as the default value, thus throwing an incompatibility error.

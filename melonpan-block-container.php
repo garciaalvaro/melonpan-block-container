@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Melonpan Block - Container
  * Plugin URI: https://wordpress.org/plugins/melonpan-block-container/
- * Description: Container block for Gutenberg editor.
+ * Description: Container block with settings, that can have other blocks nested.
  * Author: melonpan
- * Version: 1.1.1
+ * Version: 1.2.0
  * License: GPL3+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
@@ -15,7 +15,7 @@ namespace MELONPANBLOCKCONTAINER;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.1.1' );
+	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.2.0' );
 }
 if ( ! defined( __NAMESPACE__ . '\PLUGIN_NAME' ) ) {
 	define( __NAMESPACE__ . '\PLUGIN_NAME', 'melonpan-block-container' );
@@ -38,7 +38,6 @@ function enqueue_front() {
 		array(),
 		PLUGIN_VERSION
 	);
-
 }
 
 /**
@@ -66,7 +65,7 @@ function enqueue_editor() {
 			'wp-blocks',
 			// If wp-block-editor is registered (from WP 5.2)
 			// enqueue it. Otherwise enqueue wp-editor.
-			null !== $wp_scripts->registered['wp-block-editor']
+			isset( $wp_scripts->registered['wp-block-editor'] )
 				? 'wp-block-editor'
 				: 'wp-editor',
 			'wp-components',
