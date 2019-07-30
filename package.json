@@ -9,7 +9,8 @@
 		"copy": "webpack --mode production --config ./.webpack/copy.config.babel.js && rm _extras/release/_temp.js",
 		"version": "webpack --mode production --config ./.webpack/version.config.babel.js && rm _temp.js",
 		"release": "npm run version && npm run prod && npm run copy",
-		"type": "tsc"
+		"type": "tsc",
+		"test": "jest --watch"
 	},
 	"dependencies": {
 		"tinycolor2": "^1.4.1"

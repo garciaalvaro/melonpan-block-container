@@ -98,6 +98,9 @@ describe("prepareBlock", () => {
 	it("should return expected object from melonpan-block/container", () => {
 		const testing = prepareBlock(melonpan_block_container);
 
+		// TODO: Test renderAppender.
+		testing.innerblocks_props = {};
+
 		const prepared_settings = prepareSettings(
 			melonpan_block_container.settings
 		);
