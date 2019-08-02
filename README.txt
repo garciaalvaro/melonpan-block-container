@@ -393,14 +393,3 @@ Here is an example of adding a control:
 == Credits ==
 
 Screenshot background image belongs to [Sander Wehkamp](https://unsplash.com/@sanderwehkamp).
-
-
-== Other plugins ==
-
-If you found this plugin useful, you may also like these other plugins I created for the new Gutenberg editor:
-
-* [The Typography](https://wordpress.org/plugins/the-typography/): Add Typography to your site using Google Fonts. Select Blocks or enter CSS selectors.
-* [Post Meta Controls](https://wordpress.org/plugins/post-meta-controls/): Register, save, modify and get Meta data in the Gutenberg editor using controls.
-* [Demo Content for Blocks](https://wordpress.org/plugins/demo-content-for-blocks/): Add blocks with demo/dummy content to your post in one click.
-
-Thanks!

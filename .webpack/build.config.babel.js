@@ -1,13 +1,9 @@
-const pkg = require("../package.json");
-const webpack = require("webpack");
+const { name, version, description, homepage } = require("../package.json");
 const TerserJSPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BannerPlugin = webpack.BannerPlugin;
+const { BannerPlugin, DefinePlugin } = require("webpack");
 const nib = require("nib");
-const DefinePlugin = webpack.DefinePlugin;
-
-const { name, version, description, homepage } = pkg;
 
 export default {
 	entry: {
