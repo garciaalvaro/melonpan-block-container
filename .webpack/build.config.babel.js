@@ -7,8 +7,8 @@ const nib = require("nib");
 
 export default {
 	entry: {
-		front: "./src/index-front.styl",
-		editor: ["./src/index-editor.ts", "./src/index-editor.styl"]
+		front: "./src/index-front.ts",
+		editor: "./src/index-editor.ts"
 	},
 	output: {
 		path: __dirname + "/../build",
@@ -16,16 +16,26 @@ export default {
 	},
 	resolve: {
 		alias: {
-			Components: __dirname + "/../src/js/Components",
-			utils: __dirname + "/../src/js/utils",
-			init: __dirname + "/../src/js/init",
-			block: __dirname + "/../src/js/block"
+			Components: __dirname + "/../src/Components",
+			block: __dirname + "/../src/block",
+			init: __dirname + "/../src/init",
+			utils: __dirname + "/../src/utils"
 		}
 	},
 	externals: {
 		lodash: "lodash",
 		react: "React",
-		"react-dom": "ReactDOM"
+		"react-dom": "ReactDOM",
+		"@wordpress/block-editor": "wp.blockEditor",
+		"@wordpress/block-serialization-default-parser":
+			"wp.blockSerializationDefaultParser",
+		"@wordpress/blocks": "wp.blocks",
+		"@wordpress/components": "wp.components",
+		"@wordpress/data": "wp.data",
+		"@wordpress/editor": "wp.editor",
+		"@wordpress/element": "wp.element",
+		"@wordpress/hooks": "wp.hooks",
+		"@wordpress/i18n": "wp.i18n"
 	},
 	module: {
 		rules: [

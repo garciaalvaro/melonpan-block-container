@@ -17,13 +17,11 @@
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
-			"Components/*": ["src/js/Components/*"],
-			"utils/*": ["src/js/utils/*"],
-			"init/*": ["src/js/init/*"],
-			"block/*": ["src/js/block/*"]
-		},
-		// https://stackoverflow.com/a/52404148
-		"skipLibCheck": true
+			"utils/*": ["src/utils/*"],
+			"init/*": ["src/init/*"],
+			"block/*": ["src/block/*"],
+			"Components/*": ["src/Components/*"]
+		}
 	},
 	"include": ["src", "types.d.ts"],
 	"exclude": ["node_modules", ".webpack/*"],

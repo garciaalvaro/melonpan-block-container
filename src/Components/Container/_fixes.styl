@@ -1,0 +1,16 @@
+/**
+ * Container - Fixes
+ */
+
+// Internet explorer 11 doesn't support object-fit property.
+// We assigned a background-image property as a fallback for it,
+// so we need to hide the image which has the object-fit applied.
+/* https://stackoverflow.com/a/20541859 | CC BY-SA 3.0 */
+_:-ms-fullscreen, :root .mbc-background-image { display: none; }
+
+// Touch devices don't handle correctly a fixed background while scrolling
+// so we assign the scroll value to display the image correctly.
+@media screen and (pointer: coarse) and (max-device-width: 1024px)
+
+    .mbc-background_fixed-enabled
+        background-attachment scroll

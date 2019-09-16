@@ -1,32 +1,21 @@
 // Console log shortcut
 declare const l: Function;
 
-// Lodash
-declare const lodash: typeof import("lodash");
-
-// Wordpress
-declare const wp: {
-	blockEditor: typeof import("wordpress__block-editor");
-	blocks: typeof import("wordpress__blocks");
-	blockSerializationDefaultParser: typeof import("wordpress__block-serialization-default-parser");
-	components: typeof import("wordpress__components");
-	compose: typeof import("wordpress__compose");
-	data: typeof import("wordpress__data");
-	editor: typeof import("wordpress__editor");
-	element: typeof import("wordpress__element");
-	hooks: typeof import("wordpress__hooks");
-	i18n: typeof import("wordpress__i18n");
-};
-
 interface Object {
 	[key: string]: any;
 }
 
-type ImageSize = {
+interface ComponentProps extends Object {
+	children?: React.ReactNode;
+	id?: string | null;
+	className?: string | null | (string | null)[] | undefined;
+}
+
+interface ImageSize {
 	width: number;
 	height: number;
 	url: string;
-};
+}
 
 interface ImageRaw {
 	id: number;
@@ -119,6 +108,7 @@ interface BlockRaw {
 		title: string;
 		icon: string | JSX.Element | React.ReactNode;
 		category: string;
+		description: string;
 	};
 	supports?: Object;
 	settings?: Partial<Settings>;
@@ -135,7 +125,7 @@ interface Block {
 		category: string;
 		supports?: Object;
 		deprecated: Object[];
-		attributes: Partial<Attributes>;
+		attributes: Attributes;
 	};
 	settings: Partial<Settings>;
 	innerblocks_props: Object;
@@ -144,7 +134,7 @@ interface Block {
 
 interface BlockProps {
 	values: Partial<Attributes>;
-	attributes: Block["attributes"];
+	attributes: Attributes;
 	settings: Block["settings"];
 	innerblocks_props: Block["innerblocks_props"];
 	extra_props: Block["extra_props"];
@@ -152,9 +142,9 @@ interface BlockProps {
 	is_test?: boolean;
 }
 
-interface BlockPropsEdit extends BlockProps {
+interface EditProps extends BlockProps {
 	className: string;
 	setAttributes: Function;
 }
 
-interface BlockPropsSave extends BlockProps {}
+interface SaveProps extends BlockProps {}

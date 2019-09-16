@@ -1,4 +1,4 @@
 import "init/register-category";
-import "init/register-block";
+import "init/register-block_type";
 import "init/register-hook";
-import "init/filter-image_color_palette";
+import "init/hook-image_color_palette";

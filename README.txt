@@ -22,14 +22,19 @@ This plugin provides a container block which can have other blocks nested. It co
 
 Developers: The plugin comes with a filter to register your own block based on this one. Check the *How can I use the filter to register my own block?* section for more info.
 
+[GitHub repository](https://github.com/garciaalvaro/melonpan-block-container)
+
+
 == Screenshots ==
 
 1. Block edit panel.
+
 
 == Usage ==
 
 The block can be found inside the blocks inserter menu under the *Melonpan Blocks* category.
 Once added in the post you can edit its settings and add blocks inside (you may even add a container).
+
 
 == Installation ==
 
@@ -40,6 +45,7 @@ Installation from the WordPress admin.
 3. In the results list *Melonpan Block - Container* plugin should appear, click **Install Now** button.
 4. Once it finished installing, click the *Activate* button.
 5. That's it, now you can go to any post where Gutenberg is enabled and start using the block.
+
 
 == Frequently Asked Questions ==
 
