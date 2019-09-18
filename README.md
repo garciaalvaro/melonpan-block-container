@@ -2,11 +2,11 @@
 
 # Melonpan Block - Container
 
-WordPress Block that provides a container block which can have other blocks nested.
+WordPress Block that provides a container, with styling features, which can have other blocks nested.
 
 ## Features
 
-The plugin comes with the following settings:
+The block comes with the following settings:
 
 - Background image, fixed, color & opacity
 - Content align, max-width, text color
@@ -21,6 +21,10 @@ Developers: The plugin comes with a filter to register your own block based on t
 <img src="assets-repo/screenshot-1.jpg" width="700px" alt="Block edit panel" />
 
 <br />
+
+---
+
+Screenshot background image belongs to [Charles Postiaux](https://unsplash.com/@charlpost).
 
 ---
 

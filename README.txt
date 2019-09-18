@@ -8,7 +8,7 @@ Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Container block with settings, that can have other blocks nested.
+Block that provides a container, with styling features, which can have other blocks nested.
 
 == Description ==
 
@@ -398,4 +398,4 @@ Here is an example of adding a control:
 
 == Credits ==
 
-Screenshot background image belongs to [Sander Wehkamp](https://unsplash.com/@sanderwehkamp).
+Screenshot background image belongs to [Charles Postiaux](https://unsplash.com/@charlpost).
