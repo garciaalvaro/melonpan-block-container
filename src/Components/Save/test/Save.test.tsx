@@ -6,8 +6,6 @@ import { Save } from "Components/Save/Save";
 import { prepareBlock } from "block/prepareBlock";
 import { melonpan_block_container } from "init/register-block_type";
 
-// TODO
-
 const getHTML = (modified_attributes?: Object) => {
 	const {
 		blocktype_props,

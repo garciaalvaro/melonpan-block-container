@@ -28,7 +28,7 @@ describe("getSrcset", () => {
 		}
 	};
 
-	// TODO: add tests
+	// TODO: Add tests
 	it("should return an ordered string", () => {
 		expect(getSrcset(sizes)).toBe(
 			[

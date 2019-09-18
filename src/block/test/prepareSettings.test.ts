@@ -6,7 +6,7 @@ import {
 	settings_privates
 } from "block/prepareSettings";
 
-// TODO: tests related to background_image => background_image_url
+// TODO: Tests related to background_image => background_image_url
 describe("prepareSettings", () => {
 	it("should return the default settings", () => {
 		const settings = settings_defaults;
