@@ -1,3 +1,5 @@
+import { registerBlockType } from "@wordpress/blocks";
+
 import { prepareBlock } from "./prepareBlock";
 import { getValues } from "utils/tools";
 import { Edit } from "Components/Edit/Edit";
@@ -48,5 +50,5 @@ export const registerBlock = (block_raw: BlockRaw) => {
 	};
 
 	// @ts-ignore TODO: Check types
-	return wp.blocks.registerBlockType(blocktype_props.name, config);
+	return registerBlockType(blocktype_props.name, config);
 };
