@@ -10,9 +10,17 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Block that provides a container, with styling features, which can have other blocks nested.
 
+
 == Description ==
 
-This plugin provides a container block which can have other blocks nested. It comes with the following settings:
+[Demo](https://gutenberg-showcase.melonpan.io/melonpan-block-container) - [Documentation](https://melonpan.io/wordpress-plugins/melonpan-block-container) - [GitHub](https://github.com/garciaalvaro/melonpan-block-container)
+
+Block that provides a container, with styling features, which can have other blocks nested.
+
+
+== Features ==
+
+The block comes with the following settings:
 
 * Background image, fixed, color & opacity
 * Content align, max-width, text color
@@ -20,9 +28,10 @@ This plugin provides a container block which can have other blocks nested. It co
 * Shadow width, color & opacity
 * Padding top, bottom, left, right, responsive paddings
 
-Developers: The plugin comes with a filter to register your own block based on this one. Check the *How can I use the filter to register my own block?* section for more info.
 
-[GitHub repository](https://github.com/garciaalvaro/melonpan-block-container)
+== Plugin developers ==
+
+The plugin comes with a filter to register your own block based on this one. Check the [documentation](https://melonpan.io/wordpress-plugins/melonpan-block-container) to see how to use it.
 
 
 == Screenshots ==

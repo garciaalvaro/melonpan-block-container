@@ -2,7 +2,11 @@
 
 # Melonpan Block - Container
 
+[Demo](https://gutenberg-showcase.melonpan.io/melonpan-block-container) - [Documentation](https://melonpan.io/wordpress-plugins/melonpan-block-container) - [WordPress](https://wordpress.org/plugins/melonpan-block-container)
+
 WordPress Block that provides a container, with styling features, which can have other blocks nested.
+
+<br />
 
 ## Features
 
@@ -14,7 +18,11 @@ The block comes with the following settings:
 - Shadow width, color & opacity
 - Padding top, bottom, left, right, responsive paddings
 
-Developers: The plugin comes with a filter to register your own block based on this one. Check the _How can I use the filter to register my own block?_ section for more info. To check the documentation please refer to the [WordPress repository](https://wordpress.org/plugins/melonpan-block-container/) (until the documentation page is finished).
+<br />
+
+## Plugin developers
+
+The plugin comes with a filter to register your own block based on this one. Check the [documentation]() to see how to use it.
 
 <br />
 
@@ -25,7 +33,3 @@ Developers: The plugin comes with a filter to register your own block based on t
 ---
 
 Screenshot background image belongs to [Charles Postiaux](https://unsplash.com/@charlpost).
-
----
-
-This plugin can be downloaded from the [WordPress repository](https://wordpress.org/plugins/melonpan-block-container/).
