@@ -2,7 +2,7 @@
 
 # Melonpan Block - Container
 
-[Demo](https://gutenberg-showcase.melonpan.io/melonpan-block-container) - [Documentation](https://melonpan.io/wordpress-plugins/melonpan-block-container) - [WordPress](https://wordpress.org/plugins/melonpan-block-container)
+[Demo](https://gutenberg-showcase.melonpan.io/melonpan-block-container) - [Documentation](https://melonpan.io/gutenberg-blocks/melonpan-block-container) - [WordPress](https://wordpress.org/plugins/melonpan-block-container)
 
 <br />
 
@@ -24,11 +24,14 @@ The block comes with the following settings:
 
 ## Plugin developers
 
-The plugin comes with a filter to register your own block based on this one. Check the [documentation]() to see how to use it.
+The plugin comes with a filter to register your own block based on this one. Check the [documentation](https://melonpan.io/gutenberg-blocks/melonpan-block-container/registering-a-custom-block) to see how to use it.
 
 <br />
 
+## Screenshots
+
 <img src="assets-repo/screenshot-1.jpg" width="700px" alt="Block edit panel" />
+<img src="assets-repo/screenshot-2.jpg" width="700px" alt="Block options" />
 
 <br />
 
