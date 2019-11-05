@@ -22,9 +22,9 @@ The block comes with the following settings:
 
 <br />
 
-## Plugin developers
+## Developers
 
-The plugin comes with a filter to register your own block based on this one. Check the [documentation](https://melonpan.io/gutenberg-blocks/melonpan-block-container/registering-a-custom-block) to see how to use it.
+The plugin comes with a filter to register your own block based on this one. For more information check the [documentation](https://melonpan.io/gutenberg-blocks/melonpan-block-container/registering-a-custom-block).
 
 <br />
 
@@ -32,9 +32,3 @@ The plugin comes with a filter to register your own block based on this one. Che
 
 <img src="assets-repo/screenshot-1.jpg" width="700px" alt="Block edit panel" />
 <img src="assets-repo/screenshot-2.jpg" width="700px" alt="Block options" />
-
-<br />
-
----
-
-Screenshot background image belongs to [Charles Postiaux](https://unsplash.com/@charlpost).
