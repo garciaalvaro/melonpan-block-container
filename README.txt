@@ -59,6 +59,10 @@ Installation from the WordPress admin.
 
 == Changelog ==
 
+= 1.3.0 =
+* Refactored code base.
+* Minor bug fixes.
+
 = 1.2.0 =
 * Added ButtonBlockAppender in block InnerBlocks, for future WordPress version.
 * Fixed dependencies. Use wp-block-editor instead of wp-editor if its available.
