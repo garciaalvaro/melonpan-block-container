@@ -2,8 +2,8 @@
 Contributors: melonpan
 Tags: gutenberg, blocks, editor, container, innerblocks
 Requires at least: 5.1
-Tested up to: 5.2
-Stable tag: 1.2.0
+Tested up to: 5.3
+Stable tag: 1.3.0
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -58,6 +58,10 @@ Installation from the WordPress admin.
 
 
 == Changelog ==
+
+= 1.3.0 =
+* Refactored code base.
+* Minor bug fixes.
 
 = 1.2.0 =
 * Added ButtonBlockAppender in block InnerBlocks, for future WordPress version.
