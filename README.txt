@@ -37,7 +37,7 @@ The plugin comes with a filter to register your own block based on this one. Che
 == Screenshots ==
 
 1. Block edit panel
-1. Block options
+2. Block options
 
 
 == Usage ==
@@ -58,6 +58,9 @@ Installation from the WordPress admin.
 
 
 == Changelog ==
+
+= 1.3.1 =
+* Upgraded dependencies.
 
 = 1.3.0 =
 * Refactored code base.
