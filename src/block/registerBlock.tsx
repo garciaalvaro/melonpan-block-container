@@ -1,3 +1,4 @@
+import React from "react";
 import { registerBlockType } from "@wordpress/blocks";
 
 import { prepareBlock } from "./prepareBlock";

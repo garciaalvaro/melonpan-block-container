@@ -1,3 +1,4 @@
+import React from "react";
 import { parse } from "@wordpress/block-serialization-default-parser";
 import { renderToString } from "@wordpress/element";
 import { mapValues, compact, get, cloneDeep, difference, keys } from "lodash";

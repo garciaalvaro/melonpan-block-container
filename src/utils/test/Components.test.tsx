@@ -1,3 +1,4 @@
+import React from "react";
 import { Div, Span, Img } from "utils/Components";
 import { shallow } from "enzyme";
 
