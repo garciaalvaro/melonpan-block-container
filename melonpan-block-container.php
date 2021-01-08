@@ -14,15 +14,9 @@ namespace MELONPANBLOCKCONTAINER;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! defined( __NAMESPACE__ . '\PLUGIN_VERSION' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.0' );
-}
-if ( ! defined( __NAMESPACE__ . '\PLUGIN_NAME' ) ) {
-	define( __NAMESPACE__ . '\PLUGIN_NAME', 'melonpan-block-container' );
-}
-if ( ! defined( __NAMESPACE__ . '\BUILD_DIR' ) ) {
-	define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
-}
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.0' );
+define( __NAMESPACE__ . '\PLUGIN_NAME', 'melonpan-block-container' );
+define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
 
 /**
  * Enqueue the plugin style in the front page.
@@ -48,8 +42,6 @@ function enqueue_front() {
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor', 900 );
 function enqueue_editor() {
 
-	global $wp_scripts;
-
 	wp_enqueue_style(
 		PLUGIN_NAME . '-editor',
 		BUILD_DIR . PLUGIN_NAME . '-editor.css',
@@ -63,11 +55,7 @@ function enqueue_editor() {
 		array(
 			'lodash',
 			'wp-blocks',
-			// If wp-block-editor is registered (from WP 5.2)
-			// enqueue it. Otherwise enqueue wp-editor.
-			isset( $wp_scripts->registered['wp-block-editor'] )
-				? 'wp-block-editor'
-				: 'wp-editor',
+			'wp-block-editor',
 			'wp-components',
 			'wp-compose',
 			'wp-data',
