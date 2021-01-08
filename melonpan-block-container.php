@@ -4,7 +4,7 @@
  * Plugin URI: https://wordpress.org/plugins/melonpan-block-container/
  * Description: Container block with settings, that can have other blocks nested.
  * Author: melonpan
- * Version: 1.3.0
+ * Version: 1.3.1
  * License: GPL3+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
@@ -14,7 +14,7 @@ namespace MELONPANBLOCKCONTAINER;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.0' );
+define( __NAMESPACE__ . '\PLUGIN_VERSION', '1.3.1' );
 define( __NAMESPACE__ . '\PLUGIN_NAME', 'melonpan-block-container' );
 define( __NAMESPACE__ . '\BUILD_DIR', plugins_url( 'build/', __FILE__ ) );
 
