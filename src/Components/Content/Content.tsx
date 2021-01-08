@@ -1,3 +1,4 @@
+import React from "react";
 import { isUndefined, isObject, compact } from "lodash";
 import { Fragment } from "@wordpress/element";
 import * as blockEditor from "@wordpress/block-editor";

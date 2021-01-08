@@ -1,3 +1,4 @@
+import React from "react";
 import { isObject, reduce, pick, mapValues, keys, defaults } from "lodash";
 
 // Object containing setting properties meant to be private.

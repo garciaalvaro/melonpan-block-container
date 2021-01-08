@@ -1,3 +1,4 @@
+import React from "react";
 import { isUndefined, isObject } from "lodash";
 
 import "./Background.styl";
