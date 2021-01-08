@@ -21,7 +21,8 @@
 			"init/*": ["src/init/*"],
 			"block/*": ["src/block/*"],
 			"Components/*": ["src/Components/*"]
-		}
+		},
+		"skipLibCheck": true
 	},
 	"include": ["src", "types.d.ts"],
 	"exclude": ["node_modules"],
