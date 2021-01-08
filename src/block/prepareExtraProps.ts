@@ -1,3 +1,4 @@
+import React from "react";
 import { castArray, pick, defaults, isString } from "lodash";
 
 // We add a question mark prefix so later on when applying addPrefix()

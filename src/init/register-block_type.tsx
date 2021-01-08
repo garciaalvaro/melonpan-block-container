@@ -1,3 +1,4 @@
+import React from "react";
 import * as blockEditor from "@wordpress/block-editor";
 import * as editor from "@wordpress/editor";
 import { addFilter } from "@wordpress/hooks";

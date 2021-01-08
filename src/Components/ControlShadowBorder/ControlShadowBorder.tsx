@@ -1,3 +1,4 @@
+import React from "react";
 import { isUndefined } from "lodash";
 import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";

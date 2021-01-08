@@ -1,3 +1,4 @@
+import React from "react";
 import { mapValues, compact, defaults, map } from "lodash";
 import { shallow } from "enzyme";
 

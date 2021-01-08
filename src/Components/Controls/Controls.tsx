@@ -1,3 +1,4 @@
+import React from "react";
 import { isUndefined } from "lodash";
 import { Component } from "@wordpress/element";
 import { withState } from "@wordpress/compose";

@@ -56,8 +56,10 @@ export default {
 					{
 						loader: "stylus-loader",
 						options: {
-							use: [nib()],
-							import: ["~nib/index.styl"]
+							stylusOptions: {
+								use: [nib()],
+								import: ["~nib/index.styl"]
+							}
 						}
 					}
 				]

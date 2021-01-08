@@ -1,3 +1,4 @@
+import React from "react";
 import { isBoolean, toString, map, deburr } from "lodash";
 
 import "./Container.styl";
